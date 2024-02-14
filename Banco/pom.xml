@@ -14,6 +14,11 @@
     </repositories>
     <dependencies>
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>BancoPersistencia</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>unknown.binary</groupId>
             <artifactId>AbsoluteLayout</artifactId>
             <version>SNAPSHOT</version>

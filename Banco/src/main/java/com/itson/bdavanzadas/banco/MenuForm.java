@@ -1,20 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.itson.bdavanzadas.banco;
 
-/**
- *
- * @author renec
- */
+import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
+
 public class MenuForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MenuForm
-     */
-    public MenuForm() {
+    private final IClientesDAO clientesDAO;
+    
+    public MenuForm(IClientesDAO clientesDAO) {
         initComponents();
+        this.clientesDAO = clientesDAO;
     }
 
     /**
@@ -98,7 +92,7 @@ public class MenuForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,7 +103,8 @@ public class MenuForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarUsuarioActionPerformed
-
+        RegistroForm registro = new RegistroForm(clientesDAO);
+        registro.setVisible(true);
     }//GEN-LAST:event_btnRegistrarUsuarioActionPerformed
 
     private void btnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioSesionActionPerformed

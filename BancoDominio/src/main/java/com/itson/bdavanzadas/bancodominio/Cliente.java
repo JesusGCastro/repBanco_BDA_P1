@@ -10,7 +10,6 @@ public class Cliente {
     private String apellido_paterno;
     private String apellido_materno;
     private GregorianCalendar fecha_nacimiento;
-    private int edad;
     private String calle;
     private String numero;
     private String colonia;
@@ -19,25 +18,23 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String nombre_pila, String apellido_paterno, String apellido_materno, GregorianCalendar fecha_nacimiento, int edad, String calle, String numero, String colonia, String codigo_postal) {
+    public Cliente(String nombre_pila, String apellido_paterno, String apellido_materno, GregorianCalendar fecha_nacimiento, String calle, String numero, String colonia, String codigo_postal) {
         this.nombre_pila = nombre_pila;
         this.apellido_paterno = apellido_paterno;
         this.apellido_materno = apellido_materno;
         this.fecha_nacimiento = fecha_nacimiento;
-        this.edad = edad;
         this.calle = calle;
         this.numero = numero;
         this.colonia = colonia;
         this.codigo_postal = codigo_postal;
     }
 
-    public Cliente(Long codigo, String nombre_pila, String apellido_paterno, String apellido_materno, GregorianCalendar fecha_nacimiento, int edad, String calle, String numero, String colonia, String codigo_postal) {
+    public Cliente(Long codigo, String nombre_pila, String apellido_paterno, String apellido_materno, GregorianCalendar fecha_nacimiento, String calle, String numero, String colonia, String codigo_postal) {
         this.codigo = codigo;
         this.nombre_pila = nombre_pila;
         this.apellido_paterno = apellido_paterno;
         this.apellido_materno = apellido_materno;
         this.fecha_nacimiento = fecha_nacimiento;
-        this.edad = edad;
         this.calle = calle;
         this.numero = numero;
         this.colonia = colonia;
@@ -82,14 +79,6 @@ public class Cliente {
 
     public void setFecha_nacimiento(GregorianCalendar fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
     }
 
     public String getCalle() {
@@ -155,7 +144,6 @@ public class Cliente {
         sb.append(", apellido_paterno=").append(apellido_paterno);
         sb.append(", apellido_materno=").append(apellido_materno);
         sb.append(", fecha_nacimiento=").append(fecha_nacimiento);
-        sb.append(", edad=").append(edad);
         sb.append(", calle=").append(calle);
         sb.append(", numero=").append(numero);
         sb.append(", colonia=").append(colonia);

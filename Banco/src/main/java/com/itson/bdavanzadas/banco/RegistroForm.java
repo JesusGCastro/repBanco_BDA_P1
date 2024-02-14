@@ -1,20 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.itson.bdavanzadas.banco;
 
-/**
- *
- * @author renec
- */
+import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
+
 public class RegistroForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form registroForm
-     */
-    public RegistroForm() {
+    private final IClientesDAO clientesDAO;
+    
+    public RegistroForm(IClientesDAO clientesDAO) {
         initComponents();
+        this.clientesDAO = clientesDAO;
     }
 
     /**
@@ -223,9 +217,7 @@ public class RegistroForm extends javax.swing.JFrame {
                                                 .addComponent(labelEmailRegistro))
                                             .addGap(18, 18, 18)
                                             .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(RLayout.createSequentialGroup()
-                                                    .addComponent(labelEmailRegistro1)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addComponent(labelEmailRegistro1)
                                                 .addGroup(RLayout.createSequentialGroup()
                                                     .addGap(6, 6, 6)
                                                     .addComponent(jSeparator7))
@@ -293,10 +285,11 @@ public class RegistroForm extends javax.swing.JFrame {
                 .addGap(1, 1, 1)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
-                .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelEmailRegistro)
-                    .addComponent(labelEmailRegistro1)
-                    .addComponent(labelEmailRegistro2))
+                .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelEmailRegistro1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(labelEmailRegistro)
+                        .addComponent(labelEmailRegistro2)))
                 .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(RLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

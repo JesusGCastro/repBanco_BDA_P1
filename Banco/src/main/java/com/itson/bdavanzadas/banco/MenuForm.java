@@ -39,9 +39,9 @@ public class MenuForm extends javax.swing.JFrame {
         bg.setBackground(new java.awt.Color(255, 223, 148));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel7.setText("Elige la accion a realizar:");
-        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setText("Bienvenido a tu banco de confianza");
+        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
 
         btnRegistrarUsuario.setBackground(new java.awt.Color(255, 223, 148));
         btnRegistrarUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -69,7 +69,7 @@ public class MenuForm extends javax.swing.JFrame {
                 btnInicioSesionActionPerformed(evt);
             }
         });
-        bg.add(btnInicioSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, -1, -1));
+        bg.add(btnInicioSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, -1));
 
         btnRetiro.setBackground(new java.awt.Color(255, 223, 148));
         btnRetiro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -85,7 +85,8 @@ public class MenuForm extends javax.swing.JFrame {
         });
         bg.add(btnRetiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 180, -1));
 
-        botonCancelar.setText("Cancelar");
+        botonCancelar.setBackground(new java.awt.Color(255, 224, 150));
+        botonCancelar.setText("Salir");
         botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonCancelarActionPerformed(evt);
@@ -101,7 +102,7 @@ public class MenuForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
 
         pack();

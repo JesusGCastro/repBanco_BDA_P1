@@ -29,9 +29,10 @@ public class MenuClienteForm extends javax.swing.JFrame {
         bg = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        btnIniciarSesion = new javax.swing.JButton();
-        btnIniciarSesion1 = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        btnNuevaCuenta = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        btnTransferencia = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -39,43 +40,56 @@ public class MenuClienteForm extends javax.swing.JFrame {
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(255, 223, 148));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setText("Cuenta Personal");
-        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setText("Bienvenido a tu cuenta!");
+        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel2.setText("1500$");
-        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, -1, -1));
+        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, -1, -1));
 
-        btnIniciarSesion.setBackground(new java.awt.Color(255, 223, 148));
-        btnIniciarSesion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnIniciarSesion.setForeground(new java.awt.Color(100, 100, 100));
-        btnIniciarSesion.setText("Salir");
-        btnIniciarSesion.setBorder(null);
-        btnIniciarSesion.setBorderPainted(false);
-        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.setBackground(new java.awt.Color(255, 223, 148));
+        btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(100, 100, 100));
+        btnSalir.setText("Salir");
+        btnSalir.setBorder(null);
+        btnSalir.setBorderPainted(false);
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarSesionActionPerformed(evt);
+                btnSalirActionPerformed(evt);
             }
         });
-        bg.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 90, -1));
+        bg.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 70, -1));
 
-        btnIniciarSesion1.setBackground(new java.awt.Color(255, 223, 148));
-        btnIniciarSesion1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnIniciarSesion1.setForeground(new java.awt.Color(100, 100, 100));
-        btnIniciarSesion1.setText("Realizar Transferencia");
-        btnIniciarSesion1.setBorder(null);
-        btnIniciarSesion1.setBorderPainted(false);
-        btnIniciarSesion1.addActionListener(new java.awt.event.ActionListener() {
+        btnNuevaCuenta.setBackground(new java.awt.Color(255, 223, 148));
+        btnNuevaCuenta.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnNuevaCuenta.setForeground(new java.awt.Color(100, 100, 100));
+        btnNuevaCuenta.setText("Crear nueva cuenta");
+        btnNuevaCuenta.setBorder(null);
+        btnNuevaCuenta.setBorderPainted(false);
+        btnNuevaCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarSesion1ActionPerformed(evt);
+                btnNuevaCuentaActionPerformed(evt);
             }
         });
-        bg.add(btnIniciarSesion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 180, -1));
+        bg.add(btnNuevaCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 180, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel3.setText("Saldo:");
-        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, -1, -1));
+        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, -1, -1));
+
+        btnTransferencia.setBackground(new java.awt.Color(255, 223, 148));
+        btnTransferencia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnTransferencia.setForeground(new java.awt.Color(100, 100, 100));
+        btnTransferencia.setText("Realizar Transferencia");
+        btnTransferencia.setBorder(null);
+        btnTransferencia.setBorderPainted(false);
+        btnTransferencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTransferenciaActionPerformed(evt);
+            }
+        });
+        bg.add(btnTransferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 340, 180, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,25 +99,30 @@ public class MenuClienteForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
 
-    }//GEN-LAST:event_btnIniciarSesionActionPerformed
+    }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void btnIniciarSesion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesion1ActionPerformed
+    private void btnNuevaCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaCuentaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnIniciarSesion1ActionPerformed
+    }//GEN-LAST:event_btnNuevaCuentaActionPerformed
+
+    private void btnTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferenciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTransferenciaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
-    private javax.swing.JButton btnIniciarSesion;
-    private javax.swing.JButton btnIniciarSesion1;
+    private javax.swing.JButton btnNuevaCuenta;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnTransferencia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

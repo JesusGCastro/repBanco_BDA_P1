@@ -28,13 +28,13 @@ public class TransferenciaForm extends javax.swing.JFrame {
 
         bg = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnIniciarSesion = new javax.swing.JButton();
-        btnIniciarSesion1 = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        btnAceptar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        campoTextoIDUsuario = new javax.swing.JTextField();
+        txtCuentaDestino = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        campoTextoIDUsuario1 = new javax.swing.JTextField();
+        txtMonto = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -47,64 +47,64 @@ public class TransferenciaForm extends javax.swing.JFrame {
         jLabel1.setText("Ingrese los datos solicitados:");
         bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
-        btnIniciarSesion.setBackground(new java.awt.Color(255, 223, 148));
-        btnIniciarSesion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnIniciarSesion.setForeground(new java.awt.Color(100, 100, 100));
-        btnIniciarSesion.setText("Salir");
-        btnIniciarSesion.setBorder(null);
-        btnIniciarSesion.setBorderPainted(false);
-        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.setBackground(new java.awt.Color(255, 223, 148));
+        btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(100, 100, 100));
+        btnSalir.setText("Salir");
+        btnSalir.setBorder(null);
+        btnSalir.setBorderPainted(false);
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarSesionActionPerformed(evt);
+                btnSalirActionPerformed(evt);
             }
         });
-        bg.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 90, -1));
+        bg.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 90, -1));
 
-        btnIniciarSesion1.setBackground(new java.awt.Color(255, 223, 148));
-        btnIniciarSesion1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnIniciarSesion1.setForeground(new java.awt.Color(100, 100, 100));
-        btnIniciarSesion1.setText("Aceptar");
-        btnIniciarSesion1.setBorder(null);
-        btnIniciarSesion1.setBorderPainted(false);
-        btnIniciarSesion1.addActionListener(new java.awt.event.ActionListener() {
+        btnAceptar.setBackground(new java.awt.Color(255, 223, 148));
+        btnAceptar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAceptar.setForeground(new java.awt.Color(100, 100, 100));
+        btnAceptar.setText("Aceptar");
+        btnAceptar.setBorder(null);
+        btnAceptar.setBorderPainted(false);
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarSesion1ActionPerformed(evt);
+                btnAceptarActionPerformed(evt);
             }
         });
-        bg.add(btnIniciarSesion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 120, -1));
+        bg.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 120, -1));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         bg.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 310, -1));
 
-        campoTextoIDUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        campoTextoIDUsuario.setForeground(new java.awt.Color(100, 100, 100));
-        campoTextoIDUsuario.setBorder(null);
-        campoTextoIDUsuario.addActionListener(new java.awt.event.ActionListener() {
+        txtCuentaDestino.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtCuentaDestino.setForeground(new java.awt.Color(100, 100, 100));
+        txtCuentaDestino.setBorder(null);
+        txtCuentaDestino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoTextoIDUsuarioActionPerformed(evt);
+                txtCuentaDestinoActionPerformed(evt);
             }
         });
-        bg.add(campoTextoIDUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 320, 30));
+        bg.add(txtCuentaDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 320, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel2.setText("Cuenta a tranferir:");
+        jLabel2.setText("Cuenta a transferir:");
         bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 137, -1, -1));
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
         bg.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 310, -1));
 
-        campoTextoIDUsuario1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        campoTextoIDUsuario1.setForeground(new java.awt.Color(100, 100, 100));
-        campoTextoIDUsuario1.setBorder(null);
-        campoTextoIDUsuario1.addActionListener(new java.awt.event.ActionListener() {
+        txtMonto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtMonto.setForeground(new java.awt.Color(100, 100, 100));
+        txtMonto.setBorder(null);
+        txtMonto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoTextoIDUsuario1ActionPerformed(evt);
+                txtMontoActionPerformed(evt);
             }
         });
-        bg.add(campoTextoIDUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 320, 30));
+        bg.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 320, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel3.setText("Monto a tranferir:");
+        jLabel3.setText("Monto a transferir:");
         bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -125,33 +125,33 @@ public class TransferenciaForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
 
-    }//GEN-LAST:event_btnIniciarSesionActionPerformed
+    }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void btnIniciarSesion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesion1ActionPerformed
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnIniciarSesion1ActionPerformed
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
-    private void campoTextoIDUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTextoIDUsuarioActionPerformed
+    private void txtCuentaDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCuentaDestinoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoTextoIDUsuarioActionPerformed
+    }//GEN-LAST:event_txtCuentaDestinoActionPerformed
 
-    private void campoTextoIDUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTextoIDUsuario1ActionPerformed
+    private void txtMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoTextoIDUsuario1ActionPerformed
+    }//GEN-LAST:event_txtMontoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
-    private javax.swing.JButton btnIniciarSesion;
-    private javax.swing.JButton btnIniciarSesion1;
-    private javax.swing.JTextField campoTextoIDUsuario;
-    private javax.swing.JTextField campoTextoIDUsuario1;
+    private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextField txtCuentaDestino;
+    private javax.swing.JTextField txtMonto;
     // End of variables declaration//GEN-END:variables
 }

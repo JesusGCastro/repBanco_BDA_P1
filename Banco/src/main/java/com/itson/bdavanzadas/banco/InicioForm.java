@@ -29,12 +29,12 @@ public class InicioForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        campoTextoIDUsuario = new javax.swing.JTextField();
-        campoContrasenaUsuario = new javax.swing.JPasswordField();
+        txtNumeroCuenta = new javax.swing.JTextField();
+        btnContrasenia = new javax.swing.JPasswordField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         btnIniciarSesion = new javax.swing.JButton();
-        btnIniciarSesion1 = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,22 +94,22 @@ public class InicioForm extends javax.swing.JFrame {
         jLabel1.setText("Inicio de Sesion");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel2.setText("Numero Cliente");
+        jLabel2.setText("Numero Cuenta:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel3.setText("Contraseña:");
 
-        campoTextoIDUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        campoTextoIDUsuario.setForeground(new java.awt.Color(100, 100, 100));
-        campoTextoIDUsuario.setBorder(null);
-        campoTextoIDUsuario.addActionListener(new java.awt.event.ActionListener() {
+        txtNumeroCuenta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNumeroCuenta.setForeground(new java.awt.Color(100, 100, 100));
+        txtNumeroCuenta.setBorder(null);
+        txtNumeroCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoTextoIDUsuarioActionPerformed(evt);
+                txtNumeroCuentaActionPerformed(evt);
             }
         });
 
-        campoContrasenaUsuario.setForeground(new java.awt.Color(100, 100, 100));
-        campoContrasenaUsuario.setBorder(null);
+        btnContrasenia.setForeground(new java.awt.Color(100, 100, 100));
+        btnContrasenia.setBorder(null);
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -125,15 +125,15 @@ public class InicioForm extends javax.swing.JFrame {
             }
         });
 
-        btnIniciarSesion1.setBackground(new java.awt.Color(255, 223, 148));
-        btnIniciarSesion1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnIniciarSesion1.setForeground(new java.awt.Color(100, 100, 100));
-        btnIniciarSesion1.setText("Salir");
-        btnIniciarSesion1.setBorder(null);
-        btnIniciarSesion1.setBorderPainted(false);
-        btnIniciarSesion1.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.setBackground(new java.awt.Color(255, 223, 148));
+        btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(100, 100, 100));
+        btnSalir.setText("Salir");
+        btnSalir.setBorder(null);
+        btnSalir.setBorderPainted(false);
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarSesion1ActionPerformed(evt);
+                btnSalirActionPerformed(evt);
             }
         });
 
@@ -148,38 +148,38 @@ public class InicioForm extends javax.swing.JFrame {
                     .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel3)
                         .addComponent(jLabel2)
-                        .addComponent(campoTextoIDUsuario)
-                        .addComponent(campoContrasenaUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                        .addComponent(txtNumeroCuenta)
+                        .addComponent(btnContrasenia, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
                         .addComponent(jSeparator1)
                         .addComponent(jSeparator2)))
                 .addContainerGap(31, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RLayout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
+                .addContainerGap(71, Short.MAX_VALUE)
                 .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(73, 73, 73))
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RLayout.createSequentialGroup()
-                        .addComponent(btnIniciarSesion1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(jLabel1)
+                        .addGap(67, 67, 67))))
         );
         RLayout.setVerticalGroup(
             RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnIniciarSesion1)
-                .addGap(43, 43, 43)
+                .addComponent(btnSalir)
+                .addGap(45, 45, 45)
                 .addComponent(jLabel1)
-                .addGap(57, 57, 57)
+                .addGap(55, 55, 55)
                 .addComponent(jLabel2)
                 .addGap(23, 23, 23)
-                .addComponent(campoTextoIDUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campoContrasenaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
@@ -207,13 +207,13 @@ public class InicioForm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
-    private void campoTextoIDUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTextoIDUsuarioActionPerformed
+    private void txtNumeroCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroCuentaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoTextoIDUsuarioActionPerformed
+    }//GEN-LAST:event_txtNumeroCuentaActionPerformed
 
-    private void btnIniciarSesion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesion1ActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnIniciarSesion1ActionPerformed
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     
 
@@ -221,10 +221,9 @@ public class InicioForm extends javax.swing.JFrame {
     private javax.swing.JPanel L;
     private javax.swing.JPanel R;
     private javax.swing.JPanel bg;
+    private javax.swing.JPasswordField btnContrasenia;
     private javax.swing.JButton btnIniciarSesion;
-    private javax.swing.JButton btnIniciarSesion1;
-    private javax.swing.JPasswordField campoContrasenaUsuario;
-    private javax.swing.JTextField campoTextoIDUsuario;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -234,5 +233,6 @@ public class InicioForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextField txtNumeroCuenta;
     // End of variables declaration//GEN-END:variables
 }

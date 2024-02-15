@@ -40,7 +40,6 @@ public class MenuForm extends javax.swing.JFrame {
         btnRegistrarUsuario.setBackground(new java.awt.Color(255, 223, 148));
         btnRegistrarUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnRegistrarUsuario.setForeground(new java.awt.Color(100, 100, 100));
-        btnRegistrarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/itson/bdavanzadas/banco/img/agregue-el-simbolo-de-la-interfaz-de-personas-de-la-persona-negra-de-cerca-con-el-signo-mas-en-un-circulo-pequeno.png"))); // NOI18N
         btnRegistrarUsuario.setText("Registrar usuario");
         btnRegistrarUsuario.setBorder(null);
         btnRegistrarUsuario.setBorderPainted(false);
@@ -54,7 +53,6 @@ public class MenuForm extends javax.swing.JFrame {
         btnInicioSesion.setBackground(new java.awt.Color(255, 223, 148));
         btnInicioSesion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnInicioSesion.setForeground(new java.awt.Color(100, 100, 100));
-        btnInicioSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/itson/bdavanzadas/banco/img/acceso.png"))); // NOI18N
         btnInicioSesion.setText("Iniciar Sesión");
         btnInicioSesion.setBorder(null);
         btnInicioSesion.setBorderPainted(false);
@@ -63,12 +61,11 @@ public class MenuForm extends javax.swing.JFrame {
                 btnInicioSesionActionPerformed(evt);
             }
         });
-        bg.add(btnInicioSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, -1));
+        bg.add(btnInicioSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, -1, -1));
 
         btnRetiro.setBackground(new java.awt.Color(255, 223, 148));
         btnRetiro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnRetiro.setForeground(new java.awt.Color(100, 100, 100));
-        btnRetiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/itson/bdavanzadas/banco/img/retiro-de-efectivo.png"))); // NOI18N
         btnRetiro.setText("Retiro sin cuenta");
         btnRetiro.setBorder(null);
         btnRetiro.setBorderPainted(false);
@@ -100,6 +97,7 @@ public class MenuForm extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarUsuarioActionPerformed

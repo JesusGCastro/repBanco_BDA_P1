@@ -16,6 +16,7 @@ public class Banco {
         String password = "123456789";
         IConexion conexion = new Conexion(cadenaConexion, usuario, password);
         IClientesDAO clienteDAO = new ClientesDAO(conexion);
-        
+        MenuForm principal = new MenuForm(clienteDAO);
+        principal.setVisible(true);
     }
 }

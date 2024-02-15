@@ -411,14 +411,14 @@ public class RegistroForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumeroCasaActionPerformed
 
     public void registrarCliente(){
-        if (jDateFechaNacimiento.getDate() == null)
-            JOptionPane.showMessageDialog(null, "La fecha no debe estar vacía", "Error", JOptionPane.ERROR_MESSAGE);
         
         String nombre_pila = txtNombreUsuario.getText();
         String apellido_paterno = txtApellidoPaterno.getText();
         String apellido_materno = txtApellidoMaterno.getText();
-        java.util.Date fechaSeleccionada = jDateFechaNacimiento.getDate();
-        java.sql.Date fechaNacimiento = new java.sql.Date(fechaSeleccionada.getTime());
+        
+        java.util.Date fechaSeleccionada;
+        java.sql.Date fechaNacimiento = null;
+        
         String calle = txtCalle.getText();
         String numero = txtNumeroCasa.getText();
         String colonia = txtColonia.getText();
@@ -428,13 +428,19 @@ public class RegistroForm extends javax.swing.JFrame {
         clienteNuevo.setNombre_pila(nombre_pila);
         clienteNuevo.setApellido_paterno(apellido_paterno);
         clienteNuevo.setApellido_materno(apellido_materno);
-        clienteNuevo.setFecha_nacimiento(fechaNacimiento);
         clienteNuevo.setCalle(calle);
         clienteNuevo.setNumero(numero);
         clienteNuevo.setColonia(colonia);
         clienteNuevo.setCodigo_postal(codigo_postal);
         
         try {
+            if (jDateFechaNacimiento.getDate() == null) throw new ValidacionDTOException("La fecha no debe estar vacía");
+            else{
+                fechaSeleccionada = jDateFechaNacimiento.getDate();
+                fechaNacimiento = new java.sql.Date(fechaSeleccionada.getTime());
+                clienteNuevo.setFecha_nacimiento(fechaNacimiento);
+            }
+            
             clienteNuevo.esValido();
             this.clientesDAO.registrarCliente(clienteNuevo);
             JOptionPane.showMessageDialog(this, "Se registró el cliente", "Notificaión", JOptionPane.INFORMATION_MESSAGE);

@@ -2,6 +2,8 @@ package com.itson.bdavanzadas.bancopersistencia.dtos;
 
 import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Period;
 
 public class ClienteNuevoDTO {
     
@@ -114,8 +116,17 @@ public class ClienteNuevoDTO {
                 || this.codigo_postal.isBlank()
                 || this.codigo_postal.trim().length() > 10) {
             throw new ValidacionDTOException("Codigo Postal de Cliente inválida");
-        } if (this.fecha_nacimiento == null) {
+        }
+        if (this.fecha_nacimiento == null) {
             throw new ValidacionDTOException("Fecha de Cliente inválida");
+        }
+        if (
+            Period.between(
+                    this.fecha_nacimiento.toLocalDate(),
+                    java.time.LocalDateTime.now().toLocalDate()
+            ).getYears() < 18
+        ) {
+            throw new ValidacionDTOException("No es mayor a 18 años");
         }
         return true;
     }

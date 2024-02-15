@@ -412,7 +412,7 @@ public class RegistroForm extends javax.swing.JFrame {
 
     public void registrarCliente(){
         if (jDateFechaNacimiento.getDate() == null)
-            JOptionPane.showMessageDialog(null, "La fecha no puede estar vacía", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "La fecha no debe estar vacía", "Error", JOptionPane.ERROR_MESSAGE);
         
         String nombre_pila = txtNombreUsuario.getText();
         String apellido_paterno = txtApellidoPaterno.getText();

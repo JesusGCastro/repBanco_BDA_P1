@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,21 +24,23 @@ public class ClientesDAO implements IClientesDAO{
     @Override
     public Cliente registrarCliente(ClienteNuevoDTO clienteNuevo) throws PersistenciaException {
         String sentenciaSQL = """
-            INSERT INTO socios(nombre,telefono,correo) 
-            VALUES (?,?,?);                      
+            INSERT INTO clientes(nombre_pila, apellido_paterno, apellido_materno, fecha_nacimiento, calle, numero, colonia, codigo_postal) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """;
         try (
             Connection conexion = this.conexionBD.obtenerConexion();
-            PreparedStatement comando = conexion.prepareStatement(sentenciaSQL);
+            PreparedStatement comando = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);
         ){
             comando.setString(1, clienteNuevo.getNombre_pila());
-            comando.setString(1, clienteNuevo.getApellido_paterno());
-            comando.setString(1, clienteNuevo.getApellido_materno());
-            comando.setString(1, clienteNuevo.getFecha_nacimiento().toString());
-            comando.setString(1, clienteNuevo.getCalle());
-            comando.setString(1, clienteNuevo.getNumero());
-            comando.setString(1, clienteNuevo.getColonia());
-            comando.setString(1, clienteNuevo.getCodigo_postal());
+            comando.setString(2, clienteNuevo.getApellido_paterno());
+            comando.setString(3, clienteNuevo.getApellido_materno());
+            comando.setString(4, clienteNuevo.getFecha_nacimiento().toString());
+            comando.setString(5, clienteNuevo.getCalle());
+            comando.setString(6, clienteNuevo.getNumero());
+            comando.setString(7, clienteNuevo.getColonia());
+            comando.setString(8, clienteNuevo.getCodigo_postal());
+            int numRegistrosInsertados = comando.executeUpdate();
+            logger.log(Level.INFO, "Se agregó {0} clientes", numRegistrosInsertados);
             //Socio a devolver con id
             ResultSet idsGenerados = comando.getGeneratedKeys();
             idsGenerados.next();

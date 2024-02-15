@@ -101,6 +101,7 @@ public class MenuForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarUsuarioActionPerformed
+        dispose();
         RegistroForm registro = new RegistroForm(clientesDAO);
         registro.setVisible(true);
     }//GEN-LAST:event_btnRegistrarUsuarioActionPerformed

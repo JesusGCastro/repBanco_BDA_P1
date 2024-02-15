@@ -390,6 +390,8 @@ public class RegistroForm extends javax.swing.JFrame {
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         dispose();
+        MenuForm principal = new MenuForm(clientesDAO);
+        principal.setVisible(true);
     }//GEN-LAST:event_botonCancelarActionPerformed
 
     private void txtApellidoPaternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoPaternoActionPerformed

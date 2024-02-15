@@ -409,6 +409,9 @@ public class RegistroForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumeroCasaActionPerformed
 
     public void registrarCliente(){
+        if (jDateFechaNacimiento.getDate() == null)
+            JOptionPane.showMessageDialog(null, "La fecha no puede estar vacía", "Error", JOptionPane.ERROR_MESSAGE);
+        
         String nombre_pila = txtNombreUsuario.getText();
         String apellido_paterno = txtApellidoPaterno.getText();
         String apellido_materno = txtApellidoMaterno.getText();

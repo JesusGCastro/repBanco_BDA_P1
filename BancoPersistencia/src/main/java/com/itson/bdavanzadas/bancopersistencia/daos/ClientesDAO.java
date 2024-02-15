@@ -5,10 +5,12 @@ import com.itson.bdavanzadas.bancopersistencia.conexion.IConexion;
 import com.itson.bdavanzadas.bancopersistencia.dtos.ClienteNuevoDTO;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,7 +36,7 @@ public class ClientesDAO implements IClientesDAO{
             comando.setString(1, clienteNuevo.getNombre_pila());
             comando.setString(2, clienteNuevo.getApellido_paterno());
             comando.setString(3, clienteNuevo.getApellido_materno());
-            comando.setString(4, clienteNuevo.getFecha_nacimiento().toString());
+            comando.setDate(4, clienteNuevo.getFecha_nacimiento());
             comando.setString(5, clienteNuevo.getCalle());
             comando.setString(6, clienteNuevo.getNumero());
             comando.setString(7, clienteNuevo.getColonia());

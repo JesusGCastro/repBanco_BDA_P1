@@ -1,13 +1,15 @@
 package com.itson.bdavanzadas.banco;
 
+import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
+
 
 public class InicioForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form LoginForm
-     */
-    public InicioForm() {
+    private final IClientesDAO clientesDAO;
+    
+    public InicioForm(IClientesDAO clientesDAO) {
         initComponents();
+        this.clientesDAO = clientesDAO;
     }
 
     /**
@@ -201,6 +203,7 @@ public class InicioForm extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed

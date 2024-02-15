@@ -1,6 +1,6 @@
 package com.itson.bdavanzadas.bancodominio;
 
-import java.util.GregorianCalendar;
+import java.util.Date;
 import java.util.Objects;
 
 public class Cliente {
@@ -9,7 +9,7 @@ public class Cliente {
     private String nombre_pila;
     private String apellido_paterno;
     private String apellido_materno;
-    private GregorianCalendar fecha_nacimiento;
+    private Date fecha_nacimiento;
     private String calle;
     private String numero;
     private String colonia;
@@ -18,7 +18,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String nombre_pila, String apellido_paterno, String apellido_materno, GregorianCalendar fecha_nacimiento, String calle, String numero, String colonia, String codigo_postal) {
+    public Cliente(String nombre_pila, String apellido_paterno, String apellido_materno, Date fecha_nacimiento, String calle, String numero, String colonia, String codigo_postal) {
         this.nombre_pila = nombre_pila;
         this.apellido_paterno = apellido_paterno;
         this.apellido_materno = apellido_materno;
@@ -29,7 +29,7 @@ public class Cliente {
         this.codigo_postal = codigo_postal;
     }
 
-    public Cliente(Long codigo, String nombre_pila, String apellido_paterno, String apellido_materno, GregorianCalendar fecha_nacimiento, String calle, String numero, String colonia, String codigo_postal) {
+    public Cliente(Long codigo, String nombre_pila, String apellido_paterno, String apellido_materno, Date fecha_nacimiento, String calle, String numero, String colonia, String codigo_postal) {
         this.codigo = codigo;
         this.nombre_pila = nombre_pila;
         this.apellido_paterno = apellido_paterno;
@@ -73,11 +73,11 @@ public class Cliente {
         this.apellido_materno = apellido_materno;
     }
 
-    public GregorianCalendar getFecha_nacimiento() {
+    public Date getFecha_nacimiento() {
         return fecha_nacimiento;
     }
 
-    public void setFecha_nacimiento(GregorianCalendar fecha_nacimiento) {
+    public void setFecha_nacimiento(Date fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 

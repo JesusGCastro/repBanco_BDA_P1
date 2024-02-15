@@ -106,7 +106,8 @@ public class MenuForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarUsuarioActionPerformed
 
     private void btnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioSesionActionPerformed
-        // TODO add your handling code here:
+        InicioForm inicioSesion = new InicioForm(clientesDAO);
+        inicioSesion.setVisible(true);
     }//GEN-LAST:event_btnInicioSesionActionPerformed
 
     private void btnRetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetiroActionPerformed
@@ -114,7 +115,7 @@ public class MenuForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRetiroActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
-
+        dispose();
     }//GEN-LAST:event_botonCancelarActionPerformed
 
     

@@ -38,6 +38,7 @@ public class RetiroForm extends javax.swing.JFrame {
         campoTextoContrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(400, 400));
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

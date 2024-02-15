@@ -2,16 +2,13 @@ package com.itson.bdavanzadas.bancopersistencia.dtos;
 
 import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
 
 public class ClienteNuevoDTO {
     
     private String nombre_pila;
     private String apellido_paterno;
     private String apellido_materno;
-    private GregorianCalendar fecha_nacimiento;
+    private Date fecha_nacimiento;
     private String calle;
     private String numero;
     private String colonia;
@@ -41,23 +38,12 @@ public class ClienteNuevoDTO {
         this.apellido_materno = apellido_materno;
     }
 
-    public GregorianCalendar getFecha_nacimiento() {
+    public Date getFecha_nacimiento() {
         return fecha_nacimiento;
     }
 
-    public void setFecha_nacimiento(GregorianCalendar fecha_nacimiento) {
+    public void setFecha_nacimiento(Date fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
-    }
-
-    public void setFecha_nacimiento(String fecha_nacimiento_str) throws ParseException {
-        // Dividir la cadena en año, mes y día
-        String[] partes = fecha_nacimiento_str.split("-");
-        int anio = Integer.parseInt(partes[0]);
-        int mes = Integer.parseInt(partes[1]) - 1; // Restar 1 para ajustar al formato de Calendar
-        int dia = Integer.parseInt(partes[2]);
-
-        // Crear el objeto GregorianCalendar y establecer la fecha
-        this.fecha_nacimiento = new GregorianCalendar(anio, mes, dia);
     }
     
     public String getCalle() {

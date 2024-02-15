@@ -4,9 +4,6 @@ import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
 import com.itson.bdavanzadas.bancopersistencia.dtos.ClienteNuevoDTO;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class RegistroForm extends javax.swing.JFrame {
@@ -54,13 +51,7 @@ public class RegistroForm extends javax.swing.JFrame {
         txtNumeroCasa = new javax.swing.JTextField();
         jSeparator7 = new javax.swing.JSeparator();
         jSeparator8 = new javax.swing.JSeparator();
-        labelContraseñaRegistro1 = new javax.swing.JLabel();
-        labelContraseñaRegistro2 = new javax.swing.JLabel();
-        jSeparator9 = new javax.swing.JSeparator();
-        jSeparator10 = new javax.swing.JSeparator();
-        txtAnio = new javax.swing.JTextField();
-        txtDia = new javax.swing.JTextField();
-        txtMes = new javax.swing.JTextField();
+        jDateFechaNacimiento = new com.toedter.calendar.JDateChooser();
         L = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -87,7 +78,7 @@ public class RegistroForm extends javax.swing.JFrame {
         labelEmailRegistro.setText("Calle:");
 
         labelContraseñaRegistro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        labelContraseñaRegistro.setText("Dia nacimiento:");
+        labelContraseñaRegistro.setText("Fecha nacimiento:");
 
         botonRegistrarCliente.setBackground(new java.awt.Color(255, 223, 148));
         botonRegistrarCliente.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -174,23 +165,7 @@ public class RegistroForm extends javax.swing.JFrame {
             }
         });
 
-        labelContraseñaRegistro1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        labelContraseñaRegistro1.setText("Mes nacimiento:");
-
-        labelContraseñaRegistro2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        labelContraseñaRegistro2.setText("Año nacimiento:");
-
-        txtAnio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtAnio.setForeground(new java.awt.Color(100, 100, 100));
-        txtAnio.setBorder(null);
-
-        txtDia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtDia.setForeground(new java.awt.Color(100, 100, 100));
-        txtDia.setBorder(null);
-
-        txtMes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtMes.setForeground(new java.awt.Color(100, 100, 100));
-        txtMes.setBorder(null);
+        jDateFechaNacimiento.setDateFormatString("yyyy-MM-dd");
 
         javax.swing.GroupLayout RLayout = new javax.swing.GroupLayout(R);
         R.setLayout(RLayout);
@@ -224,54 +199,40 @@ public class RegistroForm extends javax.swing.JFrame {
                     .addGroup(RLayout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(RLayout.createSequentialGroup()
-                                .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(24, 24, 24)
-                                .addComponent(txtMes))
-                            .addGroup(RLayout.createSequentialGroup()
-                                .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelTelefono)
-                                    .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtCodigoPostal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RLayout.createSequentialGroup()
-                                            .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(txtApellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGroup(RLayout.createSequentialGroup()
-                                                    .addGap(4, 4, 4)
-                                                    .addComponent(labelUsuarioRegistro2))
-                                                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGap(60, 60, 60))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RLayout.createSequentialGroup()
-                                            .addComponent(labelContraseñaRegistro)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(labelContraseñaRegistro1))
+                            .addComponent(labelTelefono)
+                            .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtCodigoPostal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RLayout.createSequentialGroup()
+                                    .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtApellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(RLayout.createSequentialGroup()
-                                            .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(txtCalle, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(labelEmailRegistro))
-                                            .addGap(18, 18, 18)
-                                            .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(labelEmailRegistro1)
-                                                .addGroup(RLayout.createSequentialGroup()
-                                                    .addGap(6, 6, 6)
-                                                    .addComponent(jSeparator7))
-                                                .addComponent(txtNumeroCasa)))))
-                                .addGap(0, 28, Short.MAX_VALUE))
-                            .addGroup(RLayout.createSequentialGroup()
-                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(24, 24, 24)
-                                .addComponent(jSeparator9)))
-                        .addGap(18, 18, 18)
+                                            .addGap(4, 4, 4)
+                                            .addComponent(labelUsuarioRegistro2))
+                                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(60, 60, 60))
+                                .addComponent(labelContraseñaRegistro)
+                                .addGroup(RLayout.createSequentialGroup()
+                                    .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtCalle, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(labelEmailRegistro))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(labelEmailRegistro1)
+                                        .addGroup(RLayout.createSequentialGroup()
+                                            .addGap(6, 6, 6)
+                                            .addComponent(jSeparator7))
+                                        .addComponent(txtNumeroCasa))))
+                            .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jDateFechaNacimiento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)))
+                        .addGap(18, 46, Short.MAX_VALUE)
                         .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtAnio, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(labelEmailRegistro2)
-                            .addComponent(txtColonia)
-                            .addComponent(jSeparator8)
-                            .addComponent(labelContraseñaRegistro2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jSeparator10))))
+                            .addComponent(txtColonia, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                            .addComponent(jSeparator8))))
                 .addGap(32, 32, 32))
         );
         RLayout.setVerticalGroup(
@@ -326,20 +287,11 @@ public class RegistroForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelContraseñaRegistro)
-                    .addComponent(labelContraseñaRegistro1)
-                    .addComponent(labelContraseñaRegistro2))
+                .addComponent(labelContraseñaRegistro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE)
-                    .addComponent(jSeparator9)
-                    .addComponent(jSeparator10))
+                .addComponent(jDateFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(botonRegistrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(200, 200, 200))
@@ -425,12 +377,7 @@ public class RegistroForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarClienteActionPerformed
-        try {
-            registrarCliente();
-        } catch (ParseException ex) {
-            Logger.getLogger(RegistroForm.class.getName()).log(Level.SEVERE, "Error en la fecha", ex);
-            JOptionPane.showMessageDialog(rootPane, "Error en la fecha");
-        }
+    registrarCliente();
     }//GEN-LAST:event_botonRegistrarClienteActionPerformed
 
     private void txtNombreUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreUsuarioActionPerformed
@@ -442,7 +389,7 @@ public class RegistroForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtColoniaActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
-        
+        dispose();
     }//GEN-LAST:event_botonCancelarActionPerformed
 
     private void txtApellidoPaternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoPaternoActionPerformed
@@ -461,11 +408,12 @@ public class RegistroForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumeroCasaActionPerformed
 
-    public void registrarCliente() throws ParseException{
+    public void registrarCliente(){
         String nombre_pila = txtNombreUsuario.getText();
         String apellido_paterno = txtApellidoPaterno.getText();
         String apellido_materno = txtApellidoMaterno.getText();
-        String fecha_nacimiento = txtAnio.getText()+"-"+txtMes.getText()+"-"+txtDia.getText();
+        java.util.Date fechaSeleccionada = jDateFechaNacimiento.getDate();
+        java.sql.Date fechaNacimiento = new java.sql.Date(fechaSeleccionada.getTime());
         String calle = txtCalle.getText();
         String numero = txtNumeroCasa.getText();
         String colonia = txtColonia.getText();
@@ -475,7 +423,7 @@ public class RegistroForm extends javax.swing.JFrame {
         clienteNuevo.setNombre_pila(nombre_pila);
         clienteNuevo.setApellido_paterno(apellido_paterno);
         clienteNuevo.setApellido_materno(apellido_materno);
-        clienteNuevo.setFecha_nacimiento(fecha_nacimiento);
+        clienteNuevo.setFecha_nacimiento(fechaNacimiento);
         clienteNuevo.setCalle(calle);
         clienteNuevo.setNumero(numero);
         clienteNuevo.setColonia(colonia);
@@ -497,9 +445,6 @@ public class RegistroForm extends javax.swing.JFrame {
         txtNombreUsuario.setText("");
         txtApellidoPaterno.setText("");
         txtApellidoMaterno.setText("");
-        txtAnio.setText("");
-        txtMes.setText("");
-        txtDia.setText("");
         txtCalle.setText("");
         txtNumeroCasa.setText("");
         txtColonia.setText("");
@@ -514,13 +459,13 @@ public class RegistroForm extends javax.swing.JFrame {
     private javax.swing.JPanel bg;
     private javax.swing.JButton botonCancelar;
     private javax.swing.JButton botonRegistrarCliente;
+    private com.toedter.calendar.JDateChooser jDateFechaNacimiento;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -528,10 +473,7 @@ public class RegistroForm extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
-    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JLabel labelContraseñaRegistro;
-    private javax.swing.JLabel labelContraseñaRegistro1;
-    private javax.swing.JLabel labelContraseñaRegistro2;
     private javax.swing.JLabel labelEmailRegistro;
     private javax.swing.JLabel labelEmailRegistro1;
     private javax.swing.JLabel labelEmailRegistro2;
@@ -539,14 +481,11 @@ public class RegistroForm extends javax.swing.JFrame {
     private javax.swing.JLabel labelUsuarioRegistro;
     private javax.swing.JLabel labelUsuarioRegistro1;
     private javax.swing.JLabel labelUsuarioRegistro2;
-    private javax.swing.JTextField txtAnio;
     private javax.swing.JTextField txtApellidoMaterno;
     private javax.swing.JTextField txtApellidoPaterno;
     private javax.swing.JTextField txtCalle;
     private javax.swing.JTextField txtCodigoPostal;
     private javax.swing.JTextField txtColonia;
-    private javax.swing.JTextField txtDia;
-    private javax.swing.JTextField txtMes;
     private javax.swing.JTextField txtNombreUsuario;
     private javax.swing.JTextField txtNumeroCasa;
     // End of variables declaration//GEN-END:variables

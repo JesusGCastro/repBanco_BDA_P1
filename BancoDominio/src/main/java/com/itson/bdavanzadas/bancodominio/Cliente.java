@@ -14,11 +14,13 @@ public class Cliente {
     private String numero;
     private String colonia;
     private String codigo_postal;
+    private String correo;
+    private String contrasenia;
 
     public Cliente() {
     }
 
-    public Cliente(String nombre_pila, String apellido_paterno, String apellido_materno, Date fecha_nacimiento, String calle, String numero, String colonia, String codigo_postal) {
+    public Cliente(String nombre_pila, String apellido_paterno, String apellido_materno, Date fecha_nacimiento, String calle, String numero, String colonia, String codigo_postal, String correo, String contrasenia) {
         this.nombre_pila = nombre_pila;
         this.apellido_paterno = apellido_paterno;
         this.apellido_materno = apellido_materno;
@@ -27,9 +29,11 @@ public class Cliente {
         this.numero = numero;
         this.colonia = colonia;
         this.codigo_postal = codigo_postal;
+        this.correo = correo;
+        this.contrasenia = contrasenia;
     }
 
-    public Cliente(Long codigo, String nombre_pila, String apellido_paterno, String apellido_materno, Date fecha_nacimiento, String calle, String numero, String colonia, String codigo_postal) {
+    public Cliente(Long codigo, String nombre_pila, String apellido_paterno, String apellido_materno, Date fecha_nacimiento, String calle, String numero, String colonia, String codigo_postal, String correo, String contrasenia) {
         this.codigo = codigo;
         this.nombre_pila = nombre_pila;
         this.apellido_paterno = apellido_paterno;
@@ -39,6 +43,8 @@ public class Cliente {
         this.numero = numero;
         this.colonia = colonia;
         this.codigo_postal = codigo_postal;
+        this.correo = correo;
+        this.contrasenia = contrasenia;
     }
 
     public Long getCodigo() {
@@ -112,6 +118,22 @@ public class Cliente {
     public void setCodigo_postal(String codigo_postal) {
         this.codigo_postal = codigo_postal;
     }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
     
     @Override
     public int hashCode() {
@@ -148,7 +170,11 @@ public class Cliente {
         sb.append(", numero=").append(numero);
         sb.append(", colonia=").append(colonia);
         sb.append(", codigo_postal=").append(codigo_postal);
+        sb.append(", correo=").append(correo);
+        sb.append(", contrasenia=").append(contrasenia);
         sb.append('}');
         return sb.toString();
     }
+
+    
 }

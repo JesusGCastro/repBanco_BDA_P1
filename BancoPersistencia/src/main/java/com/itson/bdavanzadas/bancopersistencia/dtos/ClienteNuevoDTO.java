@@ -15,6 +15,8 @@ public class ClienteNuevoDTO {
     private String numero;
     private String colonia;
     private String codigo_postal;
+    private String correo;
+    private String contrasenia;
 
     public String getNombre_pila() {
         return nombre_pila;
@@ -79,6 +81,22 @@ public class ClienteNuevoDTO {
     public void setCodigo_postal(String codigo_postal) {
         this.codigo_postal = codigo_postal;
     }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
     
     public boolean esValido() throws ValidacionDTOException{
         //Validaciones solo de Formato
@@ -120,13 +138,21 @@ public class ClienteNuevoDTO {
         if (this.fecha_nacimiento == null) {
             throw new ValidacionDTOException("Fecha de Cliente inválida");
         }
-        if (
-            Period.between(
-                    this.fecha_nacimiento.toLocalDate(),
-                    java.time.LocalDateTime.now().toLocalDate()
-            ).getYears() < 18
-        ) {
-            throw new ValidacionDTOException("No es mayor a 18 años");
+        LocalDate fechaNacimientoLocal = this.fecha_nacimiento.toLocalDate();
+        int years = Period.between(fechaNacimientoLocal, LocalDate.now()).getYears();
+
+        if (years < 18) {
+            throw new ValidacionDTOException("El cliente debe de ser mayor de 18 años");
+        }
+        if (this.correo == null 
+                || this.correo.isBlank()
+                || this.correo.trim().length() > 100) {
+            throw new ValidacionDTOException("Correo de Cliente inválida");
+        }
+        if (this.contrasenia == null 
+                || this.contrasenia.isBlank()
+                || this.contrasenia.trim().length() > 50) {
+            throw new ValidacionDTOException("Codigo Postal de Cliente inválida");
         }
         return true;
     }

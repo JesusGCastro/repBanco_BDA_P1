@@ -24,8 +24,8 @@ public class ClientesDAO implements IClientesDAO{
     @Override
     public Cliente registrarCliente(ClienteNuevoDTO clienteNuevo) throws PersistenciaException {
         String sentenciaSQL = """
-            INSERT INTO clientes(nombre_pila, apellido_paterno, apellido_materno, fecha_nacimiento, calle, numero, colonia, codigo_postal) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO clientes(nombre_pila, apellido_paterno, apellido_materno, fecha_nacimiento, calle, numero, colonia, codigo_postal, correo, contrasenia) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """;
         try (
             Connection conexion = this.conexionBD.obtenerConexion();
@@ -39,6 +39,8 @@ public class ClientesDAO implements IClientesDAO{
             comando.setString(6, clienteNuevo.getNumero());
             comando.setString(7, clienteNuevo.getColonia());
             comando.setString(8, clienteNuevo.getCodigo_postal());
+            comando.setString(9, clienteNuevo.getCorreo());
+            comando.setString(10, clienteNuevo.getContrasenia());
             int numRegistrosInsertados = comando.executeUpdate();
             logger.log(Level.INFO, "Se agregó {0} clientes", numRegistrosInsertados);
             //Socio a devolver con id
@@ -53,7 +55,9 @@ public class ClientesDAO implements IClientesDAO{
                     clienteNuevo.getCalle(), 
                     clienteNuevo.getNumero(), 
                     clienteNuevo.getColonia(), 
-                    clienteNuevo.getCodigo_postal());
+                    clienteNuevo.getCodigo_postal(),
+                    clienteNuevo.getCorreo(),
+                    clienteNuevo.getContrasenia());
             return cliente;
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "No se pudo registrar el cliente", e);

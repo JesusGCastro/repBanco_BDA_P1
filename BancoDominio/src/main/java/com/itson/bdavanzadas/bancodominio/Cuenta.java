@@ -4,44 +4,36 @@ import java.util.Date;
 
 public class Cuenta {
     
-    private Long numero_cuenta;
-    private String contrasenia;
+    private long codigo;
     private Date fecha_apertura;
     private float saldo;
-    private Long codigo_cliente;
+    private long codigo_cliente;
+    private String estado;
 
     public Cuenta() {
     }
-
-    public Cuenta(String contrasenia, Date fecha_apertura, float saldo, Long codigo_cliente) {
-        this.contrasenia = contrasenia;
+    
+    public Cuenta(Date fecha_apertura, float saldo, long codigo_cliente, String estado) {
         this.fecha_apertura = fecha_apertura;
         this.saldo = saldo;
         this.codigo_cliente = codigo_cliente;
+        this.estado = estado;
     }
-
-    public Cuenta(Long numero_cuenta, String contrasenia, Date fecha_apertura, float saldo, Long codigo_cliente) {
-        this.numero_cuenta = numero_cuenta;
-        this.contrasenia = contrasenia;
+    
+    public Cuenta(long codigo, Date fecha_apertura, float saldo, long codigo_cliente, String estado) {
+        this.codigo= codigo;
         this.fecha_apertura = fecha_apertura;
         this.saldo = saldo;
         this.codigo_cliente = codigo_cliente;
+        this.estado = estado;
     }
 
-    public Long getNumero_cuenta() {
-        return numero_cuenta;
+    public long getCodigo() {
+        return codigo;
     }
 
-    public void setNumero_cuenta(Long numero_cuenta) {
-        this.numero_cuenta = numero_cuenta;
-    }
-
-    public String getContrasenia() {
-        return contrasenia;
-    }
-
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
+    public void setCodigo(long codigo) {
+        this.codigo = codigo;
     }
 
     public Date getFecha_apertura() {
@@ -60,24 +52,47 @@ public class Cuenta {
         this.saldo = saldo;
     }
 
-    public Long getCodigo_cliente() {
+    public long getCodigo_cliente() {
         return codigo_cliente;
     }
 
-    public void setCodigo_cliente(Long codigo_cliente) {
+    public void setCodigo_cliente(long codigo_cliente) {
         this.codigo_cliente = codigo_cliente;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + (int) (this.codigo ^ (this.codigo >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cuenta other = (Cuenta) obj;
+        return this.codigo == other.codigo;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Cuenta{");
-        sb.append("numero_cuenta=").append(numero_cuenta);
-        sb.append(", contrasenia=").append(contrasenia);
-        sb.append(", fecha_apertura=").append(fecha_apertura);
-        sb.append(", saldo=").append(saldo);
-        sb.append(", codigo_cliente=").append(codigo_cliente);
-        sb.append('}');
-        return sb.toString();
-    }  
+        return "Cuenta{" + "codigo=" + codigo + ", fecha_apertura=" + fecha_apertura + ", saldo=" + saldo + ", codigo_cliente=" + codigo_cliente + ", estado=" + estado + '}';
+    }
+    
 }

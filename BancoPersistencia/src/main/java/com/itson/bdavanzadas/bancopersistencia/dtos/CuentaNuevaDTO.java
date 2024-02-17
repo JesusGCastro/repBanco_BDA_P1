@@ -5,26 +5,18 @@ import java.sql.Date;
 
 public class CuentaNuevaDTO {
     
-    private Long numero_cuenta;
-    private String contrasenia;
+    private long codigo;
     private Date fecha_apertura;
     private float saldo;
-    private Long codigo_cliente;
+    private long codigo_cliente;
+    private String estado;
 
-    public Long getNumero_cuenta() {
-        return numero_cuenta;
+    public long getCodigo() {
+        return codigo;
     }
 
-    public void setNumero_cuenta(Long numero_cuenta) {
-        this.numero_cuenta = numero_cuenta;
-    }
-
-    public String getContrasenia() {
-        return contrasenia;
-    }
-
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
+    public void setCodigo(long codigo) {
+        this.codigo = codigo;
     }
 
     public Date getFecha_apertura() {
@@ -43,23 +35,25 @@ public class CuentaNuevaDTO {
         this.saldo = saldo;
     }
 
-    public Long getCodigo_cliente() {
+    public long getCodigo_cliente() {
         return codigo_cliente;
     }
 
-    public void setcodigo_cliente(Long codigo_cliente) {
+    public void setCodigo_cliente(long codigo_cliente) {
         this.codigo_cliente = codigo_cliente;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
     
     public boolean esValido() throws ValidacionDTOException{
-        if (this.numero_cuenta == null
-                || this.numero_cuenta < 0) {
+        if (this.codigo < 0) {
             throw new ValidacionDTOException("Numero de cuenta invalido");
-        }
-        if (this.contrasenia == null 
-                || this.contrasenia.isBlank()
-                || this.contrasenia.trim().length() > 100) {
-            throw new ValidacionDTOException("Contraseña invalida");
         }
         if (this.fecha_apertura == null) {
             throw new ValidacionDTOException("Fecha invalida");
@@ -67,9 +61,11 @@ public class CuentaNuevaDTO {
         if (this.saldo < 0) {
             throw new ValidacionDTOException("Saldo invalido");
         }
-        if (this.codigo_cliente == null
-                || this.codigo_cliente < 0) {
+        if (this.codigo_cliente < 0) {
             throw new ValidacionDTOException("Codigo de cliente invalido");
+        }
+        if (!(this.estado.equals("activada") || this.estado.equals("cancelada"))) {
+            throw new ValidacionDTOException("Estado invalido");
         }
         return true;
     }

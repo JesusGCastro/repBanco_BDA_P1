@@ -9,6 +9,8 @@ import com.itson.bdavanzadas.bancopersistencia.daos.CuentasDAO;
 import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
 import com.itson.bdavanzadas.bancopersistencia.daos.ICuentasDAO;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.util.List;
 import java.util.logging.Level;
@@ -156,17 +158,92 @@ public class MenuClienteForm extends javax.swing.JFrame {
             DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Numero de Cuenta");
             modelo.addColumn("Saldo");
+            modelo.addColumn("Desactivar");
+            modelo.addColumn("Transferir");
+            modelo.addColumn("Retiro sin cuenta");
             for (Cuenta cuenta : listaCuentas) {
-                Object[] fila = {cuenta.getCodigo(),cuenta.getSaldo()};
+                Object[] fila = {cuenta.getCodigo(),cuenta.getSaldo(), "", "Transferir", "Retiro"};
                 modelo.addRow(fila);
             }
             tblCuentas.setModel(modelo);
             TableColumnModel columnModel = tblCuentas.getColumnModel();
+            
+            ButtonColumn estadoButtonColumn = new ButtonColumn("Desactivar", new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("Aqui va la logica del boton de estado");
+//                    // Lógica para el botón "Eliminar"
+//                    int row = tblSocios.convertRowIndexToModel(tblSocios.getEditingRow());
+//                    // Acciones para eliminar el socio en la fila 'row'
+//                    // ...
+//                    Socio socio;
+//                    try {
+//                        socio = obtenerSocioDesdeFila(row);
+//                        sociosDAO.eliminar(socio.getId());
+//                    } catch (PersistenciaException ex) {
+//                        Logger.getLogger(SociosForm.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+                }
+            });
+            
+            ButtonColumn transferenciaButtonColumn = new ButtonColumn("Transferir", new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int row = tblCuentas.convertRowIndexToModel(tblCuentas.getEditingRow());
+                    Cuenta cuenta;
+                    try {
+                        cuenta = obtenerCuentaDesdeFila(row);
+                        TransferenciaForm transferencia = new TransferenciaForm(clientesDAO, cuenta);
+                        transferencia.setVisible(true);
+                    } catch (PersistenciaException ex) {
+                        Logger.getLogger(MenuClienteForm.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+
+            ButtonColumn retiroButtonColumn = new ButtonColumn("Retiro", new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int row = tblCuentas.convertRowIndexToModel(tblCuentas.getEditingRow());
+                    Cuenta cuenta;
+                    try {
+                        cuenta = obtenerCuentaDesdeFila(row);
+                        RetiroForm retiro = new RetiroForm(clientesDAO, cuenta);
+                        retiro.setVisible(true);
+                    } catch (PersistenciaException ex) {
+                        Logger.getLogger(MenuClienteForm.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+            
+            columnModel.getColumn(2).setCellRenderer(estadoButtonColumn);
+            columnModel.getColumn(2).setCellEditor(estadoButtonColumn);
+
+            columnModel.getColumn(3).setCellRenderer(transferenciaButtonColumn);
+            columnModel.getColumn(3).setCellEditor(transferenciaButtonColumn);
+            
+            columnModel.getColumn(4).setCellRenderer(retiroButtonColumn);
+            columnModel.getColumn(4).setCellEditor(retiroButtonColumn);
+
         } catch (PersistenciaException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al mostrar la tabla", JOptionPane.ERROR_MESSAGE);
         }
     }
 
+    private Cuenta obtenerCuentaDesdeFila(int fila) throws PersistenciaException {
+        String cadenaConexion = "jdbc:mysql://localhost/banco";
+        String usuario = "root";
+        String password = "123456789";
+        IConexion conexion = new Conexion(cadenaConexion, usuario, password);
+        ICuentasDAO cuentasDAO = new CuentasDAO(conexion);
+        
+        List<Cuenta> listaCuentas = cuentasDAO.consultarCuentas(cliente);
+        if (fila >= 0 && fila < listaCuentas.size()) {
+            return listaCuentas.get(fila);
+        } else {
+            return null;
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnNuevaCuenta;

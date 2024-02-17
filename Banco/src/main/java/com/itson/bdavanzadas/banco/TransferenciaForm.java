@@ -1,20 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.itson.bdavanzadas.banco;
 
-/**
- *
- * @author renec
- */
+import com.itson.bdavanzadas.bancodominio.Cuenta;
+import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
+
 public class TransferenciaForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TransferenciaForm
-     */
-    public TransferenciaForm() {
+    private final IClientesDAO clientesDAO;
+    private final Cuenta cuenta;
+    
+    public TransferenciaForm(IClientesDAO clientesDAO, Cuenta cuenta) {
         initComponents();
+        this.clientesDAO = clientesDAO;
+        this.cuenta = cuenta;
     }
 
     /**
@@ -79,11 +76,6 @@ public class TransferenciaForm extends javax.swing.JFrame {
         txtCuentaDestino.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtCuentaDestino.setForeground(new java.awt.Color(100, 100, 100));
         txtCuentaDestino.setBorder(null);
-        txtCuentaDestino.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCuentaDestinoActionPerformed(evt);
-            }
-        });
         bg.add(txtCuentaDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 320, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -96,11 +88,6 @@ public class TransferenciaForm extends javax.swing.JFrame {
         txtMonto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtMonto.setForeground(new java.awt.Color(100, 100, 100));
         txtMonto.setBorder(null);
-        txtMonto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMontoActionPerformed(evt);
-            }
-        });
         bg.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 320, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -126,20 +113,12 @@ public class TransferenciaForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-
+        dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAceptarActionPerformed
-
-    private void txtCuentaDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCuentaDestinoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCuentaDestinoActionPerformed
-
-    private void txtMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMontoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

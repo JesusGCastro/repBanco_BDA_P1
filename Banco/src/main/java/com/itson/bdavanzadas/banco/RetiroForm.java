@@ -1,20 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.itson.bdavanzadas.banco;
 
-/**
- *
- * @author renec
- */
-public class RetiroForm extends javax.swing.JFrame {
+import com.itson.bdavanzadas.bancodominio.Cuenta;
+import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
 
-    /**
-     * Creates new form RetiroForm
-     */
-    public RetiroForm() {
+public class RetiroForm extends javax.swing.JFrame {
+    
+    private final IClientesDAO clientesDAO;
+    private final Cuenta cuenta;
+    
+    public RetiroForm(IClientesDAO clientesDAO, Cuenta cuenta) {
         initComponents();
+        this.clientesDAO = clientesDAO;
+        this.cuenta = cuenta; 
     }
 
     /**
@@ -41,6 +38,7 @@ public class RetiroForm extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(400, 400));
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
+        bg.setMinimumSize(new java.awt.Dimension(400, 400));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(255, 223, 148));
@@ -52,11 +50,6 @@ public class RetiroForm extends javax.swing.JFrame {
         campoTextoIDUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoTextoIDUsuario.setForeground(new java.awt.Color(100, 100, 100));
         campoTextoIDUsuario.setBorder(null);
-        campoTextoIDUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoTextoIDUsuarioActionPerformed(evt);
-            }
-        });
         bg.add(campoTextoIDUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 320, 30));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
@@ -116,10 +109,6 @@ public class RetiroForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void campoTextoIDUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTextoIDUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoTextoIDUsuarioActionPerformed
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
 

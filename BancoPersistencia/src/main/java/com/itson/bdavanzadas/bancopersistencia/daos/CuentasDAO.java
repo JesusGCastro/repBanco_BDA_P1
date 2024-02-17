@@ -16,15 +16,31 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Clase de CuentasDAO
+ * @author Equipo
+ */
 public class CuentasDAO implements ICuentasDAO{
     
     final IConexion conexionBD;
     static final Logger logger = Logger.getLogger(CuentasDAO.class.getName());
 
+    /**
+     * Constructor de la clase CuentasDAO.
+     * 
+     * @param conexionBD La instancia de conexión a la base de datos.
+     */
     public CuentasDAO(IConexion conexionBD) {
         this.conexionBD = conexionBD;
     }
     
+    /**
+     * Registra una nueva cuenta en la base de datos.
+     * 
+     * @param cuentaNueva El DTO que contiene la información de la nueva cuenta a registrar.
+     * @return La cuenta registrada.
+     * @throws PersistenciaException Si ocurre un error durante el proceso de registro.
+     */
     @Override
     public Cuenta registrarCuenta(CuentaNuevaDTO cuentaNueva) throws PersistenciaException {
         String sentenciaSQL = """
@@ -55,6 +71,13 @@ public class CuentasDAO implements ICuentasDAO{
         }
     }
 
+    /**
+     * Consulta las cuentas asociadas a un cliente en la base de datos.
+     * 
+     * @param cliente El cliente del cual se desean consultar las cuentas.
+     * @return Una lista de cuentas asociadas al cliente especificado.
+     * @throws PersistenciaException Si ocurre un error durante el proceso de consulta.
+     */
     @Override
     public List<Cuenta> consultarCuentas(Cliente cliente) throws PersistenciaException {
         String sentenciaSQL = """

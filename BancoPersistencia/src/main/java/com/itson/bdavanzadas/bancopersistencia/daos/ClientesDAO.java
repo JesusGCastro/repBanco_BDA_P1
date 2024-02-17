@@ -13,15 +13,31 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Clase de ClientesDAO
+ * @author Equipo
+ */
 public class ClientesDAO implements IClientesDAO{
 
     final IConexion conexionBD;
     static final Logger logger = Logger.getLogger(ClientesDAO.class.getName());
 
+    /**
+     * Constructor para la clase ClientesDAO.
+     * 
+     * @param conexionBD La conexión a la base de datos.
+     */
     public ClientesDAO(IConexion conexionBD) {
         this.conexionBD = conexionBD;
     }
 
+    /**
+     * Registra un nuevo cliente en la base de datos.
+     * 
+     * @param clienteNuevo El DTO que contiene la información del nuevo cliente a registrar.
+     * @return El objeto Cliente registrado.
+     * @throws PersistenciaException Si ocurre un error durante el proceso de registro.
+     */
     @Override
     public Cliente registrarCliente(ClienteNuevoDTO clienteNuevo) throws PersistenciaException {
         String sentenciaSQL = """
@@ -66,6 +82,13 @@ public class ClientesDAO implements IClientesDAO{
         }
     }
 
+    /**
+     * Inicia sesión para un cliente existente en la base de datos.
+     * 
+     * @param cliente El DTO que contiene la información del cliente para iniciar sesión.
+     * @return El objeto Cliente que representa al cliente que ha iniciado sesión.
+     * @throws PersistenciaException Si ocurre un error durante el proceso de inicio de sesión.
+     */
     @Override
     public Cliente iniciarSesion(ClienteNuevoDTO cliente) throws PersistenciaException {
         String sentenciaSQL = """

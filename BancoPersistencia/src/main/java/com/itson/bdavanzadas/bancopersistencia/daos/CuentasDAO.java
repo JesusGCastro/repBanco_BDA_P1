@@ -1,5 +1,6 @@
 package com.itson.bdavanzadas.bancopersistencia.daos;
 
+import com.itson.bdavanzadas.bancodominio.Cliente;
 import com.itson.bdavanzadas.bancodominio.Cuenta;
 import com.itson.bdavanzadas.bancopersistencia.conexion.IConexion;
 import com.itson.bdavanzadas.bancopersistencia.dtos.CuentaNuevaDTO;
@@ -10,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -49,6 +52,36 @@ public class CuentasDAO implements ICuentasDAO{
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "No se pudo registrar la cuenta", e);
             throw new PersistenciaException("No se pudo registrar la cuenta", e);
+        }
+    }
+
+    @Override
+    public List<Cuenta> consultarCuentas(Cliente cliente) throws PersistenciaException {
+        String sentenciaSQL = """
+            SELECT * FROM cuentas WHERE codigo_cliente = ?
+        """;
+        List<Cuenta> listaCuentas = new LinkedList<>();
+        try (
+            Connection conexion = this.conexionBD.obtenerConexion(); 
+            PreparedStatement comando = conexion.prepareStatement(sentenciaSQL);
+        ){
+            comando.setLong(1, cliente.getCodigo());
+            ResultSet resultado = comando.executeQuery();
+            while (resultado.next()) {
+                Long codigo = resultado.getLong("codigo");
+//                Date fecha_apertura = resultado.getDate("fecha_apertura");
+                Float saldo = resultado.getFloat("saldo");
+//                Long codigo_cliete = resultado.getLong("codigo_cliente");
+//                Boolean estado = resultado.getBoolean("estado");
+                
+                Cuenta cuenta = new Cuenta(codigo, saldo);
+                listaCuentas.add(cuenta);
+            }
+            logger.log(Level.INFO, "Se consultaron {0} cuentas", listaCuentas.size());
+            return listaCuentas;
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "No se pudieron consultar cuentas", e);
+            throw new PersistenciaException("No se pudieron consultar cuentas", e);
         }
     }
     

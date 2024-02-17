@@ -27,6 +27,11 @@ public class Cuenta {
         this.codigo_cliente = codigo_cliente;
     }
 
+    public Cuenta(long codigo, float saldo) {
+        this.codigo = codigo;
+        this.saldo = saldo;
+    }
+
     public long getCodigo() {
         return codigo;
     }

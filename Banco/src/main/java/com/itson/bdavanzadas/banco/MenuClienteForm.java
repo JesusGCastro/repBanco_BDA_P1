@@ -1,13 +1,21 @@
 package com.itson.bdavanzadas.banco;
 
 import com.itson.bdavanzadas.bancodominio.Cliente;
+import com.itson.bdavanzadas.bancodominio.Cuenta;
 import com.itson.bdavanzadas.bancopersistencia.conexion.Conexion;
 import com.itson.bdavanzadas.bancopersistencia.conexion.IConexion;
 import com.itson.bdavanzadas.bancopersistencia.daos.ClientesDAO;
 import com.itson.bdavanzadas.bancopersistencia.daos.CuentasDAO;
 import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
 import com.itson.bdavanzadas.bancopersistencia.daos.ICuentasDAO;
+import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
 import java.sql.Connection;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 public class MenuClienteForm extends javax.swing.JFrame {
 
@@ -19,6 +27,7 @@ public class MenuClienteForm extends javax.swing.JFrame {
         this.clientesDAO = clientesDAO;
         this.cliente = cliente;
         lblBienvenida.setText("Bienvenid@ "+cliente.getNombre_pila());
+        mostrarCuentas();
     }
     
     /**
@@ -133,9 +142,30 @@ public class MenuClienteForm extends javax.swing.JFrame {
         ICuentasDAO cuentasDAO = new CuentasDAO(conexion);
         DlgCrearCuenta crearCuenta = new DlgCrearCuenta(this, rootPaneCheckingEnabled, cuentasDAO, cliente);
         crearCuenta.setVisible(true);
+        mostrarCuentas();
     }//GEN-LAST:event_btnNuevaCuentaActionPerformed
 
-    
+    public void mostrarCuentas(){
+        String cadenaConexion = "jdbc:mysql://localhost/banco";
+        String usuario = "root";
+        String password = "123456789";
+        IConexion conexion = new Conexion(cadenaConexion, usuario, password);
+        ICuentasDAO cuentasDAO = new CuentasDAO(conexion);
+        try {
+            List<Cuenta> listaCuentas = cuentasDAO.consultarCuentas(cliente);
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Numero de Cuenta");
+            modelo.addColumn("Saldo");
+            for (Cuenta cuenta : listaCuentas) {
+                Object[] fila = {cuenta.getCodigo(),cuenta.getSaldo()};
+                modelo.addRow(fila);
+            }
+            tblCuentas.setModel(modelo);
+            TableColumnModel columnModel = tblCuentas.getColumnModel();
+        } catch (PersistenciaException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al mostrar la tabla", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;

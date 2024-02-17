@@ -4,17 +4,19 @@
  */
 package com.itson.bdavanzadas.banco;
 
+import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
+
 /**
  *
  * @author renec
  */
 public class MenuClienteForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MenuClienteForm
-     */
-    public MenuClienteForm() {
+    private final IClientesDAO clientesDAO;
+    
+    public MenuClienteForm(IClientesDAO clientesDAO) {
         initComponents();
+        this.clientesDAO = clientesDAO;
     }
 
     /**

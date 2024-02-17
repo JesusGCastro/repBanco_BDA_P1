@@ -146,8 +146,8 @@
                           <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtNumeroCuenta" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnContrasenia" alignment="0" pref="344" max="32767" attributes="0"/>
+                              <Component id="txtCorreo" alignment="0" max="32767" attributes="0"/>
+                              <Component id="pswdConstrasenia" alignment="0" pref="344" max="32767" attributes="0"/>
                               <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
                               <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
                           </Group>
@@ -176,16 +176,16 @@
                       <Component id="btnSalir" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                      <Component id="txtNumeroCuenta" min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtCorreo" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                       <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnContrasenia" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="pswdConstrasenia" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                       <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
@@ -215,7 +215,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="16" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Numero Cuenta:"/>
+                <Property name="text" type="java.lang.String" value="Correo:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
@@ -226,7 +226,7 @@
                 <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNumeroCuenta">
+            <Component class="javax.swing.JTextField" name="txtCorreo">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
@@ -239,10 +239,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNumeroCuentaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCorreoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="btnContrasenia">
+            <Component class="javax.swing.JPasswordField" name="pswdConstrasenia">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="64" green="64" red="64" type="rgb"/>

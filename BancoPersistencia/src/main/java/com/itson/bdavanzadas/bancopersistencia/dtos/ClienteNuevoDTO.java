@@ -156,4 +156,17 @@ public class ClienteNuevoDTO {
         }
         return true;
     }
+    
+    public void esValidoInicioSesion() throws ValidacionDTOException{
+        if (this.correo == null 
+                || this.correo.isBlank()
+                || this.correo.trim().length() > 100) {
+            throw new ValidacionDTOException("Correo de Cliente inválida");
+        }
+        if (this.contrasenia == null 
+                || this.contrasenia.isBlank()
+                || this.contrasenia.trim().length() > 50) {
+            throw new ValidacionDTOException("Codigo Postal de Cliente inválida");
+        }
+    }
 }

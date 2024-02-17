@@ -6,4 +6,6 @@ import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException
 
 public interface IClientesDAO {
     Cliente registrarCliente(ClienteNuevoDTO clienteNuevo) throws PersistenciaException;
+    
+    Cliente iniciarSesion(ClienteNuevoDTO cliente) throws PersistenciaException;
 }

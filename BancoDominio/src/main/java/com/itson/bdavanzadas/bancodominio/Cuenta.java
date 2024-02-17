@@ -1,5 +1,6 @@
 package com.itson.bdavanzadas.bancodominio;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Cuenta {
@@ -8,24 +9,22 @@ public class Cuenta {
     private Date fecha_apertura;
     private float saldo;
     private long codigo_cliente;
-    private String estado;
+    private boolean estado = true; //De principio estara activa
 
     public Cuenta() {
     }
     
-    public Cuenta(Date fecha_apertura, float saldo, long codigo_cliente, String estado) {
-        this.fecha_apertura = fecha_apertura;
+    public Cuenta( float saldo, long codigo_cliente) {
+        this.fecha_apertura = new Date();
         this.saldo = saldo;
         this.codigo_cliente = codigo_cliente;
-        this.estado = estado;
     }
     
-    public Cuenta(long codigo, Date fecha_apertura, float saldo, long codigo_cliente, String estado) {
+    public Cuenta(long codigo, float saldo, long codigo_cliente) {
         this.codigo= codigo;
-        this.fecha_apertura = fecha_apertura;
+        this.fecha_apertura = new Date();
         this.saldo = saldo;
         this.codigo_cliente = codigo_cliente;
-        this.estado = estado;
     }
 
     public long getCodigo() {
@@ -36,13 +35,14 @@ public class Cuenta {
         this.codigo = codigo;
     }
 
-    public Date getFecha_apertura() {
-        return fecha_apertura;
+    public String getFechaAperturaFormateada() {
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        return formatoFecha.format(fecha_apertura);
     }
 
-    public void setFecha_apertura(Date fecha_apertura) {
-        this.fecha_apertura = fecha_apertura;
-    }
+//    public void setFecha_apertura(Date fecha_apertura) {
+//        this.fecha_apertura = fecha_apertura;
+//    }
 
     public float getSaldo() {
         return saldo;
@@ -60,11 +60,11 @@ public class Cuenta {
         this.codigo_cliente = codigo_cliente;
     }
 
-    public String getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 
@@ -92,7 +92,17 @@ public class Cuenta {
 
     @Override
     public String toString() {
-        return "Cuenta{" + "codigo=" + codigo + ", fecha_apertura=" + fecha_apertura + ", saldo=" + saldo + ", codigo_cliente=" + codigo_cliente + ", estado=" + estado + '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("Cuenta{");
+        sb.append("codigo=").append(codigo);
+        sb.append(", fecha_apertura=").append(fecha_apertura);
+        sb.append(", saldo=").append(saldo);
+        sb.append(", codigo_cliente=").append(codigo_cliente);
+        sb.append(", estado=").append(estado);
+        sb.append('}');
+        return sb.toString();
     }
+
+    
     
 }

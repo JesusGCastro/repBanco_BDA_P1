@@ -1,14 +1,24 @@
 package com.itson.bdavanzadas.banco;
 
+import com.itson.bdavanzadas.bancodominio.Cliente;
+import com.itson.bdavanzadas.bancopersistencia.daos.ICuentasDAO;
+import com.itson.bdavanzadas.bancopersistencia.dtos.CuentaNuevaDTO;
+import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
+import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
+import javax.swing.JOptionPane;
+
 public class DlgCrearCuenta extends javax.swing.JDialog {
 
-    /**
-     * Creates new form FrmCrearCuenta
-     */
-    public DlgCrearCuenta(java.awt.Frame parent, boolean modal) {
+    private final ICuentasDAO cuentasDAO;
+    private final Cliente cliente;
+    
+    public DlgCrearCuenta(java.awt.Frame parent, boolean modal,ICuentasDAO cuentasDAO,  Cliente cliente) {
         super(parent, modal);
         initComponents();
+        this.cuentasDAO = cuentasDAO;
+        this.cliente = cliente;
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -21,9 +31,6 @@ public class DlgCrearCuenta extends javax.swing.JDialog {
 
         bg = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        labelUsuarioRegistro1 = new javax.swing.JLabel();
-        txtContrasenia = new javax.swing.JTextField();
-        jSeparator3 = new javax.swing.JSeparator();
         labelUsuarioRegistro2 = new javax.swing.JLabel();
         txtSaldo = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
@@ -38,37 +45,16 @@ public class DlgCrearCuenta extends javax.swing.JDialog {
         jLabel7.setText("Ingrese los datos necesarios para crear su cuenta:");
         bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
 
-        labelUsuarioRegistro1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        labelUsuarioRegistro1.setText("Contraseña:");
-        bg.add(labelUsuarioRegistro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, -1, -1));
-
-        txtContrasenia.setBackground(new java.awt.Color(255, 204, 102));
-        txtContrasenia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtContrasenia.setForeground(new java.awt.Color(100, 100, 100));
-        txtContrasenia.setBorder(null);
-        txtContrasenia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContraseniaActionPerformed(evt);
-            }
-        });
-        bg.add(txtContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 150, -1));
-        bg.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 150, 20));
-
         labelUsuarioRegistro2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelUsuarioRegistro2.setText("Saldo de la cuenta:");
-        bg.add(labelUsuarioRegistro2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
+        bg.add(labelUsuarioRegistro2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
 
         txtSaldo.setBackground(new java.awt.Color(255, 204, 102));
         txtSaldo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtSaldo.setForeground(new java.awt.Color(100, 100, 100));
         txtSaldo.setBorder(null);
-        txtSaldo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSaldoActionPerformed(evt);
-            }
-        });
-        bg.add(txtSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 150, -1));
-        bg.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, 150, 20));
+        bg.add(txtSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 150, -1));
+        bg.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 150, 20));
 
         btnAceptar.setBackground(new java.awt.Color(255, 204, 102));
         btnAceptar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -95,31 +81,38 @@ public class DlgCrearCuenta extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtContraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseniaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContraseniaActionPerformed
-
-    private void txtSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSaldoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSaldoActionPerformed
-
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-
+        registarCuenta();
+        dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-   
+   public void registarCuenta(){
+       Float saldo = Float.valueOf(txtSaldo.getText());
+       
+       CuentaNuevaDTO cuentaNueva = new CuentaNuevaDTO();
+       cuentaNueva.setCodigo_cliente(cliente.getCodigo());
+       cuentaNueva.setSaldo(saldo);
+       
+       try {
+           cuentaNueva.esValido();
+           this.cuentasDAO.registrarCuenta(cuentaNueva);
+           JOptionPane.showMessageDialog(this, "Se registró la cuenta", "Notificaión", JOptionPane.INFORMATION_MESSAGE);
+       } catch (ValidacionDTOException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
+        } catch (PersistenciaException e) {
+            JOptionPane.showMessageDialog(this, "No fue posible registrar la cuenta", "Error de almacenamiento", JOptionPane.ERROR_MESSAGE);
+        }
+   }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnAceptar;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JLabel labelUsuarioRegistro1;
     private javax.swing.JLabel labelUsuarioRegistro2;
-    private javax.swing.JTextField txtContrasenia;
     private javax.swing.JTextField txtSaldo;
     // End of variables declaration//GEN-END:variables
 }

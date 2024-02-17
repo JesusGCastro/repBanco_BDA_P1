@@ -2,6 +2,7 @@ package com.itson.bdavanzadas.bancopersistencia.dtos;
 
 import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class CuentaNuevaDTO {
     
@@ -9,23 +10,20 @@ public class CuentaNuevaDTO {
     private Date fecha_apertura;
     private float saldo;
     private long codigo_cliente;
-    private String estado;
+    private boolean estado = true;
 
-    public long getCodigo() {
-        return codigo;
+    public CuentaNuevaDTO() {
+        this.fecha_apertura = new Date(new java.util.Date().getTime());
     }
 
-    public void setCodigo(long codigo) {
-        this.codigo = codigo;
+    public String getFechaAperturaFormateada() {
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        return formatoFecha.format(fecha_apertura);
     }
 
-    public Date getFecha_apertura() {
-        return fecha_apertura;
-    }
-
-    public void setFecha_apertura(Date fecha_apertura) {
-        this.fecha_apertura = fecha_apertura;
-    }
+//    public void setFecha_apertura() {
+//        this.fecha_apertura = fecha_apertura;
+//    }
 
     public float getSaldo() {
         return saldo;
@@ -43,11 +41,11 @@ public class CuentaNuevaDTO {
         this.codigo_cliente = codigo_cliente;
     }
 
-    public String getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
     
@@ -64,9 +62,7 @@ public class CuentaNuevaDTO {
         if (this.codigo_cliente < 0) {
             throw new ValidacionDTOException("Codigo de cliente invalido");
         }
-        if (!(this.estado.equals("activada") || this.estado.equals("cancelada"))) {
-            throw new ValidacionDTOException("Estado invalido");
-        }
+        
         return true;
     }
     

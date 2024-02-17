@@ -1,7 +1,13 @@
 package com.itson.bdavanzadas.banco;
 
 import com.itson.bdavanzadas.bancodominio.Cliente;
+import com.itson.bdavanzadas.bancopersistencia.conexion.Conexion;
+import com.itson.bdavanzadas.bancopersistencia.conexion.IConexion;
+import com.itson.bdavanzadas.bancopersistencia.daos.ClientesDAO;
+import com.itson.bdavanzadas.bancopersistencia.daos.CuentasDAO;
 import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
+import com.itson.bdavanzadas.bancopersistencia.daos.ICuentasDAO;
+import java.sql.Connection;
 
 public class MenuClienteForm extends javax.swing.JFrame {
 
@@ -12,8 +18,9 @@ public class MenuClienteForm extends javax.swing.JFrame {
         initComponents();
         this.clientesDAO = clientesDAO;
         this.cliente = cliente;
+        lblBienvenida.setText("Bienvenid@ "+cliente.getNombre_pila());
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -24,20 +31,22 @@ public class MenuClienteForm extends javax.swing.JFrame {
     private void initComponents() {
 
         bg = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblBienvenida = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         btnNuevaCuenta = new javax.swing.JButton();
         btnTransferencia = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblCuentas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setBackground(new java.awt.Color(255, 223, 148));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Bienvenido a tu cuenta!");
-        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
+        lblBienvenida.setBackground(new java.awt.Color(255, 223, 148));
+        lblBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblBienvenida.setText("Bienvenido a tu cuenta!");
+        bg.add(lblBienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
 
         btnSalir.setBackground(new java.awt.Color(255, 223, 148));
         btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -50,7 +59,7 @@ public class MenuClienteForm extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        bg.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, 70, -1));
+        bg.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, 70, -1));
 
         btnNuevaCuenta.setBackground(new java.awt.Color(255, 223, 148));
         btnNuevaCuenta.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -63,7 +72,7 @@ public class MenuClienteForm extends javax.swing.JFrame {
                 btnNuevaCuentaActionPerformed(evt);
             }
         });
-        bg.add(btnNuevaCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 180, -1));
+        bg.add(btnNuevaCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 180, -1));
 
         btnTransferencia.setBackground(new java.awt.Color(255, 223, 148));
         btnTransferencia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -76,7 +85,22 @@ public class MenuClienteForm extends javax.swing.JFrame {
                 btnTransferenciaActionPerformed(evt);
             }
         });
-        bg.add(btnTransferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 180, -1));
+        bg.add(btnTransferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, 180, -1));
+
+        tblCuentas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tblCuentas);
+
+        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 600, 280));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,15 +126,24 @@ public class MenuClienteForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTransferenciaActionPerformed
 
     private void btnNuevaCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaCuentaActionPerformed
-        // TODO add your handling code here:
+        String cadenaConexion = "jdbc:mysql://localhost/banco";
+        String usuario = "root";
+        String password = "123456789";
+        IConexion conexion = new Conexion(cadenaConexion, usuario, password);
+        ICuentasDAO cuentasDAO = new CuentasDAO(conexion);
+        DlgCrearCuenta crearCuenta = new DlgCrearCuenta(this, rootPaneCheckingEnabled, cuentasDAO, cliente);
+        crearCuenta.setVisible(true);
     }//GEN-LAST:event_btnNuevaCuentaActionPerformed
 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnNuevaCuenta;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnTransferencia;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblBienvenida;
+    private javax.swing.JTable tblCuentas;
     // End of variables declaration//GEN-END:variables
 }

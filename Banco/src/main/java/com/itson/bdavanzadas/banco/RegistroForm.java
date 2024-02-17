@@ -101,20 +101,10 @@ public class RegistroForm extends javax.swing.JFrame {
         txtNombreUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtNombreUsuario.setForeground(new java.awt.Color(100, 100, 100));
         txtNombreUsuario.setBorder(null);
-        txtNombreUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreUsuarioActionPerformed(evt);
-            }
-        });
 
         txtColonia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtColonia.setForeground(new java.awt.Color(100, 100, 100));
         txtColonia.setBorder(null);
-        txtColonia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtColoniaActionPerformed(evt);
-            }
-        });
 
         labelTelefono.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelTelefono.setText("Codigo Postal:");
@@ -129,11 +119,6 @@ public class RegistroForm extends javax.swing.JFrame {
         txtApellidoPaterno.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtApellidoPaterno.setForeground(new java.awt.Color(100, 100, 100));
         txtApellidoPaterno.setBorder(null);
-        txtApellidoPaterno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtApellidoPaternoActionPerformed(evt);
-            }
-        });
 
         labelUsuarioRegistro2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelUsuarioRegistro2.setText("Apellido Materno:");
@@ -141,11 +126,6 @@ public class RegistroForm extends javax.swing.JFrame {
         txtApellidoMaterno.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtApellidoMaterno.setForeground(new java.awt.Color(100, 100, 100));
         txtApellidoMaterno.setBorder(null);
-        txtApellidoMaterno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtApellidoMaternoActionPerformed(evt);
-            }
-        });
 
         labelEmailRegistro1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelEmailRegistro1.setText("Numero:");
@@ -156,20 +136,10 @@ public class RegistroForm extends javax.swing.JFrame {
         txtCalle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtCalle.setForeground(new java.awt.Color(100, 100, 100));
         txtCalle.setBorder(null);
-        txtCalle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCalleActionPerformed(evt);
-            }
-        });
 
         txtNumeroCasa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtNumeroCasa.setForeground(new java.awt.Color(100, 100, 100));
         txtNumeroCasa.setBorder(null);
-        txtNumeroCasa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNumeroCasaActionPerformed(evt);
-            }
-        });
 
         jDateFechaNacimiento.setDateFormatString("yyyy-MM-dd");
 
@@ -184,11 +154,6 @@ public class RegistroForm extends javax.swing.JFrame {
         labelTelefono2.setText("Contraseña:");
 
         pswdConstrasenia.setBorder(null);
-        pswdConstrasenia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pswdConstraseniaActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout RLayout = new javax.swing.GroupLayout(R);
         R.setLayout(RLayout);
@@ -432,39 +397,11 @@ public class RegistroForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonRegistrarClienteActionPerformed
 
-    private void txtNombreUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreUsuarioActionPerformed
-
-    private void txtColoniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtColoniaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtColoniaActionPerformed
-
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         dispose();
         MenuForm principal = new MenuForm(clientesDAO);
         principal.setVisible(true);
     }//GEN-LAST:event_botonCancelarActionPerformed
-
-    private void txtApellidoPaternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoPaternoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtApellidoPaternoActionPerformed
-
-    private void txtApellidoMaternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoMaternoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtApellidoMaternoActionPerformed
-
-    private void txtCalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCalleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCalleActionPerformed
-
-    private void txtNumeroCasaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroCasaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumeroCasaActionPerformed
-
-    private void pswdConstraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswdConstraseniaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pswdConstraseniaActionPerformed
 
     public void registrarCliente(){
         

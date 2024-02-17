@@ -1,47 +1,54 @@
 package com.itson.bdavanzadas.bancodominio;
 
-import java.util.GregorianCalendar;
-import java.util.Objects;
+import java.util.Date;
 
 public class Cuenta {
     
-    private Long codigo;
-    private GregorianCalendar fecha_apertura;
+    private Long numero_cuenta;
+    private String contrasenia;
+    private Date fecha_apertura;
     private float saldo;
-    private Cliente cliente;
-    private boolean estado;
+    private Long codigo_cliente;
 
     public Cuenta() {
     }
 
-    public Cuenta(GregorianCalendar fecha_apertura, float saldo, Cliente cliente, boolean estado) {
+    public Cuenta(String contrasenia, Date fecha_apertura, float saldo, Long codigo_cliente) {
+        this.contrasenia = contrasenia;
         this.fecha_apertura = fecha_apertura;
         this.saldo = saldo;
-        this.cliente = cliente;
-        this.estado = estado;
+        this.codigo_cliente = codigo_cliente;
     }
 
-    public Cuenta(Long codigo, GregorianCalendar fecha_apertura, float saldo, Cliente cliente, boolean estado) {
-        this.codigo = codigo;
+    public Cuenta(Long numero_cuenta, String contrasenia, Date fecha_apertura, float saldo, Long codigo_cliente) {
+        this.numero_cuenta = numero_cuenta;
+        this.contrasenia = contrasenia;
         this.fecha_apertura = fecha_apertura;
         this.saldo = saldo;
-        this.cliente = cliente;
-        this.estado = estado;
+        this.codigo_cliente = codigo_cliente;
     }
 
-    public Long getCodigo() {
-        return codigo;
+    public Long getNumero_cuenta() {
+        return numero_cuenta;
     }
 
-    public void setCodigo(Long codigo) {
-        this.codigo = codigo;
+    public void setNumero_cuenta(Long numero_cuenta) {
+        this.numero_cuenta = numero_cuenta;
     }
 
-    public GregorianCalendar getFecha_apertura() {
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public Date getFecha_apertura() {
         return fecha_apertura;
     }
 
-    public void setFecha_apertura(GregorianCalendar fecha_apertura) {
+    public void setFecha_apertura(Date fecha_apertura) {
         this.fecha_apertura = fecha_apertura;
     }
 
@@ -53,57 +60,24 @@ public class Cuenta {
         this.saldo = saldo;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Long getCodigo_cliente() {
+        return codigo_cliente;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-
-    
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 47 * hash + Objects.hashCode(this.codigo);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Cuenta other = (Cuenta) obj;
-        return Objects.equals(this.codigo, other.codigo);
+    public void setCodigo_cliente(Long codigo_cliente) {
+        this.codigo_cliente = codigo_cliente;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Cuenta{");
-        sb.append("codigo=").append(codigo);
+        sb.append("numero_cuenta=").append(numero_cuenta);
+        sb.append(", contrasenia=").append(contrasenia);
         sb.append(", fecha_apertura=").append(fecha_apertura);
         sb.append(", saldo=").append(saldo);
-        sb.append(", cliente=").append(cliente);
-        sb.append(", estado=").append(estado);
+        sb.append(", codigo_cliente=").append(codigo_cliente);
         sb.append('}');
         return sb.toString();
-    }
-
-    
+    }  
 }

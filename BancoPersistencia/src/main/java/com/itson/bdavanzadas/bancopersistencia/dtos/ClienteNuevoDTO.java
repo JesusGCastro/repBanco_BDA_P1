@@ -140,7 +140,6 @@ public class ClienteNuevoDTO {
         }
         LocalDate fechaNacimientoLocal = this.fecha_nacimiento.toLocalDate();
         int years = Period.between(fechaNacimientoLocal, LocalDate.now()).getYears();
-
         if (years < 18) {
             throw new ValidacionDTOException("El cliente debe de ser mayor de 18 años");
         }
@@ -152,7 +151,7 @@ public class ClienteNuevoDTO {
         if (this.contrasenia == null 
                 || this.contrasenia.isBlank()
                 || this.contrasenia.trim().length() > 50) {
-            throw new ValidacionDTOException("Codigo Postal de Cliente inválida");
+            throw new ValidacionDTOException("Contraseña inválida");
         }
         return true;
     }

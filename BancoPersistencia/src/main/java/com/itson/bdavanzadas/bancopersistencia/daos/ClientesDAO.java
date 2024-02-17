@@ -61,7 +61,7 @@ public class ClientesDAO implements IClientesDAO{
             return cliente;
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "No se pudo registrar el cliente", e);
-            throw new PersistenciaException("No se pudo registrar el clientex", e);
+            throw new PersistenciaException("No se pudo registrar el cliente", e);
         }
     }
     

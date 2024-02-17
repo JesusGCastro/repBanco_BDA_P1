@@ -1,35 +1,35 @@
 package com.itson.bdavanzadas.bancodominio;
 
-import java.util.GregorianCalendar;
+import java.util.Date;
 import java.util.Objects;
 
 public class Cuenta {
     
     private Long codigo;
-    private int numero_cuenta;
+    private Long numero_cuenta;
     private String contrasenia;
-    private GregorianCalendar fecha_apertura;
+    private Date fecha_apertura;
     private float saldo;
-    private Cliente cliente;
+    private Long codigo_cliente;
 
     public Cuenta() {
     }
 
-    public Cuenta(int numero_cuenta, String contrasenia, GregorianCalendar fecha_apertura, float saldo, Cliente cliente) {
+    public Cuenta(Long numero_cuenta, String contrasenia, Date fecha_apertura, float saldo, Long codigo_cliente) {
         this.numero_cuenta = numero_cuenta;
         this.contrasenia = contrasenia;
         this.fecha_apertura = fecha_apertura;
         this.saldo = saldo;
-        this.cliente = cliente;
+        this.codigo_cliente = codigo_cliente;
     }
 
-    public Cuenta(Long codigo, int numero_cuenta, String contrasenia, GregorianCalendar fecha_apertura, float saldo, Cliente cliente) {
+    public Cuenta(Long codigo, Long numero_cuenta, String contrasenia, Date fecha_apertura, float saldo, Long codigo_cliente) {
         this.codigo = codigo;
         this.numero_cuenta = numero_cuenta;
         this.contrasenia = contrasenia;
         this.fecha_apertura = fecha_apertura;
         this.saldo = saldo;
-        this.cliente = cliente;
+        this.codigo_cliente = codigo_cliente;
     }
 
     public Long getCodigo() {
@@ -40,11 +40,11 @@ public class Cuenta {
         this.codigo = codigo;
     }
 
-    public int getNumero_cuenta() {
+    public Long getNumero_cuenta() {
         return numero_cuenta;
     }
 
-    public void setNumero_cuenta(int numero_cuenta) {
+    public void setNumero_cuenta(Long numero_cuenta) {
         this.numero_cuenta = numero_cuenta;
     }
 
@@ -56,11 +56,11 @@ public class Cuenta {
         this.contrasenia = contrasenia;
     }
 
-    public GregorianCalendar getFecha_apertura() {
+    public Date getFecha_apertura() {
         return fecha_apertura;
     }
 
-    public void setFecha_apertura(GregorianCalendar fecha_apertura) {
+    public void setFecha_apertura(Date fecha_apertura) {
         this.fecha_apertura = fecha_apertura;
     }
 
@@ -72,12 +72,12 @@ public class Cuenta {
         this.saldo = saldo;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Long getCodigo_cliente() {
+        return codigo_cliente;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCodigo_cliente(Long codigo_cliente) {
+        this.codigo_cliente = codigo_cliente;
     }
 
     @Override
@@ -111,7 +111,7 @@ public class Cuenta {
         sb.append(", contrasenia=").append(contrasenia);
         sb.append(", fecha_apertura=").append(fecha_apertura);
         sb.append(", saldo=").append(saldo);
-        sb.append(", cliente=").append(cliente);
+        sb.append(", codigo_cliente=").append(codigo_cliente);
         sb.append('}');
         return sb.toString();
     }

@@ -426,7 +426,10 @@ public class RegistroForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarClienteActionPerformed
-    registrarCliente();
+        registrarCliente();
+        InicioForm inicioSesion = new InicioForm(clientesDAO);
+        inicioSesion.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_botonRegistrarClienteActionPerformed
 
     private void txtNombreUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreUsuarioActionPerformed

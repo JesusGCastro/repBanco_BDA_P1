@@ -5,6 +5,7 @@ import com.itson.bdavanzadas.bancopersistencia.conexion.IConexion;
 import com.itson.bdavanzadas.bancopersistencia.dtos.ClienteNuevoDTO;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -64,5 +65,46 @@ public class ClientesDAO implements IClientesDAO{
             throw new PersistenciaException("No se pudo registrar el cliente", e);
         }
     }
+
+    @Override
+    public Cliente iniciarSesion(ClienteNuevoDTO cliente) throws PersistenciaException {
+        String sentenciaSQL = """
+                SELECT * FROM clientes 
+                WHERE correo = ? AND contrasenia = ?
+        """;
+        try (
+            Connection conexion = this.conexionBD.obtenerConexion();
+            PreparedStatement comando = conexion.prepareStatement(sentenciaSQL); 
+        ){
+            comando.setString(1, cliente.getCorreo());
+            comando.setString(2, cliente.getContrasenia());
+            ResultSet resultado = comando.executeQuery();
+            if (resultado.next()) { 
+                Long codigo = resultado.getLong("codigo");
+                String nombre_pila = resultado.getString("nombre_pila");
+                String apellido_paterno = resultado.getString("apellido_paterno");
+                String apellido_materno = resultado.getString("apellido_materno");
+                Date fecha_nacimiento = resultado.getDate("fecha_nacimiento");
+                String calle = resultado.getString("calle");
+                String numero_casa = resultado.getString("numero");
+                String colonia = resultado.getString("colonia");
+                String codigo_postal = resultado.getString("codigo_postal");
+                String correo = resultado.getString("correo");
+                String contrasenia = resultado.getString("contrasenia");
+
+                Cliente clienteEncontrado = new Cliente(codigo, nombre_pila, apellido_paterno, apellido_materno, fecha_nacimiento, calle, numero_casa, colonia, codigo_postal, correo, contrasenia);
+                logger.log(Level.INFO, "Cliente validado");
+                return clienteEncontrado;
+            } else {
+                logger.log(Level.SEVERE, "No se encontro un cliente con el correo y contraseña ingresados");
+                throw new PersistenciaException("No se encontro un cliente con el correo y contraseña ingresados");
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "No se encontro un cliente con el correo y contraseña ingresados", e);
+            throw new PersistenciaException("No se encontro un cliente con el correo y contraseña ingresados", e);
+        }
+    }
+    
+    
     
 }

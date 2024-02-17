@@ -1,6 +1,11 @@
 package com.itson.bdavanzadas.banco;
 
 import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
+import com.itson.bdavanzadas.bancopersistencia.dtos.ClienteNuevoDTO;
+import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
+import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
+import java.awt.HeadlessException;
+import javax.swing.JOptionPane;
 
 
 public class InicioForm extends javax.swing.JFrame {
@@ -31,8 +36,8 @@ public class InicioForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtNumeroCuenta = new javax.swing.JTextField();
-        btnContrasenia = new javax.swing.JPasswordField();
+        txtCorreo = new javax.swing.JTextField();
+        pswdConstrasenia = new javax.swing.JPasswordField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         btnIniciarSesion = new javax.swing.JButton();
@@ -96,22 +101,22 @@ public class InicioForm extends javax.swing.JFrame {
         jLabel1.setText("Inicio de Sesion");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel2.setText("Numero Cuenta:");
+        jLabel2.setText("Correo:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel3.setText("Contraseña:");
 
-        txtNumeroCuenta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtNumeroCuenta.setForeground(new java.awt.Color(100, 100, 100));
-        txtNumeroCuenta.setBorder(null);
-        txtNumeroCuenta.addActionListener(new java.awt.event.ActionListener() {
+        txtCorreo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtCorreo.setForeground(new java.awt.Color(100, 100, 100));
+        txtCorreo.setBorder(null);
+        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNumeroCuentaActionPerformed(evt);
+                txtCorreoActionPerformed(evt);
             }
         });
 
-        btnContrasenia.setForeground(new java.awt.Color(100, 100, 100));
-        btnContrasenia.setBorder(null);
+        pswdConstrasenia.setForeground(new java.awt.Color(100, 100, 100));
+        pswdConstrasenia.setBorder(null);
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -150,8 +155,8 @@ public class InicioForm extends javax.swing.JFrame {
                     .addGroup(RLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel3)
                         .addComponent(jLabel2)
-                        .addComponent(txtNumeroCuenta)
-                        .addComponent(btnContrasenia, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                        .addComponent(txtCorreo)
+                        .addComponent(pswdConstrasenia, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
                         .addComponent(jSeparator1)
                         .addComponent(jSeparator2)))
                 .addContainerGap(31, Short.MAX_VALUE))
@@ -172,16 +177,16 @@ public class InicioForm extends javax.swing.JFrame {
                 .addComponent(btnSalir)
                 .addGap(45, 45, 45)
                 .addComponent(jLabel1)
-                .addGap(55, 55, 55)
+                .addGap(72, 72, 72)
                 .addComponent(jLabel2)
-                .addGap(23, 23, 23)
-                .addComponent(txtNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pswdConstrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
@@ -207,24 +212,49 @@ public class InicioForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-
+        iniciarSesion();
+        MenuClienteForm menuCliente = new MenuClienteForm(clientesDAO);
+        menuCliente.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
-    private void txtNumeroCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroCuentaActionPerformed
+    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumeroCuentaActionPerformed
+    }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    public void iniciarSesion(){
+        String correo = txtCorreo.getText();
+        String contrasenia = new String(pswdConstrasenia.getPassword());
+        
+        ClienteNuevoDTO cliente = new ClienteNuevoDTO();
+        cliente.setCorreo(correo);
+        cliente.setContrasenia(contrasenia);
+        
+        try {
+            cliente.esValidoInicioSesion();
+            this.clientesDAO.iniciarSesion(cliente);
+            JOptionPane.showMessageDialog(this, "Credenciales validas", "Notificaión", JOptionPane.INFORMATION_MESSAGE);
+            limpiarDatos();
+        } catch (ValidacionDTOException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
+        } catch (PersistenciaException e) {
+            JOptionPane.showMessageDialog(this, "No fue posible iniciar sesion", "Error de credenciales", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     
+    public void limpiarDatos(){
+        txtCorreo.setText("");
+        pswdConstrasenia.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel L;
     private javax.swing.JPanel R;
     private javax.swing.JPanel bg;
-    private javax.swing.JPasswordField btnContrasenia;
     private javax.swing.JButton btnIniciarSesion;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
@@ -236,6 +266,7 @@ public class InicioForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField txtNumeroCuenta;
+    private javax.swing.JPasswordField pswdConstrasenia;
+    private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables
 }

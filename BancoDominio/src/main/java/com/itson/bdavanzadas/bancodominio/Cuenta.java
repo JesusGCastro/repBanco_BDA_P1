@@ -6,30 +6,27 @@ import java.util.Objects;
 public class Cuenta {
     
     private Long codigo;
-    private int numero_cuenta;
-    private String contrasenia;
     private GregorianCalendar fecha_apertura;
     private float saldo;
     private Cliente cliente;
+    private boolean estado;
 
     public Cuenta() {
     }
 
-    public Cuenta(int numero_cuenta, String contrasenia, GregorianCalendar fecha_apertura, float saldo, Cliente cliente) {
-        this.numero_cuenta = numero_cuenta;
-        this.contrasenia = contrasenia;
+    public Cuenta(GregorianCalendar fecha_apertura, float saldo, Cliente cliente, boolean estado) {
         this.fecha_apertura = fecha_apertura;
         this.saldo = saldo;
         this.cliente = cliente;
+        this.estado = estado;
     }
 
-    public Cuenta(Long codigo, int numero_cuenta, String contrasenia, GregorianCalendar fecha_apertura, float saldo, Cliente cliente) {
+    public Cuenta(Long codigo, GregorianCalendar fecha_apertura, float saldo, Cliente cliente, boolean estado) {
         this.codigo = codigo;
-        this.numero_cuenta = numero_cuenta;
-        this.contrasenia = contrasenia;
         this.fecha_apertura = fecha_apertura;
         this.saldo = saldo;
         this.cliente = cliente;
+        this.estado = estado;
     }
 
     public Long getCodigo() {
@@ -38,22 +35,6 @@ public class Cuenta {
 
     public void setCodigo(Long codigo) {
         this.codigo = codigo;
-    }
-
-    public int getNumero_cuenta() {
-        return numero_cuenta;
-    }
-
-    public void setNumero_cuenta(int numero_cuenta) {
-        this.numero_cuenta = numero_cuenta;
-    }
-
-    public String getContrasenia() {
-        return contrasenia;
-    }
-
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
     }
 
     public GregorianCalendar getFecha_apertura() {
@@ -80,6 +61,15 @@ public class Cuenta {
         this.cliente = cliente;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 5;
@@ -107,12 +97,13 @@ public class Cuenta {
         StringBuilder sb = new StringBuilder();
         sb.append("Cuenta{");
         sb.append("codigo=").append(codigo);
-        sb.append(", numero_cuenta=").append(numero_cuenta);
-        sb.append(", contrasenia=").append(contrasenia);
         sb.append(", fecha_apertura=").append(fecha_apertura);
         sb.append(", saldo=").append(saldo);
         sb.append(", cliente=").append(cliente);
+        sb.append(", estado=").append(estado);
         sb.append('}');
         return sb.toString();
     }
+
+    
 }

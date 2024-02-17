@@ -1,5 +1,6 @@
 package com.itson.bdavanzadas.banco;
 
+import com.itson.bdavanzadas.bancodominio.Cliente;
 import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
 import com.itson.bdavanzadas.bancopersistencia.dtos.ClienteNuevoDTO;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
@@ -212,8 +213,27 @@ public class InicioForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        iniciarSesion();
-        MenuClienteForm menuCliente = new MenuClienteForm(clientesDAO);
+        Cliente clienteInicio = null;
+        
+        String correo = txtCorreo.getText();
+        String contrasenia = new String(pswdConstrasenia.getPassword());
+        
+        ClienteNuevoDTO cliente = new ClienteNuevoDTO();
+        cliente.setCorreo(correo);
+        cliente.setContrasenia(contrasenia);
+        
+        try {
+            cliente.esValidoInicioSesion();
+            clienteInicio = this.clientesDAO.iniciarSesion(cliente);
+            JOptionPane.showMessageDialog(this, "Credenciales validas", "Notificaión", JOptionPane.INFORMATION_MESSAGE);
+            limpiarDatos();
+        } catch (ValidacionDTOException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
+        } catch (PersistenciaException e) {
+            JOptionPane.showMessageDialog(this, "No fue posible iniciar sesion", "Error de credenciales", JOptionPane.ERROR_MESSAGE);
+        }
+
+        MenuClienteForm menuCliente = new MenuClienteForm(clientesDAO, clienteInicio);
         menuCliente.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
@@ -225,26 +245,6 @@ public class InicioForm extends javax.swing.JFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
-
-    public void iniciarSesion(){
-        String correo = txtCorreo.getText();
-        String contrasenia = new String(pswdConstrasenia.getPassword());
-        
-        ClienteNuevoDTO cliente = new ClienteNuevoDTO();
-        cliente.setCorreo(correo);
-        cliente.setContrasenia(contrasenia);
-        
-        try {
-            cliente.esValidoInicioSesion();
-            this.clientesDAO.iniciarSesion(cliente);
-            JOptionPane.showMessageDialog(this, "Credenciales validas", "Notificaión", JOptionPane.INFORMATION_MESSAGE);
-            limpiarDatos();
-        } catch (ValidacionDTOException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
-        } catch (PersistenciaException e) {
-            JOptionPane.showMessageDialog(this, "No fue posible iniciar sesion", "Error de credenciales", JOptionPane.ERROR_MESSAGE);
-        }
-    }
     
     public void limpiarDatos(){
         txtCorreo.setText("");

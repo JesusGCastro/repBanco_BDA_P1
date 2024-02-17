@@ -1,22 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.itson.bdavanzadas.banco;
 
+import com.itson.bdavanzadas.bancodominio.Cliente;
 import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
 
-/**
- *
- * @author renec
- */
 public class MenuClienteForm extends javax.swing.JFrame {
 
     private final IClientesDAO clientesDAO;
+    private final Cliente cliente;
     
-    public MenuClienteForm(IClientesDAO clientesDAO) {
+    public MenuClienteForm(IClientesDAO clientesDAO, Cliente cliente) {
         initComponents();
         this.clientesDAO = clientesDAO;
+        this.cliente = cliente;
     }
 
     /**
@@ -30,10 +25,8 @@ public class MenuClienteForm extends javax.swing.JFrame {
 
         bg = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         btnNuevaCuenta = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         btnTransferencia = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,11 +37,7 @@ public class MenuClienteForm extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(255, 223, 148));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Bienvenido a tu cuenta!");
-        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel2.setText("1500$");
-        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, -1, -1));
+        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
 
         btnSalir.setBackground(new java.awt.Color(255, 223, 148));
         btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -61,7 +50,7 @@ public class MenuClienteForm extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        bg.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 70, -1));
+        bg.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, 70, -1));
 
         btnNuevaCuenta.setBackground(new java.awt.Color(255, 223, 148));
         btnNuevaCuenta.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -74,11 +63,7 @@ public class MenuClienteForm extends javax.swing.JFrame {
                 btnNuevaCuentaActionPerformed(evt);
             }
         });
-        bg.add(btnNuevaCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 180, -1));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel3.setText("Saldo:");
-        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, -1, -1));
+        bg.add(btnNuevaCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 180, -1));
 
         btnTransferencia.setBackground(new java.awt.Color(255, 223, 148));
         btnTransferencia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -91,7 +76,7 @@ public class MenuClienteForm extends javax.swing.JFrame {
                 btnTransferenciaActionPerformed(evt);
             }
         });
-        bg.add(btnTransferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 340, 180, -1));
+        bg.add(btnTransferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 180, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,19 +90,20 @@ public class MenuClienteForm extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-
+        dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
-
-    private void btnNuevaCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaCuentaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNuevaCuentaActionPerformed
 
     private void btnTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferenciaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnTransferenciaActionPerformed
+
+    private void btnNuevaCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaCuentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevaCuentaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -126,7 +112,5 @@ public class MenuClienteForm extends javax.swing.JFrame {
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnTransferencia;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

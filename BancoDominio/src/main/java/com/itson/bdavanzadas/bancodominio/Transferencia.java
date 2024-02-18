@@ -3,10 +3,10 @@ package com.itson.bdavanzadas.bancodominio;
 import java.util.Date;
 
 /**
- *  Clase de Transferencias
+ *  Clase de Transferencia
  * @author Equipo 
  */
-public class Transferencias extends Transacciones{
+public class Transferencia extends Transaccion{
     
     private long codigo_transaccion;
     private long codigo_cuenta_recibe;
@@ -15,7 +15,7 @@ public class Transferencias extends Transacciones{
      * Constructor por defecto de la clase Transferencias.
      * Crea una instancia de Transferencias con valores predeterminados para los atributos.  
      */
-    public Transferencias() {
+    public Transferencia() {
     }
 
     /**
@@ -26,7 +26,7 @@ public class Transferencias extends Transacciones{
      * @param monto El monto de la transferencia.
      * @param codigo_cuenta_proporciona La cuenta desde la cual se realiza la transferencia.
      */
-    public Transferencias(Date fecha, float monto, long codigo_cuenta_proporciona, long codigo_cuenta_recibe) {
+    public Transferencia(Date fecha, float monto, long codigo_cuenta_proporciona, long codigo_cuenta_recibe) {
         super(fecha, monto, codigo_cuenta_proporciona);
         this.codigo_cuenta_recibe = codigo_cuenta_recibe;
     }
@@ -40,7 +40,7 @@ public class Transferencias extends Transacciones{
      * @param monto El monto de la transferencia.
      * @param codigo_cuenta_proporciona La cuenta desde la cual se realiza la transferencia.
      */
-    public Transferencias(long codigo_transaccion, Date fecha, float monto, long codigo_cuenta_proporciona, long codigo_cuenta_recibe) {
+    public Transferencia(long codigo_transaccion, Date fecha, float monto, long codigo_cuenta_proporciona, long codigo_cuenta_recibe) {
         super(fecha, monto, codigo_cuenta_proporciona);
         this.codigo_transaccion = codigo_transaccion;
         this.codigo_cuenta_recibe = codigo_cuenta_recibe;
@@ -111,7 +111,7 @@ public class Transferencias extends Transacciones{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Transferencias other = (Transferencias) obj;
+        final Transferencia other = (Transferencia) obj;
         return this.codigo_transaccion == other.codigo_transaccion;
     }
 

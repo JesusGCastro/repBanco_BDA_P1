@@ -62,6 +62,19 @@ public class Cuenta {
         this.saldo = saldo;
     }
 
+    public Cuenta(long codigo, Date fecha_apertura, float saldo, long codigo_cliente) {
+        this.codigo = codigo;
+        this.fecha_apertura = fecha_apertura;
+        this.saldo = saldo;
+        this.codigo_cliente = codigo_cliente;
+    }
+    
+    public Cuenta(Date fecha_apertura, float saldo, long codigo_cliente) {
+        this.fecha_apertura = fecha_apertura;
+        this.saldo = saldo;
+        this.codigo_cliente = codigo_cliente;
+    }
+    
     /**
      * Obtiene el código único de la cuenta.
      * 

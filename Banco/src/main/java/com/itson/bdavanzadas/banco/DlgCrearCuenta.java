@@ -33,7 +33,6 @@ public class DlgCrearCuenta extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         labelUsuarioRegistro2 = new javax.swing.JLabel();
         txtSaldo = new javax.swing.JTextField();
-        jSeparator4 = new javax.swing.JSeparator();
         btnAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -46,15 +45,19 @@ public class DlgCrearCuenta extends javax.swing.JDialog {
         bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
 
         labelUsuarioRegistro2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        labelUsuarioRegistro2.setText("Saldo de la cuenta:");
-        bg.add(labelUsuarioRegistro2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
+        labelUsuarioRegistro2.setText("Deposite el saldo inicial de la cuenta:");
+        bg.add(labelUsuarioRegistro2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
 
         txtSaldo.setBackground(new java.awt.Color(255, 204, 102));
         txtSaldo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtSaldo.setForeground(new java.awt.Color(100, 100, 100));
         txtSaldo.setBorder(null);
-        bg.add(txtSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 150, -1));
-        bg.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 150, 20));
+        txtSaldo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSaldoActionPerformed(evt);
+            }
+        });
+        bg.add(txtSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 150, -1));
 
         btnAceptar.setBackground(new java.awt.Color(255, 204, 102));
         btnAceptar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -89,6 +92,10 @@ public class DlgCrearCuenta extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    private void txtSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSaldoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSaldoActionPerformed
+
    public void registarCuenta(){
        Float saldo = Float.valueOf(txtSaldo.getText());
        
@@ -111,7 +118,6 @@ public class DlgCrearCuenta extends javax.swing.JDialog {
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnAceptar;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel labelUsuarioRegistro2;
     private javax.swing.JTextField txtSaldo;
     // End of variables declaration//GEN-END:variables

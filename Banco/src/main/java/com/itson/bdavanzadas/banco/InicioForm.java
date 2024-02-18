@@ -227,15 +227,16 @@ public class InicioForm extends javax.swing.JFrame {
             clienteInicio = this.clientesDAO.iniciarSesion(cliente);
             JOptionPane.showMessageDialog(this, "Credenciales validas", "Notificaión", JOptionPane.INFORMATION_MESSAGE);
             limpiarDatos();
+            this.dispose();
+            MenuClienteForm menuCliente = new MenuClienteForm(clientesDAO, clienteInicio);
+            menuCliente.setVisible(true);
         } catch (ValidacionDTOException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
         } catch (PersistenciaException e) {
             JOptionPane.showMessageDialog(this, "No fue posible iniciar sesion", "Error de credenciales", JOptionPane.ERROR_MESSAGE);
         }
-
-        MenuClienteForm menuCliente = new MenuClienteForm(clientesDAO, clienteInicio);
-        menuCliente.setVisible(true);
-        this.dispose();
+        
+        
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed

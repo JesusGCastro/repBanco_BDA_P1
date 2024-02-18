@@ -3,10 +3,10 @@ package com.itson.bdavanzadas.bancodominio;
 import java.util.Date;
 
 /**
- *  Clase de Transacciones
+ *  Clase de Transaccion
  * @author Equipo
  */
-public class Transacciones {
+public class Transaccion {
     
     private long codigo;
     private Date fecha;
@@ -17,7 +17,7 @@ public class Transacciones {
      * Constructor por defecto de la clase Transacciones.
      * Crea una instancia de Transacciones con valores predeterminados para los atributos.
      */
-    public Transacciones() {
+    public Transaccion() {
     }
 
     /**
@@ -27,7 +27,7 @@ public class Transacciones {
      * @param monto El monto de la transacción.
      * @param codigo_cuenta_proporciona La cuenta desde la cual se realiza la transacción.
      */
-    public Transacciones(Date fecha, float monto, long codigo_cuenta_proporciona) {
+    public Transaccion(Date fecha, float monto, long codigo_cuenta_proporciona) {
         this.fecha = fecha;
         this.monto = monto;
         this.codigo_cuenta_proporciona = codigo_cuenta_proporciona;
@@ -41,7 +41,7 @@ public class Transacciones {
      * @param monto El monto de la transacción.
      * @param codigo_cuenta_proporciona La cuenta desde la cual se realiza la transacción.
      */
-    public Transacciones(long codigo, Date fecha, float monto, long codigo_cuenta_proporciona) {
+    public Transaccion(long codigo, Date fecha, float monto, long codigo_cuenta_proporciona) {
         this.codigo = codigo;
         this.fecha = fecha;
         this.monto = monto;
@@ -149,7 +149,7 @@ public class Transacciones {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Transacciones other = (Transacciones) obj;
+        final Transaccion other = (Transaccion) obj;
         return this.codigo == other.codigo;
     }
 

@@ -6,7 +6,6 @@ import com.itson.bdavanzadas.bancopersistencia.conexion.IConexion;
 import com.itson.bdavanzadas.bancopersistencia.dtos.CuentaNuevaDTO;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,14 +43,14 @@ public class CuentasDAO implements ICuentasDAO{
     @Override
     public Cuenta registrarCuenta(CuentaNuevaDTO cuentaNueva) throws PersistenciaException {
         String sentenciaSQL = """
-            INSERT INTO cuentas(fecha_apertura, saldo, codigo_cliente, estado) 
+            INSERT INTO cuenta(fecha_apertura, saldo, codigo_cliente, estado) 
             VALUES (?, ?, ?, ?)
         """;
         try (
             Connection conexion = this.conexionBD.obtenerConexion();
             PreparedStatement comando = conexion.prepareStatement(sentenciaSQL, Statement.RETURN_GENERATED_KEYS);
         ){
-            comando.setDate(1, Date.valueOf(cuentaNueva.getFechaAperturaFormateada()));
+            comando.setDate(1, cuentaNueva.getFecha_apertura());
             comando.setFloat(2, cuentaNueva.getSaldo());
             comando.setLong(3, cuentaNueva.getCodigo_cliente());
             comando.setBoolean(4, cuentaNueva.getEstado());
@@ -61,7 +60,8 @@ public class CuentasDAO implements ICuentasDAO{
             ResultSet idsGenerados = comando.getGeneratedKeys();
             idsGenerados.next();
             Cuenta cuenta = new Cuenta(
-                    idsGenerados.getLong(1),  
+                    idsGenerados.getLong(1),
+                    cuentaNueva.getFecha_apertura(),
                     cuentaNueva.getSaldo(), 
                     cuentaNueva.getCodigo_cliente());
             return cuenta;
@@ -81,7 +81,7 @@ public class CuentasDAO implements ICuentasDAO{
     @Override
     public List<Cuenta> consultarCuentas(Cliente cliente) throws PersistenciaException {
         String sentenciaSQL = """
-            SELECT * FROM cuentas WHERE codigo_cliente = ?
+            SELECT * FROM cuenta WHERE codigo_cliente = ?
         """;
         List<Cuenta> listaCuentas = new LinkedList<>();
         try (

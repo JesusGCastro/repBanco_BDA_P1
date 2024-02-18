@@ -33,9 +33,13 @@ public class CuentaNuevaDTO {
         return formatoFecha.format(fecha_apertura);
     }
 
-//    public void setFecha_apertura() {
-//        this.fecha_apertura = fecha_apertura;
-//    }
+    public Date getFecha_apertura() {
+        return fecha_apertura;
+    }
+
+    public void setFecha_apertura(Date fecha_apertura) {
+        this.fecha_apertura = fecha_apertura;
+    }
 
     /**
      * Obtiene el saldo de la cuenta.

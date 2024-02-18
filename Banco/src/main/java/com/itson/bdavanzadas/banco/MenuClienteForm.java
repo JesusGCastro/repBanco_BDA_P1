@@ -23,11 +23,17 @@ public class MenuClienteForm extends javax.swing.JFrame {
 
     private final IClientesDAO clientesDAO;
     private final Cliente cliente;
+    private final ICuentasDAO cuentasDAO;
     
     public MenuClienteForm(IClientesDAO clientesDAO, Cliente cliente) {
         initComponents();
         this.clientesDAO = clientesDAO;
         this.cliente = cliente;
+        String cadenaConexion = "jdbc:mysql://localhost/banco";
+        String usuario = "root";
+        String password = "123456789";
+        IConexion conexion = new Conexion(cadenaConexion, usuario, password);
+        this.cuentasDAO = new CuentasDAO(conexion);
         lblBienvenida.setText("Bienvenid@ "+cliente.getNombre_pila());
         mostrarCuentas();
     }
@@ -130,6 +136,8 @@ public class MenuClienteForm extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
+        InicioForm inicioSesion = new InicioForm(clientesDAO);
+        inicioSesion.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferenciaActionPerformed
@@ -137,22 +145,16 @@ public class MenuClienteForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTransferenciaActionPerformed
 
     private void btnNuevaCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaCuentaActionPerformed
-        String cadenaConexion = "jdbc:mysql://localhost/banco";
-        String usuario = "root";
-        String password = "123456789";
-        IConexion conexion = new Conexion(cadenaConexion, usuario, password);
-        ICuentasDAO cuentasDAO = new CuentasDAO(conexion);
+        this.setVisible(false);
         DlgCrearCuenta crearCuenta = new DlgCrearCuenta(this, rootPaneCheckingEnabled, cuentasDAO, cliente);
         crearCuenta.setVisible(true);
         mostrarCuentas();
+        this.setVisible(true);
     }//GEN-LAST:event_btnNuevaCuentaActionPerformed
 
+    //public Cuenta cuenta
+    
     public void mostrarCuentas(){
-        String cadenaConexion = "jdbc:mysql://localhost/banco";
-        String usuario = "root";
-        String password = "123456789";
-        IConexion conexion = new Conexion(cadenaConexion, usuario, password);
-        ICuentasDAO cuentasDAO = new CuentasDAO(conexion);
         try {
             List<Cuenta> listaCuentas = cuentasDAO.consultarCuentas(cliente);
             DefaultTableModel modelo = new DefaultTableModel();
@@ -231,12 +233,6 @@ public class MenuClienteForm extends javax.swing.JFrame {
     }
 
     private Cuenta obtenerCuentaDesdeFila(int fila) throws PersistenciaException {
-        String cadenaConexion = "jdbc:mysql://localhost/banco";
-        String usuario = "root";
-        String password = "123456789";
-        IConexion conexion = new Conexion(cadenaConexion, usuario, password);
-        ICuentasDAO cuentasDAO = new CuentasDAO(conexion);
-        
         List<Cuenta> listaCuentas = cuentasDAO.consultarCuentas(cliente);
         if (fila >= 0 && fila < listaCuentas.size()) {
             return listaCuentas.get(fila);

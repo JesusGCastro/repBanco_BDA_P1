@@ -1,6 +1,6 @@
 package com.itson.bdavanzadas.bancodominio;
 
-import java.util.GregorianCalendar;
+import java.util.Date;
 
 /**
  *  Clase de Transacciones
@@ -9,9 +9,9 @@ import java.util.GregorianCalendar;
 public class Transacciones {
     
     private long codigo;
-    private GregorianCalendar fecha;
+    private Date fecha;
     private float monto;
-    private Cuenta cuentaEnvio;
+    private long codigo_cuenta_proporciona;
 
     /**
      * Constructor por defecto de la clase Transacciones.
@@ -25,12 +25,12 @@ public class Transacciones {
      * 
      * @param fecha La fecha de la transacción.
      * @param monto El monto de la transacción.
-     * @param cuentaEnvio La cuenta desde la cual se realiza la transacción.
+     * @param codigo_cuenta_proporciona La cuenta desde la cual se realiza la transacción.
      */
-    public Transacciones(GregorianCalendar fecha, float monto, Cuenta cuentaEnvio) {
+    public Transacciones(Date fecha, float monto, long codigo_cuenta_proporciona) {
         this.fecha = fecha;
         this.monto = monto;
-        this.cuentaEnvio = cuentaEnvio;
+        this.codigo_cuenta_proporciona = codigo_cuenta_proporciona;
     }
 
     /**
@@ -39,13 +39,13 @@ public class Transacciones {
      * @param codigo El código único de la transacción.
      * @param fecha La fecha de la transacción.
      * @param monto El monto de la transacción.
-     * @param cuentaEnvio La cuenta desde la cual se realiza la transacción.
+     * @param codigo_cuenta_proporciona La cuenta desde la cual se realiza la transacción.
      */
-    public Transacciones(long codigo, GregorianCalendar fecha, float monto, Cuenta cuentaEnvio) {
+    public Transacciones(long codigo, Date fecha, float monto, long codigo_cuenta_proporciona) {
         this.codigo = codigo;
         this.fecha = fecha;
         this.monto = monto;
-        this.cuentaEnvio = cuentaEnvio;
+        this.codigo_cuenta_proporciona = codigo_cuenta_proporciona;
     }
 
     /**
@@ -71,7 +71,7 @@ public class Transacciones {
      * 
      * @return La fecha de la transacción.
      */
-    public GregorianCalendar getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
@@ -80,7 +80,7 @@ public class Transacciones {
      * 
      * @param fecha La fecha de la transacción.
      */
-    public void setFecha(GregorianCalendar fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
@@ -107,8 +107,8 @@ public class Transacciones {
      * 
      * @return La cuenta desde la cual se realiza la transacción.
      */
-    public Cuenta getCuentaEnvio() {
-        return cuentaEnvio;
+    public long getCodigo_cuenta_proporciona() {
+        return codigo_cuenta_proporciona;
     }
 
     /**
@@ -116,8 +116,8 @@ public class Transacciones {
      * 
      * @param cuentaEnvio La cuenta desde la cual se realiza la transacción.
      */
-    public void setCuentaEnvio(Cuenta cuentaEnvio) {
-        this.cuentaEnvio = cuentaEnvio;
+    public void setCodigo_cuenta_proporciona(long codigo_cuenta_proporciona) {
+        this.codigo_cuenta_proporciona = codigo_cuenta_proporciona;
     }
 
     /**
@@ -165,7 +165,7 @@ public class Transacciones {
         sb.append("codigo=").append(codigo);
         sb.append(", fecha=").append(fecha);
         sb.append(", monto=").append(monto);
-        sb.append(", cuentaEnvio=").append(cuentaEnvio);
+        sb.append(", codigo_cuenta_proporciona=").append(codigo_cuenta_proporciona);
         sb.append('}');
         return sb.toString();
     }

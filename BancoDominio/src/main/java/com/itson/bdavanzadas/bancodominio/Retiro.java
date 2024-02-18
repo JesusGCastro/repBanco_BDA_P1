@@ -5,9 +5,9 @@ package com.itson.bdavanzadas.bancodominio;
  * @author Equipo
  */
 public class Retiro {
-    private int codigo_transaccion;
-    private int folio;
-    private int contraseña;
+    private long codigo_transaccion;
+    private long folio;
+    private int contrasena;
     private byte estado;
 
     /**
@@ -21,12 +21,12 @@ public class Retiro {
      * Constructor que inicializa un retiro con el folio, contraseña y estado especificados.
      * 
      * @param folio El folio del retiro.
-     * @param contraseña La contraseña asociada al retiro.
+     * @param contrasena La contraseña asociada al retiro.
      * @param estado El estado del retiro.
      */
-    public Retiro(int folio, int contraseña, byte estado) {
+    public Retiro(long folio, int contrasena, byte estado) {
         this.folio = folio;
-        this.contraseña = contraseña;
+        this.contrasena = contrasena;
         this.estado = estado;
     }
 
@@ -35,13 +35,13 @@ public class Retiro {
      * 
      * @param codigo_transaccion El código único de transacción del retiro.
      * @param folio El folio del retiro.
-     * @param contraseña La contraseña asociada al retiro.
+     * @param contrasena La contraseña asociada al retiro.
      * @param estado El estado del retiro.
      */
-    public Retiro(int codigo_transaccion, int folio, int contraseña, byte estado) {
+    public Retiro(long codigo_transaccion, long folio, int contrasena, byte estado) {
         this.codigo_transaccion = codigo_transaccion;
         this.folio = folio;
-        this.contraseña = contraseña;
+        this.contrasena = contrasena;
         this.estado = estado;
     }
     
@@ -50,7 +50,7 @@ public class Retiro {
      * 
      * @return El código de transacción del retiro.
      */
-    public int getCodigo_transaccion() {
+    public long getCodigo_transaccion() {
         return codigo_transaccion;
     }
 
@@ -59,7 +59,7 @@ public class Retiro {
      * 
      * @param codigo_transaccion El código de transacción del retiro.
      */
-    public void setCodigo_transaccion(int codigo_transaccion) {
+    public void setCodigo_transaccion(long codigo_transaccion) {
         this.codigo_transaccion = codigo_transaccion;
     }
 
@@ -68,7 +68,7 @@ public class Retiro {
      * 
      * @return El folio del retiro.
      */
-    public int getFolio() {
+    public long getFolio() {
         return folio;
     }
 
@@ -77,7 +77,7 @@ public class Retiro {
      * 
      * @param folio El folio del retiro.
      */
-    public void setFolio(int folio) {
+    public void setFolio(long folio) {
         this.folio = folio;
     }
 
@@ -86,17 +86,17 @@ public class Retiro {
      * 
      * @return La contraseña asociada al retiro.
      */
-    public int getContraseña() {
-        return contraseña;
+    public int getContrasena() {
+        return contrasena;
     }
 
     /**
      * Establece la contraseña asociada al retiro.
      * 
-     * @param contraseña La contraseña asociada al retiro.
+     * @param contrasena La contraseña asociada al retiro.
      */
-    public void setContraseña(int contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasenia(int contrasena) {
+        this.contrasena = contrasena;
     }
 
     /**
@@ -125,7 +125,7 @@ public class Retiro {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + this.codigo_transaccion;
+        hash = 79 * hash + (int) (this.codigo_transaccion ^ (this.codigo_transaccion >>> 32));
         return hash;
     }
 
@@ -161,7 +161,7 @@ public class Retiro {
         sb.append("Retiro{");
         sb.append("codigo_transaccion=").append(codigo_transaccion);
         sb.append(", folio=").append(folio);
-        sb.append(", contrase\u00f1a=").append(contraseña);
+        sb.append(", contrasena=").append(contrasena);
         sb.append(", estado=").append(estado);
         sb.append('}');
         return sb.toString();

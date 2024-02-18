@@ -1,6 +1,6 @@
 package com.itson.bdavanzadas.bancodominio;
 
-import java.util.GregorianCalendar;
+import java.util.Date;
 
 /**
  *  Clase de Transferencias
@@ -8,8 +8,8 @@ import java.util.GregorianCalendar;
  */
 public class Transferencias extends Transacciones{
     
-    private int codigo_transferencia;
-    private Cuenta cuentaDestinataria;
+    private long codigo_transaccion;
+    private long codigo_cuenta_recibe;
 
     /**
      * Constructor por defecto de la clase Transferencias.
@@ -21,47 +21,47 @@ public class Transferencias extends Transacciones{
     /**
      * Constructor que inicializa una transferencia con la cuenta destinataria, fecha, monto y cuenta de envío especificados.
      * 
-     * @param cuentaDestinataria La cuenta a la que se realiza la transferencia.
+     * @param codigo_cuenta_recibe La cuenta a la que se realiza la transferencia.
      * @param fecha La fecha de la transferencia.
      * @param monto El monto de la transferencia.
-     * @param cuentaEnvio La cuenta desde la cual se realiza la transferencia.
+     * @param codigo_cuenta_proporciona La cuenta desde la cual se realiza la transferencia.
      */
-    public Transferencias(Cuenta cuentaDestinataria, GregorianCalendar fecha, float monto, Cuenta cuentaEnvio) {
-        super(fecha, monto, cuentaEnvio);
-        this.cuentaDestinataria = cuentaDestinataria;
+    public Transferencias(Date fecha, float monto, long codigo_cuenta_proporciona, long codigo_cuenta_recibe) {
+        super(fecha, monto, codigo_cuenta_proporciona);
+        this.codigo_cuenta_recibe = codigo_cuenta_recibe;
     }
 
     /**
      * Constructor que inicializa una transferencia con el código, cuenta destinataria, fecha, monto y cuenta de envío especificados.
      * 
-     * @param codigo El código único de la transferencia.
-     * @param cuentaDestinataria La cuenta a la que se realiza la transferencia.
+     * @param codigo_transaccion El código único de la transferencia.
+     * @param codigo_cuenta_recibe La cuenta a la que se realiza la transferencia.
      * @param fecha La fecha de la transferencia.
      * @param monto El monto de la transferencia.
-     * @param cuentaEnvio La cuenta desde la cual se realiza la transferencia.
+     * @param codigo_cuenta_proporciona La cuenta desde la cual se realiza la transferencia.
      */
-    public Transferencias(int codigo, Cuenta cuentaDestinataria, GregorianCalendar fecha, float monto, Cuenta cuentaEnvio) {
-        super(fecha, monto, cuentaEnvio);
-        this.codigo_transferencia = codigo;
-        this.cuentaDestinataria = cuentaDestinataria;
+    public Transferencias(long codigo_transaccion, Date fecha, float monto, long codigo_cuenta_proporciona, long codigo_cuenta_recibe) {
+        super(fecha, monto, codigo_cuenta_proporciona);
+        this.codigo_transaccion = codigo_transaccion;
+        this.codigo_cuenta_recibe = codigo_cuenta_recibe;
     }
-
+    
     /**
      * Obtiene el código único de la transferencia.
      * 
      * @return El código de la transferencia.
      */
-    public int getCodigo_transferencia() {
-        return codigo_transferencia;
+    public long getCodigo_transaccion() {
+        return codigo_transaccion;
     }
 
     /**
      * Establece el código único de la transferencia.
      * 
-     * @param codigo_transferencia El código de la transferencia.
+     * @param codigo_transaccion El código de la transferencia.
      */
-    public void setCodigo_transferencia(int codigo_transferencia) {
-        this.codigo_transferencia = codigo_transferencia;
+    public void setCodigo_transaccion(long codigo_transaccion) {
+        this.codigo_transaccion = codigo_transaccion;
     }
 
     /**
@@ -69,17 +69,17 @@ public class Transferencias extends Transacciones{
      * 
      * @return La cuenta destinataria de la transferencia.
      */
-    public Cuenta getCuentaDestinataria() {
-        return cuentaDestinataria;
+    public long getCodigo_cuenta_recibe() {
+        return codigo_cuenta_recibe;
     }
 
     /**
      * Establece la cuenta destinataria de la transferencia.
      * 
-     * @param cuentaDestinataria La cuenta destinataria de la transferencia.
+     * @param codigo_cuenta_recibe La cuenta destinataria de la transferencia.
      */
-    public void setCuentaDestinataria(Cuenta cuentaDestinataria) {
-        this.cuentaDestinataria = cuentaDestinataria;
+    public void setCodigo_cuenta_recibe(long codigo_cuenta_recibe) {
+        this.codigo_cuenta_recibe = codigo_cuenta_recibe;
     }
 
     /**
@@ -90,7 +90,7 @@ public class Transferencias extends Transacciones{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + this.codigo_transferencia;
+        hash = 79 * hash + (int) (this.codigo_transaccion ^ (this.codigo_transaccion >>> 32));
         return hash;
     }
 
@@ -112,7 +112,7 @@ public class Transferencias extends Transacciones{
             return false;
         }
         final Transferencias other = (Transferencias) obj;
-        return this.codigo_transferencia == other.codigo_transferencia;
+        return this.codigo_transaccion == other.codigo_transaccion;
     }
 
     /**
@@ -124,8 +124,8 @@ public class Transferencias extends Transacciones{
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Transferencias{");
-        sb.append("codigo_transferencia=").append(codigo_transferencia);
-        sb.append(", cuentaDestinataria=").append(cuentaDestinataria);
+        sb.append("codigo_transaccion=").append(codigo_transaccion);
+        sb.append(", codigo_cuenta_recibe=").append(codigo_cuenta_recibe);
         sb.append('}');
         return sb.toString();
     } 

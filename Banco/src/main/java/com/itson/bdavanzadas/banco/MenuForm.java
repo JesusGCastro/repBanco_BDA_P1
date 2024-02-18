@@ -107,6 +107,7 @@ public class MenuForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarUsuarioActionPerformed
 
     private void btnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioSesionActionPerformed
+        dispose();
         InicioForm inicioSesion = new InicioForm(clientesDAO);
         inicioSesion.setVisible(true);
     }//GEN-LAST:event_btnInicioSesionActionPerformed

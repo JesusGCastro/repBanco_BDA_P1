@@ -244,6 +244,8 @@ public class InicioForm extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
+        MenuForm principal = new MenuForm(clientesDAO);
+        principal.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed
     
     public void limpiarDatos(){

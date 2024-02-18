@@ -392,9 +392,6 @@ public class RegistroForm extends javax.swing.JFrame {
 
     private void botonRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarClienteActionPerformed
         registrarCliente();
-        InicioForm inicioSesion = new InicioForm(clientesDAO);
-        inicioSesion.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_botonRegistrarClienteActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
@@ -437,11 +434,13 @@ public class RegistroForm extends javax.swing.JFrame {
                 fechaNacimiento = new java.sql.Date(fechaSeleccionada.getTime());
                 clienteNuevo.setFecha_nacimiento(fechaNacimiento);
             }
-            
             clienteNuevo.esValido();
             this.clientesDAO.registrarCliente(clienteNuevo);
             JOptionPane.showMessageDialog(this, "Se registró el cliente", "Notificaión", JOptionPane.INFORMATION_MESSAGE);
             limpiarDatos();
+            this.dispose();
+            InicioForm inicioSesion = new InicioForm(clientesDAO);
+            inicioSesion.setVisible(true);
         } catch (ValidacionDTOException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
         } catch (PersistenciaException e) {

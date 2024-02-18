@@ -5,6 +5,7 @@ package com.itson.bdavanzadas.bancodominio;
  * @author Equipo
  */
 public class Retiro {
+    
     private long codigo_transaccion;
     private long folio;
     private int contrasena;

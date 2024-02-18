@@ -14,7 +14,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TransaccionesDAO implements ITransaccionDAO{
+public class TransaccionesDAO implements ITransaccionesDAO{
     
     final IConexion conexionBD;
     static final Logger logger = Logger.getLogger(CuentasDAO.class.getName());

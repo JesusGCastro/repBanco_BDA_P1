@@ -7,7 +7,7 @@ import com.itson.bdavanzadas.bancopersistencia.dtos.TransferenciaNuevaDTO;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
 import java.util.logging.Logger;
 
-public class TransferenciasDAO implements ITransferenciaDAO{
+public class TransferenciasDAO implements ITransferenciasDAO{
     
     final IConexion conexionBD;
     static final Logger logger = Logger.getLogger(CuentasDAO.class.getName());

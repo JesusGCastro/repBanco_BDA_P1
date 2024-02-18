@@ -8,7 +8,7 @@ import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException
 import java.util.logging.Logger;
 
 
-public class RetirosDAO implements IRetiroDAO{
+public class RetirosDAO implements IRetirosDAO{
     
     final IConexion conexionBD;
     static final Logger logger = Logger.getLogger(CuentasDAO.class.getName());

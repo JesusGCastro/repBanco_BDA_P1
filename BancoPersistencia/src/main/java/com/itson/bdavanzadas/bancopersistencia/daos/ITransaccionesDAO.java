@@ -5,6 +5,6 @@ import com.itson.bdavanzadas.bancodominio.Transaccion;
 import com.itson.bdavanzadas.bancopersistencia.dtos.TransaccionNuevaDTO;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
 
-public interface ITransaccionDAO {
+public interface ITransaccionesDAO {
     Transaccion registrarTransaccion(TransaccionNuevaDTO transaccionNueva) throws PersistenciaException;
 }

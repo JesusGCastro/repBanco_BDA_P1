@@ -4,6 +4,12 @@ import com.itson.bdavanzadas.bancodominio.Cliente;
 import com.itson.bdavanzadas.bancodominio.Cuenta;
 import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
 import com.itson.bdavanzadas.bancopersistencia.daos.ICuentasDAO;
+import com.itson.bdavanzadas.bancopersistencia.daos.RetirosDAO;
+import com.itson.bdavanzadas.bancopersistencia.dtos.RetiroNuevoDTO;
+import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
+import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
+import static java.lang.Float.parseFloat;
+import javax.swing.JOptionPane;
 //import com.itson.bdavanzadas.bancopersistencia.daos.IRetirosDAO;
 
 public class RetiroForm extends javax.swing.JFrame {
@@ -39,7 +45,7 @@ public class RetiroForm extends javax.swing.JFrame {
 
         bg = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        campoTextoIDUsuario = new javax.swing.JTextField();
+        txtMonto = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
@@ -57,10 +63,15 @@ public class RetiroForm extends javax.swing.JFrame {
         jLabel1.setText("Retiro de dinero");
         bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
 
-        campoTextoIDUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        campoTextoIDUsuario.setForeground(new java.awt.Color(100, 100, 100));
-        campoTextoIDUsuario.setBorder(null);
-        bg.add(campoTextoIDUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 320, 30));
+        txtMonto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtMonto.setForeground(new java.awt.Color(100, 100, 100));
+        txtMonto.setBorder(null);
+        txtMonto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMontoActionPerformed(evt);
+            }
+        });
+        bg.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 320, 30));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         bg.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 310, -1));
@@ -117,23 +128,48 @@ public class RetiroForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        this.setVisible(false);
-        DlgFolioGenerado folioGenerado = new DlgFolioGenerado(this, rootPaneCheckingEnabled, cuentasDAO);
-        folioGenerado.setVisible(true);
-        dispose();
-        MenuClienteForm menuCliente = new MenuClienteForm(clientesDAO, cliente);
-        menuCliente.setVisible(true);
+        retirar();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-    
+    private void txtMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMontoActionPerformed
+
+    public void retirar(){
+        
+        String monto = txtMonto.getText();
+        
+        RetiroNuevoDTO retiro = new RetiroNuevoDTO();
+        retiro.setMonto(parseFloat(monto));
+        
+        try {
+            retiro.esValido();
+            
+            
+            
+            JOptionPane.showMessageDialog(this, "Credenciales validas", "Notificaión", JOptionPane.INFORMATION_MESSAGE);
+            
+            this.setVisible(false);
+            DlgFolioGenerado folioGenerado = new DlgFolioGenerado(this, rootPaneCheckingEnabled, cuentasDAO);
+            folioGenerado.setVisible(true);
+            dispose();
+            MenuClienteForm menuCliente = new MenuClienteForm(clientesDAO, cliente);
+            menuCliente.setVisible(true);
+        } catch (ValidacionDTOException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
+        } /*catch (PersistenciaException e) {
+            JOptionPane.showMessageDialog(this, "No fue posible iniciar sesion", "Error", JOptionPane.ERROR_MESSAGE);
+        }*/
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JTextField campoTextoIDUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField txtMonto;
     // End of variables declaration//GEN-END:variables
 }

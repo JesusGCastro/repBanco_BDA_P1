@@ -4,13 +4,17 @@ package com.itson.bdavanzadas.bancopersistencia.dtos;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
 
 
-public class RetiroNuevoDTO {
+public class RetiroNuevoDTO extends TransaccionNuevaDTO{
     
     private long codigo_transaccion;
     private long folio;
     private int contrasena;
     private byte estado;
-
+    
+    public RetiroNuevoDTO() {
+        super();
+    }
+    
     public long getCodigo_transaccion() {
         return codigo_transaccion;
     }

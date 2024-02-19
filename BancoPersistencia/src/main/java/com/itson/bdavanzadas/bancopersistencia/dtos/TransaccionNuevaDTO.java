@@ -9,7 +9,7 @@ import java.sql.Date;
 public class TransaccionNuevaDTO {
     
     private Date fecha;
-    private String monto;
+    private float monto;
     private long codigo_cuenta_proporciona;
     
     public TransaccionNuevaDTO() {
@@ -24,11 +24,11 @@ public class TransaccionNuevaDTO {
         this.fecha = fecha;
     }
 
-    public String getMonto() {
+    public float getMonto() {
         return monto;
     }
 
-    public void setMonto(String monto) {
+    public void setMonto(float monto) {
         this.monto = monto;
     }
 
@@ -44,10 +44,7 @@ public class TransaccionNuevaDTO {
         if (this.fecha == null) {
             throw new ValidacionDTOException("Fecha invalida");
         }
-        if (this.monto == null 
-                || this.monto.isBlank()
-                || this.monto.matches("(\\d*)+([.]\\d*)")
-                || parseFloat(this.monto)<0) {
+        if (this.monto<0) {
             throw new ValidacionDTOException("Monto invalido");
         }
         if (this.codigo_cuenta_proporciona <0) {

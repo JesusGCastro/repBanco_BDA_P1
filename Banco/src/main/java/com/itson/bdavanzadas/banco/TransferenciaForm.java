@@ -166,7 +166,7 @@ public class TransferenciaForm extends javax.swing.JFrame {
         String monto = txtMonto.getText();
         
         TransferenciaNuevaDTO transferencia = new TransferenciaNuevaDTO();
-        transferencia.setMonto(monto);
+        transferencia.setMonto(parseFloat(monto));
         transferencia.setCodigo_cuenta_proporciona(cuenta.getCodigo());
         transferencia.setCodigo_cuenta_recibe(parseLong(codigo_cuenta_recibe));
         

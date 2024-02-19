@@ -113,9 +113,9 @@ public class MenuForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInicioSesionActionPerformed
 
     private void btnRetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetiroActionPerformed
-        //dispose();
-        //RetiroForm retiro = new RetiroForm();
-        //retiro.setVisible(true);
+        dispose();
+        RetiroSinCuentaForm retiro = new RetiroSinCuentaForm(clientesDAO);
+        retiro.setVisible(true);
     }//GEN-LAST:event_btnRetiroActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed

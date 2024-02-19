@@ -2,22 +2,16 @@ package com.itson.bdavanzadas.banco;
 
 import com.itson.bdavanzadas.bancodominio.Cliente;
 import com.itson.bdavanzadas.bancodominio.Cuenta;
-import com.itson.bdavanzadas.bancodominio.Transaccion;
-import com.itson.bdavanzadas.bancodominio.Transferencia;
 import com.itson.bdavanzadas.bancopersistencia.conexion.Conexion;
 import com.itson.bdavanzadas.bancopersistencia.conexion.IConexion;
 import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
 import com.itson.bdavanzadas.bancopersistencia.daos.ITransferenciasDAO;
 import com.itson.bdavanzadas.bancopersistencia.daos.TransferenciasDAO;
-import com.itson.bdavanzadas.bancopersistencia.dtos.TransaccionNuevaDTO;
 import com.itson.bdavanzadas.bancopersistencia.dtos.TransferenciaNuevaDTO;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
 import static java.lang.Float.parseFloat;
 import static java.lang.Long.parseLong;
-import java.sql.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class TransferenciaForm extends javax.swing.JFrame {

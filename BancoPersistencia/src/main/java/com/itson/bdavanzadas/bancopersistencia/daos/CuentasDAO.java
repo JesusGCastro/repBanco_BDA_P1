@@ -43,7 +43,7 @@ public class CuentasDAO implements ICuentasDAO{
     @Override
     public Cuenta registrarCuenta(CuentaNuevaDTO cuentaNueva) throws PersistenciaException {
         String sentenciaSQL = """
-            INSERT INTO cuenta(fecha_apertura, saldo, codigo_cliente, estado) 
+            INSERT INTO cuentas(fecha_apertura, saldo, codigo_cliente, estado) 
             VALUES (?, ?, ?, ?)
         """;
         try (
@@ -81,7 +81,7 @@ public class CuentasDAO implements ICuentasDAO{
     @Override
     public List<Cuenta> consultarCuentas(Cliente cliente) throws PersistenciaException {
         String sentenciaSQL = """
-            SELECT * FROM cuenta WHERE codigo_cliente = ?
+            SELECT * FROM cuentas WHERE codigo_cliente = ?
         """;
         List<Cuenta> listaCuentas = new LinkedList<>();
         try (

@@ -28,18 +28,21 @@ public class MenuForm extends javax.swing.JFrame {
         botonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(400, 400));
         setPreferredSize(new java.awt.Dimension(400, 430));
 
         bg.setBackground(new java.awt.Color(255, 223, 148));
+        bg.setPreferredSize(new java.awt.Dimension(400, 400));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setText("Bienvenido a tu banco de confianza");
-        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
+        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
         btnRegistrarUsuario.setBackground(new java.awt.Color(255, 223, 148));
         btnRegistrarUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnRegistrarUsuario.setForeground(new java.awt.Color(100, 100, 100));
+        btnRegistrarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/registro.png"))); // NOI18N
         btnRegistrarUsuario.setText("Registrar usuario");
         btnRegistrarUsuario.setBorder(null);
         btnRegistrarUsuario.setBorderPainted(false);
@@ -48,11 +51,12 @@ public class MenuForm extends javax.swing.JFrame {
                 btnRegistrarUsuarioActionPerformed(evt);
             }
         });
-        bg.add(btnRegistrarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 200, -1));
+        bg.add(btnRegistrarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 200, -1));
 
         btnInicioSesion.setBackground(new java.awt.Color(255, 223, 148));
         btnInicioSesion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnInicioSesion.setForeground(new java.awt.Color(100, 100, 100));
+        btnInicioSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/incioSesion.png"))); // NOI18N
         btnInicioSesion.setText("Iniciar Sesión");
         btnInicioSesion.setBorder(null);
         btnInicioSesion.setBorderPainted(false);
@@ -61,11 +65,12 @@ public class MenuForm extends javax.swing.JFrame {
                 btnInicioSesionActionPerformed(evt);
             }
         });
-        bg.add(btnInicioSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, -1, -1));
+        bg.add(btnInicioSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, -1));
 
         btnRetiro.setBackground(new java.awt.Color(255, 223, 148));
         btnRetiro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnRetiro.setForeground(new java.awt.Color(100, 100, 100));
+        btnRetiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/retiro.png"))); // NOI18N
         btnRetiro.setText("Retiro sin cuenta");
         btnRetiro.setBorder(null);
         btnRetiro.setBorderPainted(false);
@@ -76,24 +81,27 @@ public class MenuForm extends javax.swing.JFrame {
         });
         bg.add(btnRetiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 180, -1));
 
-        botonCancelar.setBackground(new java.awt.Color(255, 224, 150));
-        botonCancelar.setText("Salir");
+        botonCancelar.setBackground(new java.awt.Color(255, 223, 148));
+        botonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salida.png"))); // NOI18N
+        botonCancelar.setBorder(null);
+        botonCancelar.setBorderPainted(false);
+        botonCancelar.setContentAreaFilled(false);
         botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonCancelarActionPerformed(evt);
             }
         });
-        bg.add(botonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, -1, -1));
+        bg.add(botonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

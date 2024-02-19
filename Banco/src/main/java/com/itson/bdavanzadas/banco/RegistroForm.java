@@ -316,6 +316,8 @@ public class RegistroForm extends javax.swing.JFrame {
         L.setBackground(new java.awt.Color(255, 223, 148));
         L.setPreferredSize(new java.awt.Dimension(400, 500));
 
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
+
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel6.setText("© [2023] SCAA. Todos los derechos reservados.\"");
 
@@ -326,7 +328,10 @@ public class RegistroForm extends javax.swing.JFrame {
         jLabel8.setText("Tu dinero, siempre en tus manos");
 
         botonCancelar.setBackground(new java.awt.Color(255, 223, 148));
-        botonCancelar.setText("Cancelar");
+        botonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salida.png"))); // NOI18N
+        botonCancelar.setBorder(null);
+        botonCancelar.setBorderPainted(false);
+        botonCancelar.setContentAreaFilled(false);
         botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonCancelarActionPerformed(evt);
@@ -337,38 +342,39 @@ public class RegistroForm extends javax.swing.JFrame {
         L.setLayout(LLayout);
         LLayout.setHorizontalGroup(
             LLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LLayout.createSequentialGroup()
+                .addGroup(LLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(LLayout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addGroup(LLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7)))
+                    .addGroup(LLayout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(jLabel5)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LLayout.createSequentialGroup()
-                .addGap(0, 229, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(131, 131, 131))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(46, Short.MAX_VALUE)
                 .addGroup(LLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LLayout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(70, 70, 70))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LLayout.createSequentialGroup()
                         .addComponent(botonCancelar)
-                        .addGap(30, 30, 30))))
-            .addGroup(LLayout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addGroup(LLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel7))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         LLayout.setVerticalGroup(
             LLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(botonCancelar)
-                .addGap(42, 42, 42)
+                .addGap(52, 52, 52)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addGap(37, 37, 37)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(53, 53, 53))
         );

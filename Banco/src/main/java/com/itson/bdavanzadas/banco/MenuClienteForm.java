@@ -54,6 +54,7 @@ public class MenuClienteForm extends javax.swing.JFrame {
         btnAjustes = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCuentas = new javax.swing.JTable();
+        txtlogo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,46 +64,45 @@ public class MenuClienteForm extends javax.swing.JFrame {
         lblBienvenida.setBackground(new java.awt.Color(255, 223, 148));
         lblBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblBienvenida.setText("Bienvenido a tu cuenta!");
-        bg.add(lblBienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
+        bg.add(lblBienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
 
-        btnSalir.setBackground(new java.awt.Color(255, 223, 148));
         btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(100, 100, 100));
-        btnSalir.setText("Salir");
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salida.png"))); // NOI18N
         btnSalir.setBorder(null);
         btnSalir.setBorderPainted(false);
+        btnSalir.setContentAreaFilled(false);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
             }
         });
-        bg.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, 70, -1));
+        bg.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, 40, 40));
 
-        btnNuevaCuenta.setBackground(new java.awt.Color(255, 223, 148));
-        btnNuevaCuenta.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNuevaCuenta.setForeground(new java.awt.Color(100, 100, 100));
-        btnNuevaCuenta.setText("Crear nueva cuenta");
+        btnNuevaCuenta.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        btnNuevaCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/agregarCuentaB.png"))); // NOI18N
+        btnNuevaCuenta.setText("Agregar Cuenta");
         btnNuevaCuenta.setBorder(null);
         btnNuevaCuenta.setBorderPainted(false);
+        btnNuevaCuenta.setContentAreaFilled(false);
         btnNuevaCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevaCuentaActionPerformed(evt);
             }
         });
-        bg.add(btnNuevaCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 180, -1));
+        bg.add(btnNuevaCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 120, -1));
 
-        btnAjustes.setBackground(new java.awt.Color(255, 223, 148));
         btnAjustes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnAjustes.setForeground(new java.awt.Color(100, 100, 100));
-        btnAjustes.setText("Ajustes");
+        btnAjustes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ajustes.png"))); // NOI18N
         btnAjustes.setBorder(null);
         btnAjustes.setBorderPainted(false);
+        btnAjustes.setContentAreaFilled(false);
         btnAjustes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAjustesActionPerformed(evt);
             }
         });
-        bg.add(btnAjustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, 180, -1));
+        bg.add(btnAjustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 360, 50, -1));
 
         tblCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -118,6 +118,9 @@ public class MenuClienteForm extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblCuentas);
 
         bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 600, 280));
+
+        txtlogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
+        bg.add(txtlogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 70));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -251,5 +254,6 @@ public class MenuClienteForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBienvenida;
     private javax.swing.JTable tblCuentas;
+    private javax.swing.JLabel txtlogo;
     // End of variables declaration//GEN-END:variables
 }

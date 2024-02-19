@@ -1,19 +1,31 @@
 package com.itson.bdavanzadas.banco;
 
+import com.itson.bdavanzadas.bancodominio.Cliente;
 import com.itson.bdavanzadas.bancodominio.Cuenta;
 import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
+import com.itson.bdavanzadas.bancopersistencia.daos.ICuentasDAO;
+import com.itson.bdavanzadas.bancopersistencia.daos.RetirosDAO;
+import com.itson.bdavanzadas.bancopersistencia.dtos.RetiroNuevoDTO;
+import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
+import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
+import static java.lang.Float.parseFloat;
+import javax.swing.JOptionPane;
 //import com.itson.bdavanzadas.bancopersistencia.daos.IRetirosDAO;
 
 public class RetiroForm extends javax.swing.JFrame {
     
     private final IClientesDAO clientesDAO;
     private final Cuenta cuenta;
+    private final Cliente cliente;
+    private final ICuentasDAO cuentasDAO;
     //private final IRetirosDAO retirosDAO;
     
-    public RetiroForm(IClientesDAO clientesDAO, Cuenta cuenta) {
+    public RetiroForm(IClientesDAO clientesDAO, Cuenta cuenta, Cliente cliente, ICuentasDAO cuentasDAO) {
         initComponents();
         this.clientesDAO = clientesDAO;
-        this.cuenta = cuenta; 
+        this.cuenta = cuenta;
+        this.cliente = cliente;
+        this.cuentasDAO = cuentasDAO;
     }
     
     //public RetiroForm() {
@@ -33,14 +45,11 @@ public class RetiroForm extends javax.swing.JFrame {
 
         bg = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        campoTextoIDUsuario = new javax.swing.JTextField();
+        txtMonto = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
         btnCancelar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
-        campoTextoContrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,24 +63,22 @@ public class RetiroForm extends javax.swing.JFrame {
         jLabel1.setText("Retiro de dinero");
         bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
 
-        campoTextoIDUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        campoTextoIDUsuario.setForeground(new java.awt.Color(100, 100, 100));
-        campoTextoIDUsuario.setBorder(null);
-        bg.add(campoTextoIDUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 320, 30));
+        txtMonto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtMonto.setForeground(new java.awt.Color(100, 100, 100));
+        txtMonto.setBorder(null);
+        txtMonto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMontoActionPerformed(evt);
+            }
+        });
+        bg.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 320, 30));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         bg.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 310, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel2.setText("Folio:");
+        jLabel2.setText("Monto a retirar");
         bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 137, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel3.setText("Contraseña:");
-        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, -1));
-
-        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
-        bg.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 310, -1));
 
         btnCancelar.setBackground(new java.awt.Color(255, 223, 148));
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -99,10 +106,6 @@ public class RetiroForm extends javax.swing.JFrame {
         });
         bg.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 90, -1));
 
-        campoTextoContrasena.setForeground(new java.awt.Color(100, 100, 100));
-        campoTextoContrasena.setBorder(null);
-        bg.add(campoTextoContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 310, 30));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,28 +118,58 @@ public class RetiroForm extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-
+        dispose();
+        MenuClienteForm menuCliente = new MenuClienteForm(clientesDAO, cliente);
+        menuCliente.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
+        retirar();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-    
+    private void txtMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMontoActionPerformed
+
+    public void retirar(){
+        
+        String monto = txtMonto.getText();
+        
+        RetiroNuevoDTO retiro = new RetiroNuevoDTO();
+        retiro.setMonto(parseFloat(monto));
+        
+        try {
+            retiro.esValido();
+            
+            
+            
+            JOptionPane.showMessageDialog(this, "Credenciales validas", "Notificaión", JOptionPane.INFORMATION_MESSAGE);
+            
+            this.setVisible(false);
+            DlgFolioGenerado folioGenerado = new DlgFolioGenerado(this, rootPaneCheckingEnabled, cuentasDAO);
+            folioGenerado.setVisible(true);
+            dispose();
+            MenuClienteForm menuCliente = new MenuClienteForm(clientesDAO, cliente);
+            menuCliente.setVisible(true);
+        } catch (ValidacionDTOException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
+        } /*catch (PersistenciaException e) {
+            JOptionPane.showMessageDialog(this, "No fue posible iniciar sesion", "Error", JOptionPane.ERROR_MESSAGE);
+        }*/
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JPasswordField campoTextoContrasena;
-    private javax.swing.JTextField campoTextoIDUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextField txtMonto;
     // End of variables declaration//GEN-END:variables
 }

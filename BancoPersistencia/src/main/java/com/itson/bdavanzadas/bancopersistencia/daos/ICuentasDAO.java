@@ -21,6 +21,8 @@ public interface ICuentasDAO {
      */
     Cuenta registrarCuenta(CuentaNuevaDTO cuentaNueva) throws PersistenciaException;
     
+    void realizarTransferencia(Cuenta cuenta, Long codigoCuentaDestino, float monto) throws PersistenciaException;
+    
     /**
      * Consulta las cuentas asociadas a un cliente en la base de datos.
      * 

@@ -107,7 +107,7 @@ public class DlgCrearCuenta extends javax.swing.JDialog {
            cuentaNueva.esValido();
            this.cuentasDAO.registrarCuenta(cuentaNueva);
            JOptionPane.showMessageDialog(this, "Se registró la cuenta", "Notificaión", JOptionPane.INFORMATION_MESSAGE);
-       } catch (ValidacionDTOException e) {
+        } catch (ValidacionDTOException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
         } catch (PersistenciaException e) {
             JOptionPane.showMessageDialog(this, "No fue posible registrar la cuenta", "Error de almacenamiento", JOptionPane.ERROR_MESSAGE);

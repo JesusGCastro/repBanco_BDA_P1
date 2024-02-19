@@ -5,6 +5,7 @@ import com.itson.bdavanzadas.bancodominio.Cuenta;
 import com.itson.bdavanzadas.bancopersistencia.conexion.IConexion;
 import com.itson.bdavanzadas.bancopersistencia.dtos.CuentaNuevaDTO;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -68,6 +69,31 @@ public class CuentasDAO implements ICuentasDAO{
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "No se pudo registrar la cuenta", e);
             throw new PersistenciaException("No se pudo registrar la cuenta", e);
+        }
+    }
+    
+    @Override
+    public void realizarTransferencia(Cuenta cuenta, Long codigoCuentaDestino, float monto) throws PersistenciaException{
+        String sentenciaSQL = """
+            call banco.RealizarTransferencia(?, ?, ?);                      
+        """;
+        String mensaje = "";
+        try (
+            Connection conexion = this.conexionBD.obtenerConexion();
+            CallableStatement comando = conexion.prepareCall(sentenciaSQL);
+        ){
+            comando.setLong(1, cuenta.getCodigo());
+            comando.setLong(2,codigoCuentaDestino);
+            comando.setFloat(3, monto);
+            ResultSet resultado = comando.executeQuery();
+            
+            while (resultado.next()) {
+                mensaje = resultado.getString("mensaje");
+            }
+            logger.log(Level.INFO, mensaje);
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "No se pudo realizar la tranferencia", e);
+            throw new PersistenciaException("No se pudo realizar la tranferencia", e);
         }
     }
 

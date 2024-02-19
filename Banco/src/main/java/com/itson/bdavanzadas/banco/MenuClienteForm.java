@@ -51,7 +51,7 @@ public class MenuClienteForm extends javax.swing.JFrame {
         lblBienvenida = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         btnNuevaCuenta = new javax.swing.JButton();
-        btnTransferencia = new javax.swing.JButton();
+        btnAjustes = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCuentas = new javax.swing.JTable();
 
@@ -91,18 +91,18 @@ public class MenuClienteForm extends javax.swing.JFrame {
         });
         bg.add(btnNuevaCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 180, -1));
 
-        btnTransferencia.setBackground(new java.awt.Color(255, 223, 148));
-        btnTransferencia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnTransferencia.setForeground(new java.awt.Color(100, 100, 100));
-        btnTransferencia.setText("Realizar Transferencia");
-        btnTransferencia.setBorder(null);
-        btnTransferencia.setBorderPainted(false);
-        btnTransferencia.addActionListener(new java.awt.event.ActionListener() {
+        btnAjustes.setBackground(new java.awt.Color(255, 223, 148));
+        btnAjustes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAjustes.setForeground(new java.awt.Color(100, 100, 100));
+        btnAjustes.setText("Ajustes");
+        btnAjustes.setBorder(null);
+        btnAjustes.setBorderPainted(false);
+        btnAjustes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTransferenciaActionPerformed(evt);
+                btnAjustesActionPerformed(evt);
             }
         });
-        bg.add(btnTransferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, 180, -1));
+        bg.add(btnAjustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, 180, -1));
 
         tblCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -140,9 +140,9 @@ public class MenuClienteForm extends javax.swing.JFrame {
         inicioSesion.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void btnTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferenciaActionPerformed
+    private void btnAjustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjustesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTransferenciaActionPerformed
+    }//GEN-LAST:event_btnAjustesActionPerformed
 
     private void btnNuevaCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaCuentaActionPerformed
         this.setVisible(false);
@@ -195,9 +195,9 @@ public class MenuClienteForm extends javax.swing.JFrame {
                     Cuenta cuenta;
                     try {
                         cuenta = obtenerCuentaDesdeFila(row);
-                        dispose();
-                        TransferenciaForm transferencia = new TransferenciaForm(clientesDAO, cliente, cuenta);
+                        TransferenciaForm transferencia = new TransferenciaForm(clientesDAO,cliente,cuentasDAO, cuenta);
                         transferencia.setVisible(true);
+                        dispose();
                     } catch (PersistenciaException ex) {
                         Logger.getLogger(MenuClienteForm.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -245,9 +245,9 @@ public class MenuClienteForm extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
+    private javax.swing.JButton btnAjustes;
     private javax.swing.JButton btnNuevaCuenta;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton btnTransferencia;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBienvenida;
     private javax.swing.JTable tblCuentas;

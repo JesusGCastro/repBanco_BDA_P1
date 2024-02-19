@@ -4,7 +4,9 @@ import com.itson.bdavanzadas.bancodominio.Cliente;
 import com.itson.bdavanzadas.bancodominio.Cuenta;
 import com.itson.bdavanzadas.bancopersistencia.conexion.Conexion;
 import com.itson.bdavanzadas.bancopersistencia.conexion.IConexion;
+import com.itson.bdavanzadas.bancopersistencia.daos.CuentasDAO;
 import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
+import com.itson.bdavanzadas.bancopersistencia.daos.ICuentasDAO;
 import com.itson.bdavanzadas.bancopersistencia.daos.ITransferenciasDAO;
 import com.itson.bdavanzadas.bancopersistencia.daos.TransferenciasDAO;
 import com.itson.bdavanzadas.bancopersistencia.dtos.TransferenciaNuevaDTO;
@@ -17,14 +19,16 @@ import javax.swing.JOptionPane;
 public class TransferenciaForm extends javax.swing.JFrame {
 
     private final IClientesDAO clientesDAO;
+    private final ICuentasDAO cuentasDAO;
     private final Cuenta cuenta;
     private final Cliente cliente;
     
-    public TransferenciaForm(IClientesDAO clientesDAO, Cliente cliente, Cuenta cuenta) {
+    public TransferenciaForm(IClientesDAO clientesDAO, Cliente cliente,ICuentasDAO cuentasDAO, Cuenta cuenta) {
         initComponents();
         this.clientesDAO = clientesDAO;
-        this.cuenta = cuenta;
         this.cliente = cliente;
+        this.cuentasDAO = cuentasDAO;
+        this.cuenta = cuenta;
     }
 
     /**
@@ -138,12 +142,13 @@ public class TransferenciaForm extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
-        MenuClienteForm menuCliente = new MenuClienteForm(clientesDAO, cliente);
-        menuCliente.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         transferir();
+        dispose();
+        MenuClienteForm menuCliente = new MenuClienteForm(clientesDAO, cliente);
+        menuCliente.setVisible(true);
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void txtCuentaDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCuentaDestinoActionPerformed
@@ -155,30 +160,15 @@ public class TransferenciaForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMontoActionPerformed
 
     public void transferir(){
-        
-        String codigo_cuenta_recibe = txtCuentaDestino.getText();
-        String monto = txtMonto.getText();
-        
-        TransferenciaNuevaDTO transferencia = new TransferenciaNuevaDTO();
-        transferencia.setMonto(parseFloat(monto));
-        transferencia.setCodigo_cuenta_proporciona(cuenta.getCodigo());
-        transferencia.setCodigo_cuenta_recibe(parseLong(codigo_cuenta_recibe));
-        
-        String cadenaConexion = "jdbc:mysql://localhost/banco";
-        String usuario = "root";
-        String password = "123456789";
-        IConexion conexion = new Conexion(cadenaConexion, usuario, password);
+        Long codigoCuentaDestino = Long.valueOf(txtCuentaDestino.getText());
+        Float monto = Float.valueOf(txtMonto.getText());
         
         try {
-            transferencia.esValido();
-            ITransferenciasDAO transferenciasDAO = new TransferenciasDAO(conexion);
-            transferenciasDAO.registrarTransferencia(transferencia);
-        } catch (ValidacionDTOException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
+            this.cuentasDAO.realizarTransferencia(cuenta, codigoCuentaDestino, monto);
+            JOptionPane.showMessageDialog(this, "Se realizo la operacion", "Notificaión", JOptionPane.INFORMATION_MESSAGE);
         } catch (PersistenciaException e) {
-            JOptionPane.showMessageDialog(this, "No fue posible registrar la transaccion", "Error de almacenamiento", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No fue posible realizar la operacion", "Error de almacenamiento", JOptionPane.ERROR_MESSAGE);
         }
-        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

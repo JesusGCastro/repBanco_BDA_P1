@@ -212,7 +212,7 @@ public class MenuClienteForm extends javax.swing.JFrame {
                     try {
                         cuenta = obtenerCuentaDesdeFila(row);
                         dispose();
-                        RetiroForm retiro = new RetiroForm(clientesDAO, cuenta);
+                        RetiroForm retiro = new RetiroForm(clientesDAO, cuenta, cliente, cuentasDAO);
                         retiro.setVisible(true);
                     } catch (PersistenciaException ex) {
                         Logger.getLogger(MenuClienteForm.class.getName()).log(Level.SEVERE, null, ex);

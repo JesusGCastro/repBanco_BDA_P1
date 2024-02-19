@@ -1,31 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.itson.bdavanzadas.bancopersistencia.dtos;
 
 import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
+import static java.lang.Float.parseFloat;
+import static java.lang.Long.parseLong;
 import java.sql.Date;
 
-/**
- *
- * @author Gui26
- */
 public class TransaccionNuevaDTO {
     
-    private long codigo;
     private Date fecha;
-    private float monto;
+    private String monto;
     private long codigo_cuenta_proporciona;
-
-    public long getCodigo() {
-        return codigo;
+    
+    public TransaccionNuevaDTO() {
+        this.fecha = new Date(new java.util.Date().getTime());
     }
-
-    public void setCodigo(long codigo) {
-        this.codigo = codigo;
-    }
-
+    
     public Date getFecha() {
         return fecha;
     }
@@ -34,11 +24,11 @@ public class TransaccionNuevaDTO {
         this.fecha = fecha;
     }
 
-    public float getMonto() {
+    public String getMonto() {
         return monto;
     }
 
-    public void setMonto(float monto) {
+    public void setMonto(String monto) {
         this.monto = monto;
     }
 
@@ -51,17 +41,17 @@ public class TransaccionNuevaDTO {
     }
     
     public boolean esValido() throws ValidacionDTOException{
-        if (this.codigo < 0) {
-            throw new ValidacionDTOException("Codigo invalido");
-        }
         if (this.fecha == null) {
             throw new ValidacionDTOException("Fecha invalida");
         }
-        if (this.monto < 0) {
+        if (this.monto == null 
+                || this.monto.isBlank()
+                || this.monto.matches("(\\d*)+([.]\\d*)")
+                || parseFloat(this.monto)<0) {
             throw new ValidacionDTOException("Monto invalido");
         }
-        if (this.codigo_cuenta_proporciona < 0) {
-            throw new ValidacionDTOException("Codigo de cliente invalido");
+        if (this.codigo_cuenta_proporciona <0) {
+            throw new ValidacionDTOException("Codigo de cuenta que proporciona invalido");
         }
         return true;
     }

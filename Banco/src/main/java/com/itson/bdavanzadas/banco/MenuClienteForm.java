@@ -195,7 +195,8 @@ public class MenuClienteForm extends javax.swing.JFrame {
                     Cuenta cuenta;
                     try {
                         cuenta = obtenerCuentaDesdeFila(row);
-                        TransferenciaForm transferencia = new TransferenciaForm(clientesDAO, cuenta);
+                        dispose();
+                        TransferenciaForm transferencia = new TransferenciaForm(clientesDAO, cliente, cuenta);
                         transferencia.setVisible(true);
                     } catch (PersistenciaException ex) {
                         Logger.getLogger(MenuClienteForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -210,6 +211,7 @@ public class MenuClienteForm extends javax.swing.JFrame {
                     Cuenta cuenta;
                     try {
                         cuenta = obtenerCuentaDesdeFila(row);
+                        dispose();
                         RetiroForm retiro = new RetiroForm(clientesDAO, cuenta);
                         retiro.setVisible(true);
                     } catch (PersistenciaException ex) {
@@ -240,6 +242,7 @@ public class MenuClienteForm extends javax.swing.JFrame {
             return null;
         }
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnNuevaCuenta;

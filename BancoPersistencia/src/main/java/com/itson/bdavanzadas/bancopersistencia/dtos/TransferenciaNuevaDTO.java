@@ -2,12 +2,18 @@
 package com.itson.bdavanzadas.bancopersistencia.dtos;
 
 import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
+import static java.lang.Long.parseLong;
+import java.sql.Date;
 
-public class TransferenciaNuevaDTO {
+public class TransferenciaNuevaDTO extends TransaccionNuevaDTO{
     
     private long codigo_transaccion;
     private long codigo_cuenta_recibe;
 
+    public TransferenciaNuevaDTO() {
+        super();
+    }
+    
     public long getCodigo_transaccion() {
         return codigo_transaccion;
     }
@@ -24,12 +30,14 @@ public class TransferenciaNuevaDTO {
         this.codigo_cuenta_recibe = codigo_cuenta_recibe;
     }
     
+    @Override
     public boolean esValido() throws ValidacionDTOException{
-        if (this.codigo_transaccion < 0) {
+        super.esValido();
+        if (this.codigo_transaccion <0) {
             throw new ValidacionDTOException("Codigo de transaccion invalido");
         }
-        if (this.codigo_cuenta_recibe < 0) {
-            throw new ValidacionDTOException("Codigo de cuenta invalido");
+        if (this.codigo_cuenta_recibe<0) {
+            throw new ValidacionDTOException("Codigo de cuenta que recibe invalido");
         }
         return true;
     }

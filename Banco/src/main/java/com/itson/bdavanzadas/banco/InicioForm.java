@@ -5,7 +5,6 @@ import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
 import com.itson.bdavanzadas.bancopersistencia.dtos.ClienteNuevoDTO;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
-import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 
 
@@ -213,7 +212,21 @@ public class InicioForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        Cliente clienteInicio = null;
+        iniciar();
+    }//GEN-LAST:event_btnIniciarSesionActionPerformed
+
+    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCorreoActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        dispose();
+        MenuForm principal = new MenuForm(clientesDAO);
+        principal.setVisible(true);
+    }//GEN-LAST:event_btnSalirActionPerformed
+    
+    public void iniciar(){
+        Cliente clienteInicio;
         
         String correo = txtCorreo.getText();
         String contrasenia = new String(pswdConstrasenia.getPassword());
@@ -235,19 +248,7 @@ public class InicioForm extends javax.swing.JFrame {
         } catch (PersistenciaException e) {
             JOptionPane.showMessageDialog(this, "No fue posible iniciar sesion", "Error de credenciales", JOptionPane.ERROR_MESSAGE);
         }
-        
-        
-    }//GEN-LAST:event_btnIniciarSesionActionPerformed
-
-    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCorreoActionPerformed
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        dispose();
-        MenuForm principal = new MenuForm(clientesDAO);
-        principal.setVisible(true);
-    }//GEN-LAST:event_btnSalirActionPerformed
+    }
     
     public void limpiarDatos(){
         txtCorreo.setText("");

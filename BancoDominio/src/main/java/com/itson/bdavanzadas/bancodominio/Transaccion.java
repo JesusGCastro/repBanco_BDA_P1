@@ -28,7 +28,7 @@ public class Transaccion {
      * @param codigo_cuenta_proporciona La cuenta desde la cual se realiza la transacción.
      */
     public Transaccion(Date fecha, float monto, long codigo_cuenta_proporciona) {
-        this.fecha = fecha;
+        this.fecha = new Date();
         this.monto = monto;
         this.codigo_cuenta_proporciona = codigo_cuenta_proporciona;
     }
@@ -43,7 +43,7 @@ public class Transaccion {
      */
     public Transaccion(long codigo, Date fecha, float monto, long codigo_cuenta_proporciona) {
         this.codigo = codigo;
-        this.fecha = fecha;
+        this.fecha = new Date();
         this.monto = monto;
         this.codigo_cuenta_proporciona = codigo_cuenta_proporciona;
     }

@@ -34,15 +34,15 @@ public class Transferencia extends Transaccion{
     /**
      * Constructor que inicializa una transferencia con el código, cuenta destinataria, fecha, monto y cuenta de envío especificados.
      * 
-     * @param codigo_transaccion El código único de la transferencia.
-     * @param codigo_cuenta_recibe La cuenta a la que se realiza la transferencia.
+     * @param codigo El código único de la transferencia.
      * @param fecha La fecha de la transferencia.
      * @param monto El monto de la transferencia.
      * @param codigo_cuenta_proporciona La cuenta desde la cual se realiza la transferencia.
+     * @param codigo_cuenta_recibe La cuenta a la que se realiza la transferencia.
      */
-    public Transferencia(long codigo_transaccion, Date fecha, float monto, long codigo_cuenta_proporciona, long codigo_cuenta_recibe) {
-        super(fecha, monto, codigo_cuenta_proporciona);
-        this.codigo_transaccion = codigo_transaccion;
+    public Transferencia(long codigo, Date fecha, float monto, long codigo_cuenta_proporciona, long codigo_cuenta_recibe) {
+        super(codigo, fecha, monto, codigo_cuenta_proporciona);
+        this.codigo_transaccion = codigo;
         this.codigo_cuenta_recibe = codigo_cuenta_recibe;
     }
     

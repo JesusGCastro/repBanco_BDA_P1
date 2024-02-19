@@ -1,17 +1,36 @@
 package com.itson.bdavanzadas.banco;
 
+import com.itson.bdavanzadas.bancodominio.Cliente;
 import com.itson.bdavanzadas.bancodominio.Cuenta;
+import com.itson.bdavanzadas.bancodominio.Transaccion;
+import com.itson.bdavanzadas.bancodominio.Transferencia;
+import com.itson.bdavanzadas.bancopersistencia.conexion.Conexion;
+import com.itson.bdavanzadas.bancopersistencia.conexion.IConexion;
 import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
+import com.itson.bdavanzadas.bancopersistencia.daos.ITransferenciasDAO;
+import com.itson.bdavanzadas.bancopersistencia.daos.TransferenciasDAO;
+import com.itson.bdavanzadas.bancopersistencia.dtos.TransaccionNuevaDTO;
+import com.itson.bdavanzadas.bancopersistencia.dtos.TransferenciaNuevaDTO;
+import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
+import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
+import static java.lang.Float.parseFloat;
+import static java.lang.Long.parseLong;
+import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class TransferenciaForm extends javax.swing.JFrame {
 
     private final IClientesDAO clientesDAO;
     private final Cuenta cuenta;
+    private final Cliente cliente;
     
-    public TransferenciaForm(IClientesDAO clientesDAO, Cuenta cuenta) {
+    public TransferenciaForm(IClientesDAO clientesDAO, Cliente cliente, Cuenta cuenta) {
         initComponents();
         this.clientesDAO = clientesDAO;
         this.cuenta = cuenta;
+        this.cliente = cliente;
     }
 
     /**
@@ -76,6 +95,11 @@ public class TransferenciaForm extends javax.swing.JFrame {
         txtCuentaDestino.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtCuentaDestino.setForeground(new java.awt.Color(100, 100, 100));
         txtCuentaDestino.setBorder(null);
+        txtCuentaDestino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCuentaDestinoActionPerformed(evt);
+            }
+        });
         bg.add(txtCuentaDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 320, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -88,6 +112,11 @@ public class TransferenciaForm extends javax.swing.JFrame {
         txtMonto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtMonto.setForeground(new java.awt.Color(100, 100, 100));
         txtMonto.setBorder(null);
+        txtMonto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMontoActionPerformed(evt);
+            }
+        });
         bg.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 320, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -110,17 +139,54 @@ public class TransferenciaForm extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
+        MenuClienteForm menuCliente = new MenuClienteForm(clientesDAO, cliente);
+        menuCliente.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
+        transferir();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    private void txtCuentaDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCuentaDestinoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCuentaDestinoActionPerformed
 
+    private void txtMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMontoActionPerformed
+
+    public void transferir(){
+        
+        String codigo_cuenta_recibe = txtCuentaDestino.getText();
+        String monto = txtMonto.getText();
+        
+        TransferenciaNuevaDTO transferencia = new TransferenciaNuevaDTO();
+        transferencia.setMonto(monto);
+        transferencia.setCodigo_cuenta_proporciona(cuenta.getCodigo());
+        transferencia.setCodigo_cuenta_recibe(parseLong(codigo_cuenta_recibe));
+        
+        String cadenaConexion = "jdbc:mysql://localhost/banco";
+        String usuario = "root";
+        String password = "123456789";
+        IConexion conexion = new Conexion(cadenaConexion, usuario, password);
+        
+        try {
+            transferencia.esValido();
+            ITransferenciasDAO transferenciasDAO = new TransferenciasDAO(conexion);
+            transferenciasDAO.registrarTransferencia(transferencia);
+        } catch (ValidacionDTOException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
+        } catch (PersistenciaException e) {
+            JOptionPane.showMessageDialog(this, "No fue posible registrar la transaccion", "Error de almacenamiento", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnAceptar;

@@ -38,12 +38,11 @@ public class RetiroForm extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        btnIniciarSesion = new javax.swing.JButton();
-        btnIniciarSesion1 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnAceptar = new javax.swing.JButton();
         campoTextoContrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(400, 400));
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setMinimumSize(new java.awt.Dimension(400, 400));
@@ -74,31 +73,31 @@ public class RetiroForm extends javax.swing.JFrame {
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
         bg.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 310, -1));
 
-        btnIniciarSesion.setBackground(new java.awt.Color(255, 223, 148));
-        btnIniciarSesion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnIniciarSesion.setForeground(new java.awt.Color(100, 100, 100));
-        btnIniciarSesion.setText("Cancelar");
-        btnIniciarSesion.setBorder(null);
-        btnIniciarSesion.setBorderPainted(false);
-        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setBackground(new java.awt.Color(255, 223, 148));
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(100, 100, 100));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setBorder(null);
+        btnCancelar.setBorderPainted(false);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarSesionActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
-        bg.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, 90, -1));
+        bg.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, 90, -1));
 
-        btnIniciarSesion1.setBackground(new java.awt.Color(255, 223, 148));
-        btnIniciarSesion1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnIniciarSesion1.setForeground(new java.awt.Color(100, 100, 100));
-        btnIniciarSesion1.setText("Aceptar");
-        btnIniciarSesion1.setBorder(null);
-        btnIniciarSesion1.setBorderPainted(false);
-        btnIniciarSesion1.addActionListener(new java.awt.event.ActionListener() {
+        btnAceptar.setBackground(new java.awt.Color(255, 223, 148));
+        btnAceptar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAceptar.setForeground(new java.awt.Color(100, 100, 100));
+        btnAceptar.setText("Aceptar");
+        btnAceptar.setBorder(null);
+        btnAceptar.setBorderPainted(false);
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarSesion1ActionPerformed(evt);
+                btnAceptarActionPerformed(evt);
             }
         });
-        bg.add(btnIniciarSesion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 90, -1));
+        bg.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 90, -1));
 
         campoTextoContrasena.setForeground(new java.awt.Color(100, 100, 100));
         campoTextoContrasena.setBorder(null);
@@ -118,20 +117,20 @@ public class RetiroForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
 
-    }//GEN-LAST:event_btnIniciarSesionActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnIniciarSesion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesion1ActionPerformed
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnIniciarSesion1ActionPerformed
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
-    private javax.swing.JButton btnIniciarSesion;
-    private javax.swing.JButton btnIniciarSesion1;
+    private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JPasswordField campoTextoContrasena;
     private javax.swing.JTextField campoTextoIDUsuario;
     private javax.swing.JLabel jLabel1;

@@ -57,7 +57,7 @@ public class HistorialForm extends javax.swing.JFrame {
         lblBienvenida.setBackground(new java.awt.Color(255, 223, 148));
         lblBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblBienvenida.setText("Historial");
-        bg.add(lblBienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, -1, -1));
+        bg.add(lblBienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
 
         btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(100, 100, 100));

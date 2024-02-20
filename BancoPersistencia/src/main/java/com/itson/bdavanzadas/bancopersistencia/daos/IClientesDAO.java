@@ -28,5 +28,5 @@ public interface IClientesDAO {
      */
     Cliente iniciarSesion(ClienteNuevoDTO cliente) throws PersistenciaException;
     
-    void BuscarCliente(Cliente cliente) throws PersistenciaException;
+    void ActualizarCliente(Cliente cliente) throws PersistenciaException;
 }

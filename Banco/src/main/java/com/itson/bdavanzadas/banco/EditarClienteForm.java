@@ -2,6 +2,10 @@ package com.itson.bdavanzadas.banco;
 
 import com.itson.bdavanzadas.bancodominio.Cliente;
 import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
+import com.itson.bdavanzadas.bancopersistencia.dtos.ClienteNuevoDTO;
+import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
+import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
+import javax.swing.JOptionPane;
 
 
 public class EditarClienteForm extends javax.swing.JFrame {
@@ -343,15 +347,53 @@ public class EditarClienteForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarClienteActionPerformed
-        
+        ActualizarCliente();
     }//GEN-LAST:event_botonRegistrarClienteActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void consultarCliente(){
+    private void ActualizarCliente(){
+        String nombre_pila = txtNombreUsuario.getText();
+        String apellido_paterno = txtApellidoPaterno.getText();
+        String apellido_materno = txtApellidoMaterno.getText();
         
+        java.util.Date fechaSeleccionada;
+        java.sql.Date fechaNacimiento = null;
+        
+        String calle = txtCalle.getText();
+        String numero = txtNumeroCasa.getText();
+        String colonia = txtColonia.getText();
+        String codigo_postal = txtCodigoPostal.getText();
+        String correo = txtCorreo.getText();
+        String contrasenia = new String(pswdConstrasenia.getPassword());
+        
+        ClienteNuevoDTO clienteNuevo = new ClienteNuevoDTO();
+        clienteNuevo.setNombre_pila(nombre_pila);
+        clienteNuevo.setApellido_paterno(apellido_paterno);
+        clienteNuevo.setApellido_materno(apellido_materno);
+        clienteNuevo.setCalle(calle);
+        clienteNuevo.setNumero(numero);
+        clienteNuevo.setColonia(colonia);
+        clienteNuevo.setCodigo_postal(codigo_postal);
+        clienteNuevo.setCorreo(correo);
+        clienteNuevo.setContrasenia(contrasenia);
+        try {
+            if (jDateFechaNacimiento.getDate() == null) throw new ValidacionDTOException("La fecha no debe estar vacía");
+            else{
+                fechaSeleccionada = jDateFechaNacimiento.getDate();
+                fechaNacimiento = new java.sql.Date(fechaSeleccionada.getTime());
+                clienteNuevo.setFecha_nacimiento(fechaNacimiento);
+            }
+            this.clientesDAO.registrarCliente(clienteNuevo);
+            JOptionPane.showMessageDialog(this, "Se actualizo el cliente", "Notificaión", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        } catch (ValidacionDTOException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
+        } catch (PersistenciaException e) {
+            JOptionPane.showMessageDialog(this, "No fue posible actualizar el cliente", "Error de almacenamiento", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -129,7 +129,7 @@ public class ClientesDAO implements IClientesDAO{
     }
 
     @Override
-    public void BuscarCliente(Cliente cliente) throws PersistenciaException {
+    public void ActualizarCliente(Cliente cliente) throws PersistenciaException {
         String sentenciaSQL = """
             UPDATE clientes
             SET 

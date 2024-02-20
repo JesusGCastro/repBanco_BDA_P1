@@ -1,22 +1,39 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.itson.bdavanzadas.banco;
 
-/**
- *
- * @author renec
- */
+import com.itson.bdavanzadas.bancodominio.Cliente;
+import com.itson.bdavanzadas.bancodominio.Cuenta;
+import com.itson.bdavanzadas.bancodominio.Transaccion;
+import com.itson.bdavanzadas.bancopersistencia.conexion.Conexion;
+import com.itson.bdavanzadas.bancopersistencia.conexion.IConexion;
+import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
+import com.itson.bdavanzadas.bancopersistencia.daos.ITransaccionesDAO;
+import com.itson.bdavanzadas.bancopersistencia.daos.TransaccionesDAO;
+import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
 public class HistorialForm extends javax.swing.JFrame {
-
-    /**
-     * Creates new form HistorialForm
-     */
-    public HistorialForm() {
+    
+    private final IClientesDAO clientesDAO;
+    private final Cliente cliente;
+    private final Cuenta cuenta;
+    private final ITransaccionesDAO transaccionesDAO;
+    
+    public HistorialForm(IClientesDAO clientesDAO, Cliente cliente, Cuenta cuenta) {
         initComponents();
+        this.clientesDAO = clientesDAO;
+        this.cliente = cliente;
+        this.cuenta = cuenta;
+        String cadenaConexion = "jdbc:mysql://localhost/banco";
+        String usuario = "root";
+        String password = "123456789";
+        IConexion conexion = new Conexion(cadenaConexion, usuario, password);
+        this.transaccionesDAO = new TransaccionesDAO(conexion);
+        mostrarTransacciones();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,24 +43,105 @@ public class HistorialForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bg = new javax.swing.JPanel();
+        lblBienvenida = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblCuentas = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        bg.setBackground(new java.awt.Color(255, 255, 255));
+        bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblBienvenida.setBackground(new java.awt.Color(255, 223, 148));
+        lblBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblBienvenida.setText("Historial");
+        bg.add(lblBienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, -1, -1));
+
+        btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(100, 100, 100));
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salida.png"))); // NOI18N
+        btnSalir.setBorder(null);
+        btnSalir.setBorderPainted(false);
+        btnSalir.setContentAreaFilled(false);
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        bg.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, 40, 40));
+
+        tblCuentas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tblCuentas);
+
+        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 600, 280));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        dispose();
+        MenuClienteForm menuCliente = new MenuClienteForm(clientesDAO, cliente);
+        menuCliente.setVisible(true);
+    }//GEN-LAST:event_btnSalirActionPerformed
     
+    public void mostrarTransacciones(){
+        try {
+            List<Transaccion> listaTransacciones = transaccionesDAO.consultarTransacciones(cuenta);
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Codigo de transaccion");
+            modelo.addColumn("Fecha");
+            modelo.addColumn("Monto");
+            modelo.addColumn("Numero de cuenta");
+            for (Transaccion transaccion : listaTransacciones) {
+                Object[] fila = {transaccion.getCodigo(),transaccion.getFecha(), transaccion.getMonto(), transaccion.getCodigo_cuenta_proporciona()};
+                modelo.addRow(fila);
+            }
+            tblCuentas.setModel(modelo);
+            TableColumnModel columnModel = tblCuentas.getColumnModel();
+            
+        } catch (PersistenciaException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al mostrar la tabla", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
+    private Transaccion obtenerTransaccionDesdeFila(int fila) throws PersistenciaException {
+        List<Transaccion> listaTransacciones = transaccionesDAO.consultarTransacciones(cuenta);
+        if (fila >= 0 && fila < listaTransacciones.size()) {
+            return listaTransacciones.get(fila);
+        } else {
+            return null;
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel bg;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblBienvenida;
+    private javax.swing.JTable tblCuentas;
     // End of variables declaration//GEN-END:variables
 }

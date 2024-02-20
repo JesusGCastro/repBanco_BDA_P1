@@ -167,6 +167,7 @@ public class MenuClienteForm extends javax.swing.JFrame {
             modelo.addColumn("Desactivar");
             modelo.addColumn("Transferir");
             modelo.addColumn("Retiro sin cuenta");
+            modelo.addColumn("Historial");
             for (Cuenta cuenta : listaCuentas) {
                 Object[] fila = {cuenta.getCodigo(),cuenta.getSaldo(), "", "Transferir", "Retiro"};
                 modelo.addRow(fila);
@@ -224,6 +225,22 @@ public class MenuClienteForm extends javax.swing.JFrame {
                 }
             });
             
+            ButtonColumn historialButtonColumn = new ButtonColumn("Historial", new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int row = tblCuentas.convertRowIndexToModel(tblCuentas.getEditingRow());
+                    Cuenta cuenta;
+                    try {
+                        cuenta = obtenerCuentaDesdeFila(row);
+                        HistorialForm historial = new HistorialForm(clientesDAO, cliente, cuenta);
+                        historial.setVisible(true);
+                        dispose();
+                    } catch (PersistenciaException ex) {
+                        Logger.getLogger(MenuClienteForm.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+            
             columnModel.getColumn(2).setCellRenderer(estadoButtonColumn);
             columnModel.getColumn(2).setCellEditor(estadoButtonColumn);
 
@@ -232,6 +249,9 @@ public class MenuClienteForm extends javax.swing.JFrame {
             
             columnModel.getColumn(4).setCellRenderer(retiroButtonColumn);
             columnModel.getColumn(4).setCellEditor(retiroButtonColumn);
+            
+            columnModel.getColumn(5).setCellRenderer(historialButtonColumn);
+            columnModel.getColumn(5).setCellEditor(historialButtonColumn);
 
         } catch (PersistenciaException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al mostrar la tabla", JOptionPane.ERROR_MESSAGE);

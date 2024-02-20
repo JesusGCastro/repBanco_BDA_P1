@@ -11,10 +11,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  * Clase de CuentasDAO
@@ -96,6 +98,68 @@ public class CuentasDAO implements ICuentasDAO{
             throw new PersistenciaException("No se pudo realizar la tranferencia", e);
         }
     }
+    
+    @Override
+    public void realizarRetiro(int folio, int contrasenia) throws PersistenciaException {
+        String sentenciaSQL = """
+            call banco.RealizarRetiro(?, ?, ?);         
+        """;
+        try (
+            Connection conexion = this.conexionBD.obtenerConexion();
+            CallableStatement comando = conexion.prepareCall(sentenciaSQL);  
+        ){
+            comando.setInt(1, folio);
+            comando.setInt(2, contrasenia);
+            comando.registerOutParameter(3, Types.VARCHAR);
+            
+            comando.execute(); //Solo se ocupa verificar si se realizo o no
+            
+            String mensaje = comando.getString(3);
+            JOptionPane.showMessageDialog(null, mensaje, "Exito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException e) {
+            if ("45000".equals(e.getSQLState())) {
+                // Capturar el error de fondos insuficientes
+                String mensajeError = e.getMessage();
+                JOptionPane.showMessageDialog(null, mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                logger.log(Level.SEVERE, "No se pudo realizar la tranferencia", e);
+                throw new PersistenciaException("No se pudo realizar la tranferencia", e);
+            }
+        }
+    }
+    
+    @Override
+    public void registarRetiro(Cuenta cuenta, float monto) throws PersistenciaException {
+        String sentenciaSQL = """
+            call banco.RegistrarRetiro(?, ?, ?, ?);
+        """;
+        try (
+            Connection conexion = this.conexionBD.obtenerConexion();
+            CallableStatement comando = conexion.prepareCall(sentenciaSQL);      
+        ){
+            comando.setLong(1, cuenta.getCodigo());
+            comando.registerOutParameter(2, Types.INTEGER); //Indica el parametro que regresara
+            comando.registerOutParameter(3, Types.INTEGER);
+            comando.setFloat(4, monto);
+            
+            comando.execute();
+            
+            int folio = comando.getInt(2);
+            int contrasenia = comando.getInt(3);
+            
+            JOptionPane.showMessageDialog(null, "El folio es : " + folio + "\nLa contraseña es: " + contrasenia, "Se registro el retiro", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException e) {
+            if ("45000".equals(e.getSQLState())) {
+                // Capturar el error de fondos insuficientes
+                String mensajeError = e.getMessage();
+                JOptionPane.showMessageDialog(null, mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                logger.log(Level.SEVERE, "No se pudo realizar la tranferencia", e);
+                throw new PersistenciaException("No se pudo realizar la tranferencia", e);
+            }        
+        }
+    }
+    
 
     /**
      * Consulta las cuentas asociadas a un cliente en la base de datos.
@@ -133,5 +197,4 @@ public class CuentasDAO implements ICuentasDAO{
             throw new PersistenciaException("No se pudieron consultar cuentas", e);
         }
     }
-    
 }

@@ -23,6 +23,10 @@ public interface ICuentasDAO {
     
     void realizarTransferencia(Cuenta cuenta, Long codigoCuentaDestino, float monto) throws PersistenciaException;
     
+    void registarRetiro(Cuenta cuenta, float monto) throws PersistenciaException;
+    
+    void realizarRetiro(int folio, int contrasenia) throws PersistenciaException;
+    
     /**
      * Consulta las cuentas asociadas a un cliente en la base de datos.
      * 

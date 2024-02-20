@@ -1,14 +1,26 @@
 package com.itson.bdavanzadas.banco;
 
+import com.itson.bdavanzadas.bancopersistencia.conexion.Conexion;
+import com.itson.bdavanzadas.bancopersistencia.conexion.IConexion;
+import com.itson.bdavanzadas.bancopersistencia.daos.CuentasDAO;
 import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
+import com.itson.bdavanzadas.bancopersistencia.daos.ICuentasDAO;
+import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
+import javax.swing.JOptionPane;
 
 public class RetiroSinCuentaForm extends javax.swing.JFrame {
     
     private final IClientesDAO clientesDAO;
+    private final ICuentasDAO cuentasDAO;
     
     public RetiroSinCuentaForm(IClientesDAO clientesDAO) {
         initComponents();
         this.clientesDAO = clientesDAO;
+        String cadenaConexion = "jdbc:mysql://localhost/banco";
+        String usuario = "root";
+        String password = "123456789";
+        IConexion conexion = new Conexion(cadenaConexion, usuario, password);
+        this.cuentasDAO = new CuentasDAO(conexion);
     }
 
     /**
@@ -23,14 +35,14 @@ public class RetiroSinCuentaForm extends javax.swing.JFrame {
 
         bg = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        campoTextoIDUsuario = new javax.swing.JTextField();
+        txtfolio = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         btnCancelar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
-        campoTextoContrasena = new javax.swing.JPasswordField();
+        txtContrasenia = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,10 +56,10 @@ public class RetiroSinCuentaForm extends javax.swing.JFrame {
         jLabel1.setText("Retiro de dinero");
         bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
 
-        campoTextoIDUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        campoTextoIDUsuario.setForeground(new java.awt.Color(100, 100, 100));
-        campoTextoIDUsuario.setBorder(null);
-        bg.add(campoTextoIDUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 320, 30));
+        txtfolio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtfolio.setForeground(new java.awt.Color(100, 100, 100));
+        txtfolio.setBorder(null);
+        bg.add(txtfolio, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 320, 30));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         bg.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 310, -1));
@@ -89,9 +101,9 @@ public class RetiroSinCuentaForm extends javax.swing.JFrame {
         });
         bg.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 90, -1));
 
-        campoTextoContrasena.setForeground(new java.awt.Color(100, 100, 100));
-        campoTextoContrasena.setBorder(null);
-        bg.add(campoTextoContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 310, 30));
+        txtContrasenia.setForeground(new java.awt.Color(100, 100, 100));
+        txtContrasenia.setBorder(null);
+        bg.add(txtContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 310, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,21 +127,31 @@ public class RetiroSinCuentaForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
+        retirarSinCuenta();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-    
+    public void retirarSinCuenta(){
+        int folio = Integer.valueOf(txtfolio.getText());
+        String password = new String(txtContrasenia.getPassword());//Lo hacemos string para poder usar el valueOf
+        int contrasenia = Integer.valueOf(password);
+        
+        try {
+            this.cuentasDAO.realizarRetiro(folio, contrasenia);
+        } catch (PersistenciaException e) {
+            JOptionPane.showMessageDialog(this, "No fue posible realizar la operacion", "Error de almacenamiento", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JPasswordField campoTextoContrasena;
-    private javax.swing.JTextField campoTextoIDUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JPasswordField txtContrasenia;
+    private javax.swing.JTextField txtfolio;
     // End of variables declaration//GEN-END:variables
 }

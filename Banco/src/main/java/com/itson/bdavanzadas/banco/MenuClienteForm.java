@@ -64,7 +64,7 @@ public class MenuClienteForm extends javax.swing.JFrame {
         lblBienvenida.setBackground(new java.awt.Color(255, 223, 148));
         lblBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblBienvenida.setText("Bienvenido a tu cuenta!");
-        bg.add(lblBienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
+        bg.add(lblBienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, -1, -1));
 
         btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(100, 100, 100));
@@ -214,9 +214,9 @@ public class MenuClienteForm extends javax.swing.JFrame {
                     Cuenta cuenta;
                     try {
                         cuenta = obtenerCuentaDesdeFila(row);
-                        dispose();
                         RetiroForm retiro = new RetiroForm(clientesDAO, cuenta, cliente, cuentasDAO);
                         retiro.setVisible(true);
+                        dispose();
                     } catch (PersistenciaException ex) {
                         Logger.getLogger(MenuClienteForm.class.getName()).log(Level.SEVERE, null, ex);
                     }

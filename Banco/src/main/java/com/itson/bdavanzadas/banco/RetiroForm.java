@@ -9,6 +9,8 @@ import com.itson.bdavanzadas.bancopersistencia.dtos.RetiroNuevoDTO;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
 import static java.lang.Float.parseFloat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 //import com.itson.bdavanzadas.bancopersistencia.daos.IRetirosDAO;
 
@@ -52,16 +54,18 @@ public class RetiroForm extends javax.swing.JFrame {
         btnAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(300, 300));
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setMinimumSize(new java.awt.Dimension(400, 400));
+        bg.setPreferredSize(new java.awt.Dimension(300, 300));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(255, 223, 148));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 223, 148));
         jLabel1.setText("Retiro de dinero");
-        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
+        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, -1, -1));
 
         txtMonto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtMonto.setForeground(new java.awt.Color(100, 100, 100));
@@ -71,27 +75,28 @@ public class RetiroForm extends javax.swing.JFrame {
                 txtMontoActionPerformed(evt);
             }
         });
-        bg.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 320, 30));
+        bg.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 320, 30));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-        bg.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 310, -1));
+        bg.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 320, 20));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel2.setText("Monto a retirar");
-        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 137, -1, -1));
+        jLabel2.setText("Monto a retirar:");
+        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, -1, -1));
 
-        btnCancelar.setBackground(new java.awt.Color(255, 223, 148));
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(100, 100, 100));
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salida.png"))); // NOI18N
         btnCancelar.setBorder(null);
         btnCancelar.setBorderPainted(false);
+        btnCancelar.setContentAreaFilled(false);
+        btnCancelar.setDefaultCapable(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
-        bg.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, 90, -1));
+        bg.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 50, -1));
 
         btnAceptar.setBackground(new java.awt.Color(255, 223, 148));
         btnAceptar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -104,17 +109,17 @@ public class RetiroForm extends javax.swing.JFrame {
                 btnAceptarActionPerformed(evt);
             }
         });
-        bg.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 90, -1));
+        bg.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 90, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
 
         pack();
@@ -129,6 +134,9 @@ public class RetiroForm extends javax.swing.JFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         retirar();
+        dispose();
+        MenuClienteForm menuCliente = new MenuClienteForm(clientesDAO, cliente);
+        menuCliente.setVisible(true);
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void txtMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontoActionPerformed
@@ -136,30 +144,14 @@ public class RetiroForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMontoActionPerformed
 
     public void retirar(){
-        
-        String monto = txtMonto.getText();
-        
-        RetiroNuevoDTO retiro = new RetiroNuevoDTO();
-        retiro.setMonto(parseFloat(monto));
+        float monto = Float.valueOf(txtMonto.getText());
         
         try {
-            retiro.esValido();
-            
-            
-            
-            JOptionPane.showMessageDialog(this, "Credenciales validas", "Notificaión", JOptionPane.INFORMATION_MESSAGE);
-            
-            this.setVisible(false);
-            DlgFolioGenerado folioGenerado = new DlgFolioGenerado(this, rootPaneCheckingEnabled, cuentasDAO);
-            folioGenerado.setVisible(true);
-            dispose();
-            MenuClienteForm menuCliente = new MenuClienteForm(clientesDAO, cliente);
-            menuCliente.setVisible(true);
-        } catch (ValidacionDTOException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
-        } /*catch (PersistenciaException e) {
-            JOptionPane.showMessageDialog(this, "No fue posible iniciar sesion", "Error", JOptionPane.ERROR_MESSAGE);
-        }*/
+            this.cuentasDAO.registarRetiro(cuenta, monto);
+        } catch (PersistenciaException ex) {
+            JOptionPane.showMessageDialog(this, "No fue posible realizar la operacion", "Error de almacenamiento", JOptionPane.ERROR_MESSAGE);
+        }
+        
         
     }
 

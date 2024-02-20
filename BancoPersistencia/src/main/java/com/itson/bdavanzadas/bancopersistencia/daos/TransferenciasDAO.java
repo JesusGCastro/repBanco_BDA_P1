@@ -5,8 +5,6 @@ import com.itson.bdavanzadas.bancodominio.Transferencia;
 import com.itson.bdavanzadas.bancopersistencia.conexion.IConexion;
 import com.itson.bdavanzadas.bancopersistencia.dtos.TransferenciaNuevaDTO;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
-import static java.lang.Float.parseFloat;
-import static java.lang.Long.parseLong;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,16 +12,30 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-//
+
+/**
+ * Clase TransferenciasDAO
+ * @author Equipo
+ */
 public class TransferenciasDAO implements ITransferenciasDAO{
     
     final IConexion conexionBD;
     static final Logger logger = Logger.getLogger(CuentasDAO.class.getName());
     
+    /**
+     * Constructor
+     * @param conexionBD Conexion a la base de datos
+     */
     public TransferenciasDAO(IConexion conexionBD) {
         this.conexionBD = conexionBD;
     }
     
+    /**
+     * Registra una nueva transferencia
+     * @param transferenciaNueva El DTO que contiene la información de la nueva transferencia a registrar.
+     * @return El objeto Transferencia registrado.
+     * @throws PersistenciaException Si ocurre un error durante el proceso de registro.
+     */
     @Override
     public Transferencia registrarTransferencia(TransferenciaNuevaDTO transferenciaNueva) throws PersistenciaException {
         System.out.println(transferenciaNueva.getCodigo_cuenta_proporciona());
@@ -75,7 +87,5 @@ public class TransferenciasDAO implements ITransferenciasDAO{
             throw new PersistenciaException("No se pudo registrar la transferencia", e);
         }
     }
-    /*
     
-    */
 }

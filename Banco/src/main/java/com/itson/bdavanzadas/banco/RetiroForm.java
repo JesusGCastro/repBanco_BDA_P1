@@ -4,16 +4,16 @@ import com.itson.bdavanzadas.bancodominio.Cliente;
 import com.itson.bdavanzadas.bancodominio.Cuenta;
 import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
 import com.itson.bdavanzadas.bancopersistencia.daos.ICuentasDAO;
-import com.itson.bdavanzadas.bancopersistencia.daos.RetirosDAO;
-import com.itson.bdavanzadas.bancopersistencia.dtos.RetiroNuevoDTO;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
-import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
-import static java.lang.Float.parseFloat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-//import com.itson.bdavanzadas.bancopersistencia.daos.IRetirosDAO;
 
+
+/**
+ * Clase que representa el formulario para realizar un retiro de dinero de una cuenta.
+ * Permite al cliente ingresar el monto que desea retirar y realizar la operación.
+ * 
+ * @author Equipo
+ */
 public class RetiroForm extends javax.swing.JFrame {
     
     private final IClientesDAO clientesDAO;
@@ -22,6 +22,14 @@ public class RetiroForm extends javax.swing.JFrame {
     private final ICuentasDAO cuentasDAO;
     //private final IRetirosDAO retirosDAO;
     
+    /**
+     * Constructor de la clase RetiroForm.
+     * 
+     * @param clientesDAO Instancia de IClientesDAO para interactuar con la capa de persistencia de clientes.
+     * @param cuenta Objeto Cuenta asociado al retiro.
+     * @param cliente Objeto Cliente al que pertenece la cuenta.
+     * @param cuentasDAO Instancia de ICuentasDAO para interactuar con la capa de persistencia de cuentas.
+     */
     public RetiroForm(IClientesDAO clientesDAO, Cuenta cuenta, Cliente cliente, ICuentasDAO cuentasDAO) {
         initComponents();
         this.clientesDAO = clientesDAO;
@@ -30,10 +38,6 @@ public class RetiroForm extends javax.swing.JFrame {
         this.cuentasDAO = cuentasDAO;
     }
     
-    //public RetiroForm() {
-        //initComponents();
-        //this.retirosDAO = retirosDAO;
-    //}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -144,6 +148,11 @@ public class RetiroForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMontoActionPerformed
 
+    /**
+     * Método para realizar un retiro de dinero de la cuenta asociada.
+     * Obtiene el monto ingresado por el usuario y realiza la operación de retiro.
+     * Muestra un mensaje de error si la operación no puede ser completada.
+     */
     public void retirar(){
         float monto = Float.valueOf(txtMonto.getText());
         

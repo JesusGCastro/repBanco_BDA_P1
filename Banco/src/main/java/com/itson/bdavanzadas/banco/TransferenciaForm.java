@@ -2,28 +2,38 @@ package com.itson.bdavanzadas.banco;
 
 import com.itson.bdavanzadas.bancodominio.Cliente;
 import com.itson.bdavanzadas.bancodominio.Cuenta;
-import com.itson.bdavanzadas.bancopersistencia.conexion.Conexion;
-import com.itson.bdavanzadas.bancopersistencia.conexion.IConexion;
-import com.itson.bdavanzadas.bancopersistencia.daos.CuentasDAO;
 import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
 import com.itson.bdavanzadas.bancopersistencia.daos.ICuentasDAO;
-import com.itson.bdavanzadas.bancopersistencia.daos.ITransferenciasDAO;
-import com.itson.bdavanzadas.bancopersistencia.daos.TransferenciasDAO;
-import com.itson.bdavanzadas.bancopersistencia.dtos.TransferenciaNuevaDTO;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
-import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
-import static java.lang.Float.parseFloat;
-import static java.lang.Long.parseLong;
 import javax.swing.JOptionPane;
 
+/**
+ * Clase que representa el formulario para realizar una transferencia de dinero
+ * entre cuentas. Permite al cliente ingresar los datos de la cuenta destino y
+ * el monto a transferir. Utiliza la capa de persistencia para realizar la
+ * operación de transferencia.
+ *
+ * @author renec
+ */
 public class TransferenciaForm extends javax.swing.JFrame {
 
     private final IClientesDAO clientesDAO;
     private final ICuentasDAO cuentasDAO;
     private final Cuenta cuenta;
     private final Cliente cliente;
-    
-    public TransferenciaForm(IClientesDAO clientesDAO, Cliente cliente,ICuentasDAO cuentasDAO, Cuenta cuenta) {
+
+    /**
+     * Constructor de la clase TransferenciaForm.
+     *
+     * @param clientesDAO Instancia de IClientesDAO para interactuar con la capa
+     * de persistencia de clientes.
+     * @param cliente Objeto Cliente que representa al cliente actual.
+     * @param cuentasDAO Instancia de ICuentasDAO para interactuar con la capa
+     * de persistencia de cuentas.
+     * @param cuenta Objeto Cuenta que representa la cuenta del cliente desde la
+     * cual se realizará la transferencia.
+     */
+    public TransferenciaForm(IClientesDAO clientesDAO, Cliente cliente, ICuentasDAO cuentasDAO, Cuenta cuenta) {
         initComponents();
         this.clientesDAO = clientesDAO;
         this.cliente = cliente;
@@ -161,10 +171,16 @@ public class TransferenciaForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMontoActionPerformed
 
-    public void transferir(){
+    /**
+     * Método para realizar la operación de transferencia de dinero entre
+     * cuentas. Obtiene el número de cuenta destino y el monto a transferir
+     * ingresados por el usuario. Utiliza la capa de persistencia para realizar
+     * la transferencia y muestra un mensaje de éxito o error.
+     */
+    public void transferir() {
         Long codigoCuentaDestino = Long.valueOf(txtCuentaDestino.getText());
         Float monto = Float.valueOf(txtMonto.getText());
-        
+
         try {
             this.cuentasDAO.realizarTransferencia(cuenta, codigoCuentaDestino, monto);
             JOptionPane.showMessageDialog(this, "Se realizo la operacion", "Notificaión", JOptionPane.INFORMATION_MESSAGE);

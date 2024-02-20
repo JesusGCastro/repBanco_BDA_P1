@@ -7,12 +7,22 @@ import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException
 import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
 import javax.swing.JOptionPane;
 
-
+/**
+ * Formulario para editar la información de un cliente existente.
+ *
+ * @author Equipo
+ */
 public class EditarClienteForm extends javax.swing.JFrame {
 
     private final IClientesDAO clientesDAO;
     private final Cliente cliente;
-    
+
+    /**
+     * Constructor de la clase EditarClienteForm.
+     *
+     * @param clientesDAO DAO para manejar las operaciones de clientes.
+     * @param cliente Cliente cuya información se está editando.
+     */
     public EditarClienteForm(IClientesDAO clientesDAO, Cliente cliente) {
         initComponents();
         this.clientesDAO = clientesDAO;
@@ -346,17 +356,26 @@ public class EditarClienteForm extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+     /**
+     * Método llamado cuando se hace clic en el botón "Actualizar". Actualiza la
+     * información del cliente utilizando los datos ingresados.
+     */
     private void botonRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarClienteActionPerformed
         ActualizarCliente();
     }//GEN-LAST:event_botonRegistrarClienteActionPerformed
-
+    /**
+     * Método llamado cuando se hace clic en el botón "Salir". Cierra este
+     * formulario y muestra el menú principal del cliente.
+     */
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
         MenuClienteForm menuCliente = new MenuClienteForm(clientesDAO, cliente);
         menuCliente.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    /**
+     * Carga los datos del cliente actual en los campos de texto del formulario.
+     */
     private void cargarDatosCliente() {
         txtNombreUsuario.setText(cliente.getNombre_pila());
         txtApellidoPaterno.setText(cliente.getApellido_paterno());
@@ -372,7 +391,11 @@ public class EditarClienteForm extends javax.swing.JFrame {
             jDateFechaNacimiento.setDate(cliente.getFecha_nacimiento());
         }
     }
-    
+
+    /**
+     * Actualiza la información del cliente utilizando los datos ingresados en
+     * el formulario.
+     */
     private void ActualizarCliente() {
         String nombre_pila = txtNombreUsuario.getText();
         String apellido_paterno = txtApellidoPaterno.getText();

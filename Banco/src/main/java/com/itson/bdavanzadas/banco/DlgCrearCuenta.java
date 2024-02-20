@@ -7,11 +7,23 @@ import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException
 import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
 import javax.swing.JOptionPane;
 
+/**
+ * Diálogo para crear una nueva cuenta bancaria para un cliente.
+ * @author Equipo
+ */
 public class DlgCrearCuenta extends javax.swing.JDialog {
 
     private final ICuentasDAO cuentasDAO;
     private final Cliente cliente;
     
+    /**
+     * Constructor de la clase DlgCrearCuenta.
+     *
+     * @param parent El frame padre del diálogo.
+     * @param modal Verdadero si el diálogo es modal.
+     * @param cuentasDAO DAO para manejar las operaciones de cuentas.
+     * @param cliente Cliente para el cual se está creando la cuenta.
+     */
     public DlgCrearCuenta(java.awt.Frame parent, boolean modal,ICuentasDAO cuentasDAO,  Cliente cliente) {
         super(parent, modal);
         initComponents();
@@ -86,7 +98,10 @@ public class DlgCrearCuenta extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Método llamado cuando se hace clic en el botón "Aceptar". Registra una
+     * nueva cuenta bancaria utilizando los datos ingresados.
+     */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         registarCuenta();
         dispose();
@@ -96,7 +111,11 @@ public class DlgCrearCuenta extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSaldoActionPerformed
 
-   public void registarCuenta(){
+    /**
+     * Registra una nueva cuenta bancaria utilizando los datos ingresados en el diálogo.
+     * Valida los datos y muestra mensajes de error si es necesario.
+     */
+    public void registarCuenta(){
        Float saldo = Float.valueOf(txtSaldo.getText());
        
        CuentaNuevaDTO cuentaNueva = new CuentaNuevaDTO();

@@ -7,11 +7,24 @@ import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException
 import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
 import javax.swing.JOptionPane;
 
-
+/**
+ * La clase InicioForm representa una ventana de interfaz gráfica de usuario (GUI)
+ * para el inicio de sesión de un cliente en el sistema bancario. Permite al usuario
+ * ingresar su correo electrónico y contraseña para iniciar sesión. La clase utiliza
+ * componentes de Swing para construir la interfaz de usuario y se comunica con la capa
+ * de persistencia a través de la interfaz IClientesDAO para autenticar al cliente.
+ * 
+ * @author Equipo
+ */
 public class InicioForm extends javax.swing.JFrame {
 
     private final IClientesDAO clientesDAO;
     
+   /**
+     * Constructor de la clase InicioForm.
+     * 
+     * @param clientesDAO Una instancia de IClientesDAO para autenticar al cliente.
+     */
     public InicioForm(IClientesDAO clientesDAO) {
         initComponents();
         this.clientesDAO = clientesDAO;
@@ -211,21 +224,34 @@ public class InicioForm extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Método invocado cuando se presiona el botón "Iniciar Sesión".
+     * Llama al método iniciar() para procesar el inicio de sesión.
+     */
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
         iniciar();
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
-
+    
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoActionPerformed
-
+    /**
+     * Método invocado cuando se presiona el botón "Salir".
+     * Cierra la ventana actual e instancia un nuevo menú principal.
+     */
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
         MenuForm principal = new MenuForm(clientesDAO);
         principal.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed
     
+    /**
+     * Método para procesar el inicio de sesión del cliente.
+     * Recupera el correo electrónico y la contraseña ingresados por el usuario,
+     * valida las credenciales utilizando un objeto ClienteNuevoDTO y el método
+     * iniciarSesion() del DAO de clientes, y muestra un mensaje de éxito o error
+     * según el resultado.
+     */
     public void iniciar(){
         Cliente clienteInicio;
         
@@ -251,6 +277,9 @@ public class InicioForm extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Método para limpiar los datos ingresados por el usuario en los campos de correo y contraseña.
+     */
     public void limpiarDatos(){
         txtCorreo.setText("");
         pswdConstrasenia.setText("");

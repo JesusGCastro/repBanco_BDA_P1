@@ -2,10 +2,23 @@ package com.itson.bdavanzadas.banco;
 
 import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
 
+/**
+ * La clase MenuForm representa la interfaz gráfica de usuario (GUI) del menú
+ * principal para usuarios del banco. Permite a los usuarios registrar una nueva
+ * cuenta, iniciar sesión en una cuenta existente y realizar retiros sin tener
+ * una cuenta.
+ *
+ * @author Equipo
+ */
 public class MenuForm extends javax.swing.JFrame {
 
     private final IClientesDAO clientesDAO;
     
+    /**
+     * Constructor de la clase MenuForm.
+     * 
+     * @param clientesDAO Una instancia de IClientesDAO para acceder a los datos de los clientes.
+     */
     public MenuForm(IClientesDAO clientesDAO) {
         initComponents();
         this.clientesDAO = clientesDAO;
@@ -107,25 +120,37 @@ public class MenuForm extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Método invocado cuando se presiona el botón "Registrar usuario".
+     * Cierra la ventana actual e instancia el formulario de registro de usuario.
+     */
     private void btnRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarUsuarioActionPerformed
         dispose();
         RegistroForm registro = new RegistroForm(clientesDAO);
         registro.setVisible(true);
     }//GEN-LAST:event_btnRegistrarUsuarioActionPerformed
-
+    /**
+     * Método invocado cuando se presiona el botón "Iniciar Sesión".
+     * Cierra la ventana actual e instancia el formulario de inicio de sesión.
+     */
     private void btnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioSesionActionPerformed
         dispose();
         InicioForm inicioSesion = new InicioForm(clientesDAO);
         inicioSesion.setVisible(true);
     }//GEN-LAST:event_btnInicioSesionActionPerformed
-
+     /**
+     * Método invocado cuando se presiona el botón "Retiro sin cuenta".
+     * Cierra la ventana actual e instancia el formulario de retiro sin cuenta.
+     */
     private void btnRetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetiroActionPerformed
         dispose();
         RetiroSinCuentaForm retiro = new RetiroSinCuentaForm(clientesDAO);
         retiro.setVisible(true);
     }//GEN-LAST:event_btnRetiroActionPerformed
-
+    /**
+     * Método invocado cuando se presiona el botón "Cancelar".
+     * Cierra la ventana actual.
+     */
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_botonCancelarActionPerformed

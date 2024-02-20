@@ -14,13 +14,34 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+/**
+ * La clase HistorialForm representa una ventana de interfaz gráfica de usuario
+ * (GUI) que muestra el historial de transacciones de una cuenta bancaria.
+ * Permite al usuario ver diferentes tipos de transacciones, como
+ * transferencias, retiros y todas las transacciones. La clase utiliza
+ * componentes de Swing para construir la interfaz de usuario y se comunica con
+ * las clases DAO (Data Access Object) para acceder a los datos de transacciones
+ * en la base de datos.
+ *
+ * @author Equipo
+ */
 public class HistorialForm extends javax.swing.JFrame {
-    
+
     private final IClientesDAO clientesDAO;
     private final Cliente cliente;
     private final Cuenta cuenta;
     private final ITransaccionesDAO transaccionesDAO;
-    
+
+    /**
+     * Constructor de la clase HistorialForm.
+     *
+     * @param clientesDAO Una instancia de IClientesDAO para acceder a los datos
+     * de clientes.
+     * @param cliente El cliente para el cual se mostrará el historial de
+     * transacciones.
+     * @param cuenta La cuenta bancaria para la cual se mostrará el historial de
+     * transacciones.
+     */
     public HistorialForm(IClientesDAO clientesDAO, Cliente cliente, Cuenta cuenta) {
         initComponents();
         this.clientesDAO = clientesDAO;
@@ -33,7 +54,7 @@ public class HistorialForm extends javax.swing.JFrame {
         this.transaccionesDAO = new TransaccionesDAO(conexion);
         mostrarTransacciones();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -146,8 +167,13 @@ public class HistorialForm extends javax.swing.JFrame {
     private void btnTransaccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransaccionesActionPerformed
         mostrarTransacciones();
     }//GEN-LAST:event_btnTransaccionesActionPerformed
-    
-    public void mostrarTransacciones(){
+
+    /**
+     * Método para mostrar todas las transacciones en la tabla de historial. Se
+     * comunica con el DAO de transacciones para obtener los datos de las
+     * transacciones de la cuenta y los muestra en la tabla.
+     */
+    public void mostrarTransacciones() {
         try {
             List<Transaccion> listaTransacciones = transaccionesDAO.consultarTransacciones(cuenta);
             DefaultTableModel modelo = new DefaultTableModel();
@@ -156,18 +182,23 @@ public class HistorialForm extends javax.swing.JFrame {
             modelo.addColumn("Monto");
             modelo.addColumn("Numero de cuenta");
             for (Transaccion transaccion : listaTransacciones) {
-                Object[] fila = {transaccion.getCodigo(),transaccion.getFecha(), transaccion.getMonto(), transaccion.getCodigo_cuenta_proporciona()};
+                Object[] fila = {transaccion.getCodigo(), transaccion.getFecha(), transaccion.getMonto(), transaccion.getCodigo_cuenta_proporciona()};
                 modelo.addRow(fila);
             }
             tblCuentas.setModel(modelo);
             TableColumnModel columnModel = tblCuentas.getColumnModel();
-            
+
         } catch (PersistenciaException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al mostrar la tabla", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    public void mostrarTransferencias(){
+
+    /**
+     * Método para mostrar todas las transferencias en la tabla de historial. Se
+     * comunica con el DAO de transacciones para obtener los datos de las
+     * transferencias de la cuenta y los muestra en la tabla.
+     */
+    public void mostrarTransferencias() {
         try {
             List<Transaccion> listaTransacciones = transaccionesDAO.consultarTransferencias(cuenta);
             DefaultTableModel modelo = new DefaultTableModel();
@@ -176,18 +207,23 @@ public class HistorialForm extends javax.swing.JFrame {
             modelo.addColumn("Monto");
             modelo.addColumn("Numero de cuenta");
             for (Transaccion transaccion : listaTransacciones) {
-                Object[] fila = {transaccion.getCodigo(),transaccion.getFecha(), transaccion.getMonto(), transaccion.getCodigo_cuenta_proporciona()};
+                Object[] fila = {transaccion.getCodigo(), transaccion.getFecha(), transaccion.getMonto(), transaccion.getCodigo_cuenta_proporciona()};
                 modelo.addRow(fila);
             }
             tblCuentas.setModel(modelo);
             TableColumnModel columnModel = tblCuentas.getColumnModel();
-            
+
         } catch (PersistenciaException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al mostrar la tabla", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    public void mostrarRetiros(){
+
+    /**
+     * Método para mostrar todas los retiros en la tabla de historial. Se
+     * comunica con el DAO de transacciones para obtener los datos de los
+     * retiros de la cuenta y los muestra en la tabla.
+     */
+    public void mostrarRetiros() {
         try {
             List<Transaccion> listaTransacciones = transaccionesDAO.consultarRetiros(cuenta);
             DefaultTableModel modelo = new DefaultTableModel();
@@ -196,17 +232,27 @@ public class HistorialForm extends javax.swing.JFrame {
             modelo.addColumn("Monto");
             modelo.addColumn("Numero de cuenta");
             for (Transaccion transaccion : listaTransacciones) {
-                Object[] fila = {transaccion.getCodigo(),transaccion.getFecha(), transaccion.getMonto(), transaccion.getCodigo_cuenta_proporciona()};
+                Object[] fila = {transaccion.getCodigo(), transaccion.getFecha(), transaccion.getMonto(), transaccion.getCodigo_cuenta_proporciona()};
                 modelo.addRow(fila);
             }
             tblCuentas.setModel(modelo);
             TableColumnModel columnModel = tblCuentas.getColumnModel();
-            
+
         } catch (PersistenciaException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al mostrar la tabla", JOptionPane.ERROR_MESSAGE);
         }
     }
 
+    /**
+     * Método para obtener una transacción a partir de una fila seleccionada en
+     * la tabla.
+     *
+     * @param fila El índice de la fila seleccionada en la tabla.
+     * @return La transacción correspondiente a la fila seleccionada, o null si
+     * la fila es inválida.
+     * @throws PersistenciaException Si ocurre un error al acceder a la base de
+     * datos.
+     */
     private Transaccion obtenerTransaccionDesdeFila(int fila) throws PersistenciaException {
         List<Transaccion> listaTransacciones = transaccionesDAO.consultarTransacciones(cuenta);
         if (fila >= 0 && fila < listaTransacciones.size()) {
@@ -215,7 +261,7 @@ public class HistorialForm extends javax.swing.JFrame {
             return null;
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnRetiros;

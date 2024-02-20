@@ -4,14 +4,12 @@ import com.itson.bdavanzadas.bancodominio.Cliente;
 import com.itson.bdavanzadas.bancodominio.Cuenta;
 import com.itson.bdavanzadas.bancopersistencia.conexion.Conexion;
 import com.itson.bdavanzadas.bancopersistencia.conexion.IConexion;
-import com.itson.bdavanzadas.bancopersistencia.daos.ClientesDAO;
 import com.itson.bdavanzadas.bancopersistencia.daos.CuentasDAO;
 import com.itson.bdavanzadas.bancopersistencia.daos.IClientesDAO;
 import com.itson.bdavanzadas.bancopersistencia.daos.ICuentasDAO;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,12 +17,26 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+/**
+ * La clase MenuClienteForm representa la interfaz gráfica de usuario (GUI) del menú
+ * principal para un cliente registrado en el sistema bancario. Permite al cliente ver
+ * sus cuentas, realizar acciones como agregar una nueva cuenta, editar su información
+ * personal y cerrar sesión.
+ * 
+ * @author Equipo
+ */
 public class MenuClienteForm extends javax.swing.JFrame {
 
     private final IClientesDAO clientesDAO;
     private final Cliente cliente;
     private final ICuentasDAO cuentasDAO;
     
+    /**
+     * Constructor de la clase MenuClienteForm.
+     * 
+     * @param clientesDAO Una instancia de IClientesDAO para acceder a los datos del cliente.
+     * @param cliente El cliente actual que ha iniciado sesión.
+     */
     public MenuClienteForm(IClientesDAO clientesDAO, Cliente cliente) {
         initComponents();
         this.clientesDAO = clientesDAO;
@@ -136,19 +148,29 @@ public class MenuClienteForm extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Método invocado cuando se presiona el botón "Salir". Cierra la ventana
+     * actual e instancia el formulario de inicio de sesión.
+     */
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
         InicioForm inicioSesion = new InicioForm(clientesDAO);
         inicioSesion.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed
-
+    /**
+     * Método invocado cuando se presiona el botón "Ajustes". Cierra la ventana
+     * actual e instancia el formulario de edición de cliente.
+     */
     private void btnAjustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjustesActionPerformed
         dispose();
         EditarClienteForm editar = new EditarClienteForm(clientesDAO, cliente);
         editar.setVisible(true);
     }//GEN-LAST:event_btnAjustesActionPerformed
-
+    /**
+     * Método invocado cuando se presiona el botón "Agregar Cuenta". Oculta la
+     * ventana actual, instancia el diálogo de creación de cuenta, muestra el
+     * diálogo y luego vuelve a mostrar la ventana actual.
+     */
     private void btnNuevaCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaCuentaActionPerformed
         this.setVisible(false);
         DlgCrearCuenta crearCuenta = new DlgCrearCuenta(this, rootPaneCheckingEnabled, cuentasDAO, cliente);
@@ -157,9 +179,14 @@ public class MenuClienteForm extends javax.swing.JFrame {
         this.setVisible(true);
     }//GEN-LAST:event_btnNuevaCuentaActionPerformed
 
-    //public Cuenta cuenta
     
-    public void mostrarCuentas(){
+    /**
+     * Método para mostrar las cuentas del cliente en la tabla. Obtiene la lista
+     * de cuentas del cliente desde el DAO de cuentas, crea un modelo de tabla y
+     * lo asigna a la tabla tblCuentas para mostrar las cuentas con opciones
+     * para transferir, retirar y ver el historial de transacciones.
+     */
+    public void mostrarCuentas() {
         try {
             List<Cuenta> listaCuentas = cuentasDAO.consultarCuentas(cliente);
             DefaultTableModel modelo = new DefaultTableModel();
@@ -259,6 +286,13 @@ public class MenuClienteForm extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método para obtener la cuenta correspondiente a una fila de la tabla.
+     *
+     * @param fila El índice de la fila en la tabla.
+     * @return La cuenta correspondiente a la fila seleccionada.
+     * @throws PersistenciaException Si hay un error al consultar las cuentas.
+     */
     private Cuenta obtenerCuentaDesdeFila(int fila) throws PersistenciaException {
         List<Cuenta> listaCuentas = cuentasDAO.consultarCuentas(cliente);
         if (fila >= 0 && fila < listaCuentas.size()) {

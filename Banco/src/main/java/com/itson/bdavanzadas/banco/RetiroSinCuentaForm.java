@@ -8,11 +8,23 @@ import com.itson.bdavanzadas.bancopersistencia.daos.ICuentasDAO;
 import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException;
 import javax.swing.JOptionPane;
 
+/**
+ * Clase que representa el formulario para realizar un retiro de dinero sin una cuenta asociada.
+ * Permite al cliente ingresar el folio de la transacción y su contraseña para realizar el retiro.
+ * Utiliza la capa de persistencia para realizar la operación de retiro.
+ * 
+ * @author Equipo
+ */
 public class RetiroSinCuentaForm extends javax.swing.JFrame {
     
     private final IClientesDAO clientesDAO;
     private final ICuentasDAO cuentasDAO;
     
+    /**
+     * Constructor de la clase RetiroSinCuentaForm.
+     * 
+     * @param clientesDAO Instancia de IClientesDAO para interactuar con la capa de persistencia de clientes.
+     */
     public RetiroSinCuentaForm(IClientesDAO clientesDAO) {
         initComponents();
         this.clientesDAO = clientesDAO;
@@ -130,6 +142,11 @@ public class RetiroSinCuentaForm extends javax.swing.JFrame {
         retirarSinCuenta();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+   /**
+     * Método para realizar un retiro de dinero sin una cuenta asociada.
+     * Obtiene el folio y la contraseña ingresados por el usuario y realiza la operación de retiro.
+     * Muestra un mensaje de error si la operación no puede ser completada.
+     */
     public void retirarSinCuenta(){
         int folio = Integer.valueOf(txtfolio.getText());
         String password = new String(txtContrasenia.getPassword());//Lo hacemos string para poder usar el valueOf

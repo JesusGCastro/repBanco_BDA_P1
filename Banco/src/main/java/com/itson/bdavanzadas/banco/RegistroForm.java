@@ -6,10 +6,24 @@ import com.itson.bdavanzadas.bancopersistencia.excepciones.PersistenciaException
 import com.itson.bdavanzadas.bancopersistencia.excepciones.ValidacionDTOException;
 import javax.swing.JOptionPane;
 
+/**
+ * Esta clase representa el formulario de registro de clientes del banco.
+ * Permite ingresar los datos de un nuevo cliente y realizar su registro. La
+ * clase implementa la funcionalidad necesaria para validar y persistir los
+ * datos del cliente en la base de datos.
+ *
+ * @author Equipo
+ */
 public class RegistroForm extends javax.swing.JFrame {
 
     private final IClientesDAO clientesDAO;
-    
+
+    /**
+     * Constructor de la clase RegistroForm.
+     *
+     * @param clientesDAO Instancia de IClientesDAO para interactuar con la capa
+     * de persistencia.
+     */
     public RegistroForm(IClientesDAO clientesDAO) {
         initComponents();
         this.clientesDAO = clientesDAO;
@@ -395,33 +409,49 @@ public class RegistroForm extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+     /**
+     * Acción realizada cuando se presiona el botón para registrar un cliente.
+     * Invoca el método registrarCliente() para realizar el registro del
+     * cliente.
+     *
+     * @param evt Evento de acción generado al presionar el botón.
+     */
     private void botonRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarClienteActionPerformed
         registrarCliente();
     }//GEN-LAST:event_botonRegistrarClienteActionPerformed
-
+    /**
+     * Acción realizada cuando se presiona el botón para cancelar el registro.
+     * Cierra la ventana actual y abre el menú principal.
+     *
+     * @param evt Evento de acción generado al presionar el botón.
+     */
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         dispose();
         MenuForm principal = new MenuForm(clientesDAO);
         principal.setVisible(true);
     }//GEN-LAST:event_botonCancelarActionPerformed
 
-    public void registrarCliente(){
-        
+    /**
+     * Método para registrar un nuevo cliente en la base de datos. Obtiene los
+     * datos ingresados en el formulario, valida su corrección y los registra.
+     * Muestra mensajes de error en caso de problemas durante el registro.
+     */
+    public void registrarCliente() {
+
         String nombre_pila = txtNombreUsuario.getText();
         String apellido_paterno = txtApellidoPaterno.getText();
         String apellido_materno = txtApellidoMaterno.getText();
-        
+
         java.util.Date fechaSeleccionada;
         java.sql.Date fechaNacimiento = null;
-        
+
         String calle = txtCalle.getText();
         String numero = txtNumeroCasa.getText();
         String colonia = txtColonia.getText();
         String codigo_postal = txtCodigoPostal.getText();
         String correo = txtCorreo.getText();
         String contrasenia = new String(pswdConstrasenia.getPassword());
-        
+
         ClienteNuevoDTO clienteNuevo = new ClienteNuevoDTO();
         clienteNuevo.setNombre_pila(nombre_pila);
         clienteNuevo.setApellido_paterno(apellido_paterno);
@@ -432,10 +462,11 @@ public class RegistroForm extends javax.swing.JFrame {
         clienteNuevo.setCodigo_postal(codigo_postal);
         clienteNuevo.setCorreo(correo);
         clienteNuevo.setContrasenia(contrasenia);
-        
+
         try {
-            if (jDateFechaNacimiento.getDate() == null) throw new ValidacionDTOException("La fecha no debe estar vacía");
-            else{
+            if (jDateFechaNacimiento.getDate() == null) {
+                throw new ValidacionDTOException("La fecha no debe estar vacía");
+            } else {
                 fechaSeleccionada = jDateFechaNacimiento.getDate();
                 fechaNacimiento = new java.sql.Date(fechaSeleccionada.getTime());
                 clienteNuevo.setFecha_nacimiento(fechaNacimiento);
@@ -453,8 +484,12 @@ public class RegistroForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No fue posible registrar el cliente", "Error de almacenamiento", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    public void limpiarDatos(){
+
+    /**
+     * Método para limpiar los campos de texto del formulario de registro.
+     * Limpia los campos de nombre, apellidos, dirección y código postal.
+     */
+    public void limpiarDatos() {
         txtNombreUsuario.setText("");
         txtApellidoPaterno.setText("");
         txtApellidoMaterno.setText("");

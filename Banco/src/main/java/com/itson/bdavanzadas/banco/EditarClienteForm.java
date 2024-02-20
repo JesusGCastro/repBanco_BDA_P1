@@ -352,6 +352,8 @@ public class EditarClienteForm extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
+        MenuClienteForm menuCliente = new MenuClienteForm(clientesDAO, cliente);
+        menuCliente.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void ActualizarCliente(){

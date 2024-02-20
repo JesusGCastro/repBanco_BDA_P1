@@ -48,6 +48,9 @@ public class HistorialForm extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCuentas = new javax.swing.JTable();
+        btnTransferencias = new javax.swing.JButton();
+        btnRetiros = new javax.swing.JButton();
+        btnTransacciones = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,6 +90,30 @@ public class HistorialForm extends javax.swing.JFrame {
 
         bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 600, 280));
 
+        btnTransferencias.setText("Transferencias");
+        btnTransferencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTransferenciasActionPerformed(evt);
+            }
+        });
+        bg.add(btnTransferencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 360, -1, -1));
+
+        btnRetiros.setText("Retiros");
+        btnRetiros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRetirosActionPerformed(evt);
+            }
+        });
+        bg.add(btnRetiros, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 360, -1, -1));
+
+        btnTransacciones.setText("Transacciones");
+        btnTransacciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTransaccionesActionPerformed(evt);
+            }
+        });
+        bg.add(btnTransacciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,10 +134,62 @@ public class HistorialForm extends javax.swing.JFrame {
         MenuClienteForm menuCliente = new MenuClienteForm(clientesDAO, cliente);
         menuCliente.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnTransferenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferenciasActionPerformed
+        mostrarTransferencias();
+    }//GEN-LAST:event_btnTransferenciasActionPerformed
+
+    private void btnRetirosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirosActionPerformed
+        mostrarRetiros();
+    }//GEN-LAST:event_btnRetirosActionPerformed
+
+    private void btnTransaccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransaccionesActionPerformed
+        mostrarTransacciones();
+    }//GEN-LAST:event_btnTransaccionesActionPerformed
     
     public void mostrarTransacciones(){
         try {
             List<Transaccion> listaTransacciones = transaccionesDAO.consultarTransacciones(cuenta);
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Codigo de transaccion");
+            modelo.addColumn("Fecha");
+            modelo.addColumn("Monto");
+            modelo.addColumn("Numero de cuenta");
+            for (Transaccion transaccion : listaTransacciones) {
+                Object[] fila = {transaccion.getCodigo(),transaccion.getFecha(), transaccion.getMonto(), transaccion.getCodigo_cuenta_proporciona()};
+                modelo.addRow(fila);
+            }
+            tblCuentas.setModel(modelo);
+            TableColumnModel columnModel = tblCuentas.getColumnModel();
+            
+        } catch (PersistenciaException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al mostrar la tabla", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void mostrarTransferencias(){
+        try {
+            List<Transaccion> listaTransacciones = transaccionesDAO.consultarTransferencias(cuenta);
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Codigo de transaccion");
+            modelo.addColumn("Fecha");
+            modelo.addColumn("Monto");
+            modelo.addColumn("Numero de cuenta");
+            for (Transaccion transaccion : listaTransacciones) {
+                Object[] fila = {transaccion.getCodigo(),transaccion.getFecha(), transaccion.getMonto(), transaccion.getCodigo_cuenta_proporciona()};
+                modelo.addRow(fila);
+            }
+            tblCuentas.setModel(modelo);
+            TableColumnModel columnModel = tblCuentas.getColumnModel();
+            
+        } catch (PersistenciaException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al mostrar la tabla", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void mostrarRetiros(){
+        try {
+            List<Transaccion> listaTransacciones = transaccionesDAO.consultarRetiros(cuenta);
             DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Codigo de transaccion");
             modelo.addColumn("Fecha");
@@ -139,7 +218,10 @@ public class HistorialForm extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
+    private javax.swing.JButton btnRetiros;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnTransacciones;
+    private javax.swing.JButton btnTransferencias;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBienvenida;
     private javax.swing.JTable tblCuentas;

@@ -10,4 +10,6 @@ import java.util.List;
 public interface ITransaccionesDAO {
     Transaccion registrarTransaccion(TransaccionNuevaDTO transaccionNueva) throws PersistenciaException;
     List<Transaccion> consultarTransacciones(Cuenta cuenta) throws PersistenciaException;
+    List<Transaccion> consultarTransferencias(Cuenta cuenta) throws PersistenciaException;
+    List<Transaccion> consultarRetiros(Cuenta cuenta) throws PersistenciaException;
 }

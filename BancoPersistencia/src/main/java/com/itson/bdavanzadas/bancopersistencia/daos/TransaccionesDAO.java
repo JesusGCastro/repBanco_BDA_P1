@@ -86,4 +86,62 @@ public class TransaccionesDAO implements ITransaccionesDAO{
         }
     }
     
+    @Override
+    public List<Transaccion> consultarTransferencias(Cuenta cuenta) throws PersistenciaException {
+        String sentenciaSQL = """
+            SELECT codigo, fecha,monto, codigo_cuenta_proporciona FROM transacciones, transferencias WHERE codigo = codigo_transaccion AND codigo_cuenta_proporciona = ?
+        """;
+        List<Transaccion> listaTransacciones = new LinkedList<>();
+        try (
+            Connection conexion = this.conexionBD.obtenerConexion(); 
+            PreparedStatement comando = conexion.prepareStatement(sentenciaSQL);
+        ){
+            comando.setLong(1, cuenta.getCodigo());
+            ResultSet resultado = comando.executeQuery();
+            while (resultado.next()) {
+                Long codigo = resultado.getLong("codigo");
+                Date fecha = resultado.getDate("fecha");
+                Float monto = resultado.getFloat("monto");
+                Long codigo_cuenta_proporciona = resultado.getLong("codigo_cuenta_proporciona");
+                
+                Transaccion transaccion = new Transaccion(codigo, fecha, monto, codigo_cuenta_proporciona);
+                listaTransacciones.add(transaccion);
+            }
+            logger.log(Level.INFO, "Se consultaron {0} transferencias", listaTransacciones.size());
+            return listaTransacciones;
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "No se pudieron consultar transferencias", e);
+            throw new PersistenciaException("No se pudieron consultar transferencias", e);
+        }
+    }
+    
+    @Override
+    public List<Transaccion> consultarRetiros(Cuenta cuenta) throws PersistenciaException {
+        String sentenciaSQL = """
+            SELECT codigo, fecha,monto, codigo_cuenta_proporciona FROM transacciones, retiros WHERE codigo = codigo_transaccion AND codigo_cuenta_proporciona = ?
+        """;
+        List<Transaccion> listaTransacciones = new LinkedList<>();
+        try (
+            Connection conexion = this.conexionBD.obtenerConexion(); 
+            PreparedStatement comando = conexion.prepareStatement(sentenciaSQL);
+        ){
+            comando.setLong(1, cuenta.getCodigo());
+            ResultSet resultado = comando.executeQuery();
+            while (resultado.next()) {
+                Long codigo = resultado.getLong("codigo");
+                Date fecha = resultado.getDate("fecha");
+                Float monto = resultado.getFloat("monto");
+                Long codigo_cuenta_proporciona = resultado.getLong("codigo_cuenta_proporciona");
+                
+                Transaccion transaccion = new Transaccion(codigo, fecha, monto, codigo_cuenta_proporciona);
+                listaTransacciones.add(transaccion);
+            }
+            logger.log(Level.INFO, "Se consultaron {0} retiros", listaTransacciones.size());
+            return listaTransacciones;
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "No se pudieron consultar retiros", e);
+            throw new PersistenciaException("No se pudieron consultar retiros", e);
+        }
+    }
+    
 }

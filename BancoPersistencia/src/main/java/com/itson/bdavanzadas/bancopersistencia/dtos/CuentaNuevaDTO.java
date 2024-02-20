@@ -32,11 +32,19 @@ public class CuentaNuevaDTO {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         return formatoFecha.format(fecha_apertura);
     }
-
+    
+    /**
+     * Obtiene la fecha
+     * @return fecha
+     */
     public Date getFecha_apertura() {
         return fecha_apertura;
     }
-
+    
+    /**
+     * Establece la fecha
+     * @param fecha_apertura fecha
+     */
     public void setFecha_apertura(Date fecha_apertura) {
         this.fecha_apertura = fecha_apertura;
     }

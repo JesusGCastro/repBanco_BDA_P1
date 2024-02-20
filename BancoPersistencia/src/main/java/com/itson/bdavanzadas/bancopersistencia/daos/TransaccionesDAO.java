@@ -11,21 +11,34 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Clase TransaccionesDAO
+ * @author Equipo
+ */
 public class TransaccionesDAO implements ITransaccionesDAO{
     
     final IConexion conexionBD;
     static final Logger logger = Logger.getLogger(CuentasDAO.class.getName());
     
+    /**
+     * Constructor
+     * @param conexionBD conexion a la base de datos
+     */
     public TransaccionesDAO(IConexion conexionBD) {
         this.conexionBD = conexionBD;
     }
     
+    /**
+     * Registra una transaccion nueva
+     * @param transaccionNueva El DTO que contiene la información de la nueva transaccion a registrar.
+     * @return El objeto Transaccion registrado.
+     * @throws PersistenciaException Si ocurre un error durante el proceso de registro.
+     */
     @Override
     public Transaccion registrarTransaccion(TransaccionNuevaDTO transaccionNueva) throws PersistenciaException {
         /*
@@ -57,6 +70,12 @@ public class TransaccionesDAO implements ITransaccionesDAO{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
+    /**
+     * Consulta una lista de transacciones
+     * @param cuenta La cuenta de la que se buscan las transacciones
+     * @return La lista de transacciones registradas.
+     * @throws PersistenciaException Si ocurre un error durante el proceso de registro.
+     */
     @Override
     public List<Transaccion> consultarTransacciones(Cuenta cuenta) throws PersistenciaException {
         String sentenciaSQL = """
@@ -86,6 +105,12 @@ public class TransaccionesDAO implements ITransaccionesDAO{
         }
     }
     
+    /**
+     * Consulta una lista de transferencias
+     * @param cuenta La cuenta de la que se buscan las transferencias
+     * @return La lista de transferencias registradas.
+     * @throws PersistenciaException Si ocurre un error durante el proceso de registro.
+     */
     @Override
     public List<Transaccion> consultarTransferencias(Cuenta cuenta) throws PersistenciaException {
         String sentenciaSQL = """
@@ -115,6 +140,12 @@ public class TransaccionesDAO implements ITransaccionesDAO{
         }
     }
     
+    /**
+     * Consulta una lista de retiros
+     * @param cuenta La cuenta de la que se buscan los retiros
+     * @return La lista de retiros registrados.
+     * @throws PersistenciaException Si ocurre un error durante el proceso de registro.
+     */
     @Override
     public List<Transaccion> consultarRetiros(Cuenta cuenta) throws PersistenciaException {
         String sentenciaSQL = """

@@ -17,6 +17,7 @@ public class EditarClienteForm extends javax.swing.JFrame {
         initComponents();
         this.clientesDAO = clientesDAO;
         this.cliente = cliente;
+        cargarDatosCliente();
     }
 
     @SuppressWarnings("unchecked")
@@ -356,43 +357,57 @@ public class EditarClienteForm extends javax.swing.JFrame {
         menuCliente.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void ActualizarCliente(){
+    private void cargarDatosCliente() {
+        txtNombreUsuario.setText(cliente.getNombre_pila());
+        txtApellidoPaterno.setText(cliente.getApellido_paterno());
+        txtApellidoMaterno.setText(cliente.getApellido_materno());
+        txtCalle.setText(cliente.getCalle());
+        txtNumeroCasa.setText(cliente.getNumero());
+        txtColonia.setText(cliente.getColonia());
+        txtCodigoPostal.setText(cliente.getCodigo_postal());
+        txtCorreo.setText(cliente.getCorreo());
+
+        // Si la fecha de nacimiento no es nula, establecerla en el selector de fecha
+        if (cliente.getFecha_nacimiento() != null) {
+            jDateFechaNacimiento.setDate(cliente.getFecha_nacimiento());
+        }
+    }
+    
+    private void ActualizarCliente() {
         String nombre_pila = txtNombreUsuario.getText();
         String apellido_paterno = txtApellidoPaterno.getText();
         String apellido_materno = txtApellidoMaterno.getText();
-        
-        java.util.Date fechaSeleccionada;
-        java.sql.Date fechaNacimiento = null;
-        
         String calle = txtCalle.getText();
         String numero = txtNumeroCasa.getText();
         String colonia = txtColonia.getText();
         String codigo_postal = txtCodigoPostal.getText();
         String correo = txtCorreo.getText();
         String contrasenia = new String(pswdConstrasenia.getPassword());
-        
-        ClienteNuevoDTO clienteNuevo = new ClienteNuevoDTO();
-        clienteNuevo.setNombre_pila(nombre_pila);
-        clienteNuevo.setApellido_paterno(apellido_paterno);
-        clienteNuevo.setApellido_materno(apellido_materno);
-        clienteNuevo.setCalle(calle);
-        clienteNuevo.setNumero(numero);
-        clienteNuevo.setColonia(colonia);
-        clienteNuevo.setCodigo_postal(codigo_postal);
-        clienteNuevo.setCorreo(correo);
-        clienteNuevo.setContrasenia(contrasenia);
+
+        // Obtener la fecha de nacimiento seleccionada
+        java.util.Date fechaSeleccionada = jDateFechaNacimiento.getDate();
+        java.sql.Date fechaNacimiento = null;
+        if (fechaSeleccionada != null) {
+            fechaNacimiento = new java.sql.Date(fechaSeleccionada.getTime());
+        }
+
+        // Establecer los nuevos valores en el objeto Cliente
+        cliente.setNombre_pila(nombre_pila);
+        cliente.setApellido_paterno(apellido_paterno);
+        cliente.setApellido_materno(apellido_materno);
+        cliente.setCalle(calle);
+        cliente.setNumero(numero);
+        cliente.setColonia(colonia);
+        cliente.setCodigo_postal(codigo_postal);
+        cliente.setCorreo(correo);
+        cliente.setContrasenia(contrasenia);
+        cliente.setFecha_nacimiento(fechaNacimiento);
+
         try {
-            if (jDateFechaNacimiento.getDate() == null) throw new ValidacionDTOException("La fecha no debe estar vacía");
-            else{
-                fechaSeleccionada = jDateFechaNacimiento.getDate();
-                fechaNacimiento = new java.sql.Date(fechaSeleccionada.getTime());
-                clienteNuevo.setFecha_nacimiento(fechaNacimiento);
-            }
-            this.clientesDAO.registrarCliente(clienteNuevo);
-            JOptionPane.showMessageDialog(this, "Se actualizo el cliente", "Notificaión", JOptionPane.INFORMATION_MESSAGE);
+            // Llamar al método para actualizar el cliente en la base de datos
+            this.clientesDAO.ActualizarCliente(cliente);
+            JOptionPane.showMessageDialog(this, "Se actualizó el cliente", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
-        } catch (ValidacionDTOException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
         } catch (PersistenciaException e) {
             JOptionPane.showMessageDialog(this, "No fue posible actualizar el cliente", "Error de almacenamiento", JOptionPane.ERROR_MESSAGE);
         }

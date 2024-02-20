@@ -131,43 +131,47 @@ public class ClientesDAO implements IClientesDAO{
     @Override
     public void ActualizarCliente(Cliente cliente) throws PersistenciaException {
         String sentenciaSQL = """
-            UPDATE clientes
-            SET 
-                nombre_pila,
-                apellido_paterno,
-                apellido_materno,
-                fecha_nacimiento,
-                calle,
-                numero,
-                colonia,
-                codigo_postal,
-                correo,
-                contrasenia
-            WHERE codigo = ?;          
-        """;
-        try (
-            Connection conexion = this.conexionBD.obtenerConexion();
-            PreparedStatement comando = conexion.prepareStatement(sentenciaSQL);
-        ){
-            comando.setLong(1, cliente.getCodigo());
-            ResultSet resultado = comando.executeQuery();
-            
-            comando.setString(1, cliente.getNombre_pila());
-            comando.setString(2, cliente.getApellido_paterno());
-            comando.setString(3, cliente.getApellido_materno());
-            comando.setDate(4, (Date) cliente.getFecha_nacimiento());
-            comando.setString(5, cliente.getCalle());
-            comando.setString(6, cliente.getNumero());
-            comando.setString(7, cliente.getColonia());
-            comando.setString(8, cliente.getCodigo_postal());
-            comando.setString(9, cliente.getCorreo());
-            comando.setString(10, cliente.getContrasenia());
-            logger.log(Level.INFO, "Cliente Encontrado");
-        } catch (SQLException e) {
-            logger.log(Level.SEVERE, "No se encontro un cliente con el id", e);
-            throw new PersistenciaException("No se encontro un cliente con el id", e);
+        UPDATE clientes
+        SET 
+            nombre_pila = ?,
+            apellido_paterno = ?,
+            apellido_materno = ?,
+            fecha_nacimiento = ?,
+            calle = ?,
+            numero = ?,
+            colonia = ?,
+            codigo_postal = ?,
+            correo = ?,
+            contrasenia = ?
+        WHERE codigo = ?;
+    """;
+    try (
+        Connection conexion = this.conexionBD.obtenerConexion();
+        PreparedStatement comando = conexion.prepareStatement(sentenciaSQL);
+    ){
+        comando.setString(1, cliente.getNombre_pila());
+        comando.setString(2, cliente.getApellido_paterno());
+        comando.setString(3, cliente.getApellido_materno());
+        comando.setDate(4, new java.sql.Date(cliente.getFecha_nacimiento().getTime()));
+        comando.setString(5, cliente.getCalle());
+        comando.setString(6, cliente.getNumero());
+        comando.setString(7, cliente.getColonia());
+        comando.setString(8, cliente.getCodigo_postal());
+        comando.setString(9, cliente.getCorreo());
+        comando.setString(10, cliente.getContrasenia());
+        comando.setLong(11, cliente.getCodigo()); // Agregar el código al final del UPDATE WHERE
+        int filasAfectadas = comando.executeUpdate();
+        
+        if (filasAfectadas == 0) {
+            logger.log(Level.WARNING, "No se encontró un cliente con el código proporcionado");
+            throw new PersistenciaException("No se encontró un cliente con el código proporcionado");
         }
+        logger.log(Level.INFO, "Cliente actualizado exitosamente");
+    } catch (SQLException e) {
+        logger.log(Level.SEVERE, "Error al actualizar el cliente", e);
+        throw new PersistenciaException("Error al actualizar el cliente", e);
     }
+}
     
     
     

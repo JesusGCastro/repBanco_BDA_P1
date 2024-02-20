@@ -62,6 +62,13 @@ public class Cuenta {
         this.saldo = saldo;
     }
 
+    /**
+     * Constructor que inicializa una cuenta con el codigo, fecha_apertura, saldo y codigo_cliente especificados.
+     * @param codigo El código único de la cuenta.
+     * @param fecha_apertura Fecha de apertura.
+     * @param saldo El saldo inicial de la cuenta.
+     * @param codigo_cliente El código del cliente asociado a la cuenta.
+     */
     public Cuenta(long codigo, Date fecha_apertura, float saldo, long codigo_cliente) {
         this.codigo = codigo;
         this.fecha_apertura = fecha_apertura;
@@ -69,6 +76,12 @@ public class Cuenta {
         this.codigo_cliente = codigo_cliente;
     }
     
+    /**
+     * Constructor que inicializa una cuenta con el codigo, saldo y codigo_cliente especificados.
+     * @param fecha_apertura fecha de apertura.
+     * @param saldo El saldo inicial de la cuenta.
+     * @param codigo_cliente El código del cliente asociado a la cuenta.
+     */
     public Cuenta(Date fecha_apertura, float saldo, long codigo_cliente) {
         this.fecha_apertura = fecha_apertura;
         this.saldo = saldo;

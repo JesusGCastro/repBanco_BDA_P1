@@ -36,10 +36,10 @@ public class Transaccion {
     /**
      * Constructor que inicializa una transacción con el código, fecha, monto y cuenta de envío especificados.
      * 
-     * @param codigo El código único de la transacción.
-     * @param fecha La fecha de la transacción.
-     * @param monto El monto de la transacción.
-     * @param codigo_cuenta_proporciona La cuenta desde la cual se realiza la transacción.
+     * @param codigo El código único de la transaccion.
+     * @param fecha La fecha de la transaccion.
+     * @param monto El monto de la transaccion.
+     * @param codigo_cuenta_proporciona La cuenta desde la cual se realiza la transaccion.
      */
     public Transaccion(long codigo, Date fecha, float monto, long codigo_cuenta_proporciona) {
         this.codigo = codigo;
@@ -114,7 +114,7 @@ public class Transaccion {
     /**
      * Establece la cuenta desde la cual se realiza la transacción.
      * 
-     * @param cuentaEnvio La cuenta desde la cual se realiza la transacción.
+     * @param codigo_cuenta_proporciona cuenta que realiza la transferencia.
      */
     public void setCodigo_cuenta_proporciona(long codigo_cuenta_proporciona) {
         this.codigo_cuenta_proporciona = codigo_cuenta_proporciona;

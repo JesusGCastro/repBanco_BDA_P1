@@ -40,7 +40,7 @@ public class Cliente {
      * @param colonia La colonia de residencia del cliente.
      * @param codigo_postal El código postal de la dirección del cliente.
      * @param correo El correo electrónico del cliente.
-     * @param contrasenia La contraseña del cliente.
+     * @param contrasenia La contrasenia del cliente.
      */
     public Cliente(String nombre_pila, String apellido_paterno, String apellido_materno, Date fecha_nacimiento, String calle, String numero, String colonia, String codigo_postal, String correo, String contrasenia) {
         this.nombre_pila = nombre_pila;
@@ -68,7 +68,7 @@ public class Cliente {
      * @param colonia La colonia de residencia del cliente.
      * @param codigo_postal El código postal de la dirección del cliente.
      * @param correo El correo electrónico del cliente.
-     * @param contrasenia La contraseña del cliente.
+     * @param contrasenia La contraseiaa del cliente.
      */
     public Cliente(Long codigo, String nombre_pila, String apellido_paterno, String apellido_materno, Date fecha_nacimiento, String calle, String numero, String colonia, String codigo_postal, String correo, String contrasenia) {
         this.codigo = codigo;
@@ -267,7 +267,7 @@ public class Cliente {
     /**
      * Obtiene la contraseña del cliente.
      * 
-     * @return La contraseña del cliente.
+     * @return La contraseia del cliente.
      */
     public String getContrasenia() {
         return contrasenia;
@@ -276,7 +276,7 @@ public class Cliente {
     /**
      * Establece la contraseña del cliente.
      * 
-     * @param contrasenia La contraseña del cliente.
+     * @param contrasenia La contraseniadel cliente.
      */
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
@@ -285,7 +285,6 @@ public class Cliente {
     /**
      * Establece la contraseña del cliente.
      * 
-     * @param contrasenia La contraseña del cliente.
      */
     @Override
     public int hashCode() {

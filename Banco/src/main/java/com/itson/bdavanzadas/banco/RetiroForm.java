@@ -54,18 +54,19 @@ public class RetiroForm extends javax.swing.JFrame {
         btnAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(300, 300));
+        setMinimumSize(new java.awt.Dimension(522, 300));
+        setPreferredSize(new java.awt.Dimension(522, 300));
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
-        bg.setMinimumSize(new java.awt.Dimension(400, 400));
-        bg.setPreferredSize(new java.awt.Dimension(300, 300));
+        bg.setMinimumSize(new java.awt.Dimension(522, 300));
+        bg.setPreferredSize(new java.awt.Dimension(522, 300));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(255, 223, 148));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 223, 148));
         jLabel1.setText("Retiro de dinero");
-        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, -1, -1));
+        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
 
         txtMonto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtMonto.setForeground(new java.awt.Color(100, 100, 100));
@@ -75,14 +76,14 @@ public class RetiroForm extends javax.swing.JFrame {
                 txtMontoActionPerformed(evt);
             }
         });
-        bg.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 320, 30));
+        bg.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 320, 30));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-        bg.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 320, 20));
+        bg.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 320, 20));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel2.setText("Monto a retirar:");
-        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, -1, -1));
+        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(100, 100, 100));
@@ -96,7 +97,7 @@ public class RetiroForm extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        bg.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 50, -1));
+        bg.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, 50, -1));
 
         btnAceptar.setBackground(new java.awt.Color(255, 223, 148));
         btnAceptar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -109,17 +110,17 @@ public class RetiroForm extends javax.swing.JFrame {
                 btnAceptarActionPerformed(evt);
             }
         });
-        bg.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 90, -1));
+        bg.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 90, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

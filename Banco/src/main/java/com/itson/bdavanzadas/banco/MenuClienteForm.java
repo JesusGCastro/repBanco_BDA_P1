@@ -144,7 +144,8 @@ public class MenuClienteForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAjustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjustesActionPerformed
-        // TODO add your handling code here:
+        EditarClienteForm editar = new EditarClienteForm(clientesDAO, cliente);
+        editar.setVisible(true);
     }//GEN-LAST:event_btnAjustesActionPerformed
 
     private void btnNuevaCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaCuentaActionPerformed

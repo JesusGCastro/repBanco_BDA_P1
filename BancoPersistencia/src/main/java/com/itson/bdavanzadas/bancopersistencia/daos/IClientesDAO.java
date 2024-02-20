@@ -27,4 +27,6 @@ public interface IClientesDAO {
      * @throws PersistenciaException Si ocurre algún error durante el proceso de inicio de sesión.
      */
     Cliente iniciarSesion(ClienteNuevoDTO cliente) throws PersistenciaException;
+    
+    void BuscarCliente(Cliente cliente) throws PersistenciaException;
 }
